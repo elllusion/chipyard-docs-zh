@@ -1,0 +1,174 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2019, Berkeley Architecture Research
+# This file is distributed under the same license as the Chipyard package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Chipyard \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-08-28 13:06+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: ../../Software/Baremetal.rst:4
+msgid "Baremetal RISC-V Programs"
+msgstr ""
+
+#: ../../Software/Baremetal.rst:6
+msgid ""
+"To build baremetal RISC-V programs to run in simulation, we use the "
+"riscv64-unknown-elf cross-compiler and a fork of the libgloss board "
+"support package. To build such a program yourself, simply invoke the "
+"cross-compiler with the flags \"-fno-common -fno-builtin-printf "
+"-specs=htif_nano.specs\" and the link with the arguments \"-static "
+"-specs=htif_nano.specs\". For instance, if we want to run a \"Hello, "
+"World\" program in baremetal, we could do the following."
+msgstr ""
+
+#: ../../Software/Baremetal.rst:25
+msgid ""
+"For more examples, look at the `tests/ directory <https://github.com/ucb-"
+"bar/chipyard/tree/master/tests>`_ in the chipyard repository."
+msgstr ""
+
+#: ../../Software/Baremetal.rst:27
+msgid ""
+"For more information about the libgloss port, take a look at `its README "
+"<https://github.com/ucb-bar/libgloss-htif/blob/master/README.md>`_."
+msgstr ""
+
+#: ../../Software/FireMarshal.rst:4
+msgid "FireMarshal"
+msgstr ""
+
+#: ../../Software/FireMarshal.rst:6
+msgid ""
+"FireMarshal is a workload generation tool for RISC-V based systems. It "
+"currently only supports the FireSim FPGA-accelerated simulation platform."
+msgstr ""
+
+#: ../../Software/FireMarshal.rst:9
+msgid ""
+"**Workloads** in FireMarshal consist of a series of **Jobs** that are "
+"assigned to logical nodes in the target system. If no jobs are specified,"
+" then the workload is considered ``uniform`` and only a single image will"
+" be produced for all nodes in the system. Workloads are described by a "
+"``json`` file and a corresponding workload directory and can inherit "
+"their definitions from existing workloads. Typically, workload "
+"configurations are kept in ``workloads/`` although you can use any "
+"directory you like. We provide a few basic workloads to start with "
+"including buildroot or Fedora-based linux distributions and bare-metal."
+msgstr ""
+
+#: ../../Software/FireMarshal.rst:19
+msgid ""
+"Once you define a workload, the ``marshal`` command will produce a "
+"corresponding boot-binary and rootfs for each job in the workload. This "
+"binary and rootfs can then be launched on qemu or spike (for functional "
+"simulation), or installed to a platform for running on real RTL "
+"(currently only FireSim is automated)."
+msgstr ""
+
+#: ../../Software/FireMarshal.rst:25
+msgid ""
+"To get started, checkout the full `FireMarshal documentation "
+"<https://firemarshal.readthedocs.io/en/latest/index.html>`_."
+msgstr ""
+
+#: ../../Software/Spike.rst:2
+msgid "The RISC-V ISA Simulator (Spike)"
+msgstr ""
+
+#: ../../Software/Spike.rst:4
+msgid ""
+"Spike is the golden reference functional RISC-V ISA C++ sofware "
+"simulator. It provides full system emulation or proxied emulation with "
+"`HTIF/FESVR <https://github.com/riscv/riscv-isa-"
+"sim/tree/master/fesvr>`__. It serves as a starting point for running "
+"software on a RISC-V target. Here is a highlight of some of Spikes main "
+"features:"
+msgstr ""
+
+#: ../../Software/Spike.rst:9
+msgid "Multiple ISAs: RV32IMAFDQCV extensions"
+msgstr ""
+
+#: ../../Software/Spike.rst:10
+msgid ""
+"Multiple memory models: Weak Memory Ordering (WMO) and Total Store "
+"Ordering (TSO)"
+msgstr ""
+
+#: ../../Software/Spike.rst:11
+msgid "Privileged Spec: Machine, Supervisor, User modes (v1.11)"
+msgstr ""
+
+#: ../../Software/Spike.rst:12
+msgid "Debug Spec"
+msgstr ""
+
+#: ../../Software/Spike.rst:13
+msgid "Single-step debugging with support for viewing memory/register contents"
+msgstr ""
+
+#: ../../Software/Spike.rst:14
+msgid "Multiple CPU support"
+msgstr ""
+
+#: ../../Software/Spike.rst:15
+msgid "JTAG support"
+msgstr ""
+
+#: ../../Software/Spike.rst:16
+msgid "Highly extensible (add and test new instructions)"
+msgstr ""
+
+#: ../../Software/Spike.rst:18
+msgid ""
+"In most cases, software development for a Chipyard target will begin with"
+" functional simulation using Spike (usually with the addition of custom "
+"Spike models for custom accelerator functions), and only later move on to"
+" full cycle-accurate simulation using software RTL simulators or FireSim."
+msgstr ""
+
+#: ../../Software/Spike.rst:22
+msgid ""
+"Spike comes pre-packaged in the RISC-V toolchain and is available on the "
+"path as ``spike``. More information can be found in the `Spike repository"
+" <https://github.com/riscv/riscv-isa-sim>`__."
+msgstr ""
+
+#: ../../Software/index.rst:16
+msgid "Contents:"
+msgstr ""
+
+#: ../../Software/index.rst:2
+msgid "Target Software"
+msgstr ""
+
+#: ../../Software/index.rst:4
+msgid ""
+"Chipyard includes tools for developing target software workloads. The "
+"primary tool is FireMarshal, which manages workload descriptions and "
+"generates binaries and disk images to run on your target designs. "
+"Workloads can be bare-metal, or be based on standard Linux distributions."
+" Users can customize every part of the build process, including providing"
+" custom kernels (if needed by the hardware)."
+msgstr ""
+
+#: ../../Software/index.rst:10
+msgid ""
+"FireMarshal can also run your workloads on high-performance functional "
+"simulators like Spike and Qemu. Spike is easily customized and serves as "
+"the official RISC-V ISA reference implementation. Qemu is a high-"
+"performance functional simulator that can run nearly as fast as native "
+"code, but can be challenging to modify."
+msgstr ""
+

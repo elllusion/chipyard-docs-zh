@@ -1,0 +1,68 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2019, Berkeley Architecture Research
+# This file is distributed under the same license as the Chipyard package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Chipyard \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-08-28 13:06+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: ../../index.rst:7
+msgid "Welcome to Chipyard's documentation!"
+msgstr ""
+
+#: ../../index.rst:11
+msgid ""
+"Chipyard is a framework for designing and evaluating full-system hardware"
+" using agile teams. It is composed of a collection of tools and libraries"
+" designed to provide an integration between open-source and commercial "
+"tools for the development of systems-on-chip."
+msgstr ""
+
+#: ../../index.rst:14
+msgid ""
+"**New to Chipyard?** Jump to the :ref:`Chipyard-Basics/Initial-Repo-"
+"Setup:Initial Repository Setup` page for setup instructions."
+msgstr ""
+
+#: ../../index.rst:17
+msgid "Getting Help"
+msgstr ""
+
+#: ../../index.rst:19
+msgid ""
+"If you have a question about Chipyard that isn't answered by the existing"
+" documentation, feel free to ask for help on the `Chipyard Google Group "
+"<https://groups.google.com/forum/#!forum/chipyard>`_."
+msgstr ""
+
+#: ../../index.rst:24
+msgid "Table of Contents"
+msgstr ""
+
+#: ../../index.rst:52
+msgid "Indices and tables"
+msgstr ""
+
+#: ../../index.rst:54
+msgid ":ref:`genindex`"
+msgstr ""
+
+#: ../../index.rst:55
+msgid ":ref:`modindex`"
+msgstr ""
+
+#: ../../index.rst:56
+msgid ":ref:`search`"
+msgstr ""
+

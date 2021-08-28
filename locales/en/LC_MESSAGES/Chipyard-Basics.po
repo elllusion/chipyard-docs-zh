@@ -1,0 +1,863 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2019, Berkeley Architecture Research
+# This file is distributed under the same license as the Chipyard package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Chipyard \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-08-28 13:06+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: ../../Chipyard-Basics/Chipyard-Components.rst:4
+msgid "Chipyard Components"
+msgstr ""
+
+#: ../../Chipyard-Basics/Chipyard-Components.rst:7
+msgid "Generators"
+msgstr ""
+
+#: ../../Chipyard-Basics/Chipyard-Components.rst:9
+msgid "The Chipyard Framework currently consists of the following RTL generators:"
+msgstr ""
+
+#: ../../Chipyard-Basics/Chipyard-Components.rst:13
+msgid "Processor Cores"
+msgstr ""
+
+#: ../../Chipyard-Basics/Chipyard-Components.rst:17
+msgid "**Rocket Core**"
+msgstr ""
+
+#: ../../Chipyard-Basics/Chipyard-Components.rst:16
+msgid ""
+"An in-order RISC-V core. See :ref:`Generators/Rocket:Rocket Core` for "
+"more information."
+msgstr ""
+
+#: ../../Chipyard-Basics/Chipyard-Components.rst:21
+msgid "**BOOM (Berkeley Out-of-Order Machine)**"
+msgstr ""
+
+#: ../../Chipyard-Basics/Chipyard-Components.rst:20
+msgid ""
+"An out-of-order RISC-V core. See :ref:`Generators/BOOM:Berkeley Out-of-"
+"Order Machine (BOOM)` for more information."
+msgstr ""
+
+#: ../../Chipyard-Basics/Chipyard-Components.rst:25
+msgid "**CVA6 Core**"
+msgstr ""
+
+#: ../../Chipyard-Basics/Chipyard-Components.rst:24
+msgid ""
+"An in-order RISC-V core written in System Verilog. Previously called "
+"Ariane. See :ref:`Generators/CVA6:CVA6 Core` for more information."
+msgstr ""
+
+#: ../../Chipyard-Basics/Chipyard-Components.rst:28
+msgid "Accelerators"
+msgstr ""
+
+#: ../../Chipyard-Basics/Chipyard-Components.rst:34
+msgid "**Hwacha**"
+msgstr ""
+
+#: ../../Chipyard-Basics/Chipyard-Components.rst:31
+msgid ""
+"A decoupled vector architecture co-processor. Hwacha currently implements"
+" a non-standard RISC-V extension, using a vector architecture programming"
+" model. Hwacha integrates with a Rocket or BOOM core using the RoCC "
+"(Rocket Custom Co-processor) interface. See "
+":ref:`Generators/Hwacha:Hwacha` for more information."
+msgstr ""
+
+#: ../../Chipyard-Basics/Chipyard-Components.rst:37
+msgid "**Gemmini**"
+msgstr ""
+
+#: ../../Chipyard-Basics/Chipyard-Components.rst:37
+msgid "A matrix-multiply accelerator targeting neural-networks"
+msgstr ""
+
+#: ../../Chipyard-Basics/Chipyard-Components.rst:41
+msgid "**SHA3**"
+msgstr ""
+
+#: ../../Chipyard-Basics/Chipyard-Components.rst:40
+msgid ""
+"A fixed-function accelerator for the SHA3 hash function. This simple "
+"accelerator is used as a demonstration for some of the Chipyard "
+"integration flows using the RoCC interface."
+msgstr ""
+
+#: ../../Chipyard-Basics/Chipyard-Components.rst:44
+msgid "System Components:"
+msgstr ""
+
+#: ../../Chipyard-Basics/Chipyard-Components.rst:47
+msgid "**icenet**"
+msgstr ""
+
+#: ../../Chipyard-Basics/Chipyard-Components.rst:47
+msgid "A Network Interface Controller (NIC) designed to achieve up to 200 Gbps."
+msgstr ""
+
+#: ../../Chipyard-Basics/Chipyard-Components.rst:51
+msgid "**sifive-blocks**"
+msgstr ""
+
+#: ../../Chipyard-Basics/Chipyard-Components.rst:50
+msgid ""
+"System components implemented by SiFive and used by SiFive projects, "
+"designed to be integrated with the Rocket Chip generator. These system "
+"and peripheral components include UART, SPI, JTAG, I2C, PWM, and other "
+"peripheral and interface devices."
+msgstr ""
+
+#: ../../Chipyard-Basics/Chipyard-Components.rst:54
+msgid "**AWL (Analog Widget Library)**"
+msgstr ""
+
+#: ../../Chipyard-Basics/Chipyard-Components.rst:54
+msgid "Digital components required for integration with high speed serial links."
+msgstr ""
+
+#: ../../Chipyard-Basics/Chipyard-Components.rst:58
+msgid "**testchipip**"
+msgstr ""
+
+#: ../../Chipyard-Basics/Chipyard-Components.rst:57
+msgid ""
+"A collection of utilities used for testing chips and interfacing them "
+"with larger test environments."
+msgstr ""
+
+#: ../../Chipyard-Basics/Chipyard-Components.rst:61
+msgid "Tools"
+msgstr ""
+
+#: ../../Chipyard-Basics/Chipyard-Components.rst:67
+msgid "**Chisel**"
+msgstr ""
+
+#: ../../Chipyard-Basics/Chipyard-Components.rst:64
+msgid ""
+"A hardware description library embedded in Scala. Chisel is used to write"
+" RTL generators using meta-programming, by embedding hardware generation "
+"primitives in the Scala programming language. The Chisel compiler "
+"elaborates the generator into a FIRRTL output. See "
+":ref:`Tools/Chisel:Chisel` for more information."
+msgstr ""
+
+#: ../../Chipyard-Basics/Chipyard-Components.rst:73
+msgid "**FIRRTL**"
+msgstr ""
+
+#: ../../Chipyard-Basics/Chipyard-Components.rst:70
+msgid ""
+"An intermediate representation library for RTL description of digital "
+"designs. FIRRTL is used as a formalized digital circuit representation "
+"between Chisel and Verilog. FIRRTL enables digital circuits manipulation "
+"between Chisel elaboration and Verilog generation. See "
+":ref:`Tools/FIRRTL:FIRRTL` for more information."
+msgstr ""
+
+#: ../../Chipyard-Basics/Chipyard-Components.rst:77
+msgid "**Barstools**"
+msgstr ""
+
+#: ../../Chipyard-Basics/Chipyard-Components.rst:76
+msgid ""
+"A collection of common FIRRTL transformations used to manipulate a "
+"digital circuit without changing the generator source RTL. See "
+":ref:`Tools/Barstools:Barstools` for more information."
+msgstr ""
+
+#: ../../Chipyard-Basics/Chipyard-Components.rst:80
+msgid "**Dsptools**"
+msgstr ""
+
+#: ../../Chipyard-Basics/Chipyard-Components.rst:80
+msgid ""
+"A Chisel library for writing custom signal processing hardware, as well "
+"as integrating custom signal processing hardware into an SoC (especially "
+"a Rocket-based SoC)."
+msgstr ""
+
+#: ../../Chipyard-Basics/Chipyard-Components.rst:84
+msgid "**Dromajo**"
+msgstr ""
+
+#: ../../Chipyard-Basics/Chipyard-Components.rst:83
+msgid ""
+"A RV64GC emulator primarily used for co-simulation and was originally "
+"developed by Esperanto Technologies. See :ref:`Tools/Dromajo:Dromajo` for"
+" more information."
+msgstr ""
+
+#: ../../Chipyard-Basics/Chipyard-Components.rst:87
+msgid "Toolchains"
+msgstr ""
+
+#: ../../Chipyard-Basics/Chipyard-Components.rst:93
+msgid "**riscv-tools**"
+msgstr ""
+
+#: ../../Chipyard-Basics/Chipyard-Components.rst:90
+msgid ""
+"A collection of software toolchains used to develop and execute software "
+"on the RISC-V ISA. The include compiler and assembler toolchains, "
+"functional ISA simulator (spike), the Berkeley Boot Loader (BBL) and "
+"proxy kernel. The riscv-tools repository was previously required to run "
+"any RISC-V software, however, many of the riscv-tools components have "
+"since been upstreamed to their respective open-source projects (Linux, "
+"GNU, etc.). Nevertheless, for consistent versioning, as well as software "
+"design flexibility for custom hardware, we include the riscv-tools "
+"repository and installation in the Chipyard framework."
+msgstr ""
+
+#: ../../Chipyard-Basics/Chipyard-Components.rst:97
+msgid "**esp-tools**"
+msgstr ""
+
+#: ../../Chipyard-Basics/Chipyard-Components.rst:96
+msgid ""
+"A fork of riscv-tools, designed to work with the Hwacha non-standard "
+"RISC-V extension. This fork can also be used as an example demonstrating "
+"how to add additional RoCC accelerators to the ISA-level simulation "
+"(Spike) and the higher-level software toolchain (GNU binutils, riscv-"
+"opcodes, etc.)"
+msgstr ""
+
+#: ../../Chipyard-Basics/Chipyard-Components.rst:100
+msgid "Software"
+msgstr ""
+
+#: ../../Chipyard-Basics/Chipyard-Components.rst:104
+msgid "**FireMarshal**"
+msgstr ""
+
+#: ../../Chipyard-Basics/Chipyard-Components.rst:103
+msgid ""
+"FireMarshal is the default workload generation tool that Chipyard uses to"
+" create software to run on its platforms. See :ref:`fire-marshal` for "
+"more information."
+msgstr ""
+
+#: ../../Chipyard-Basics/Chipyard-Components.rst:107
+msgid "Sims"
+msgstr ""
+
+#: ../../Chipyard-Basics/Chipyard-Components.rst:112
+msgid "**Verilator**"
+msgstr ""
+
+#: ../../Chipyard-Basics/Chipyard-Components.rst:110
+msgid ""
+"Verilator is an open source Verilog simulator. The ``verilator`` "
+"directory provides wrappers which construct Verilator-based simulators "
+"from relevant generated RTL, allowing for execution of test RISC-V "
+"programs on the simulator (including vcd waveform files). See "
+":ref:`Simulation/Software-RTL-Simulation:Verilator (Open-Source)` for "
+"more information."
+msgstr ""
+
+#: ../../Chipyard-Basics/Chipyard-Components.rst:117
+msgid "**VCS**"
+msgstr ""
+
+#: ../../Chipyard-Basics/Chipyard-Components.rst:115
+msgid ""
+"VCS is a proprietary Verilog simulator. Assuming the user has valid VCS "
+"licenses and installations, the ``vcs`` directory provides wrappers which"
+" construct VCS-based simulators from relevant generated RTL, allowing for"
+" execution of test RISC-V programs on the simulator (including vcd/vpd "
+"waveform files). See :ref:`Simulation/Software-RTL-Simulation:Synopsys "
+"VCS (License Required)` for more information."
+msgstr ""
+
+#: ../../Chipyard-Basics/Chipyard-Components.rst:125
+msgid "**FireSim**"
+msgstr ""
+
+#: ../../Chipyard-Basics/Chipyard-Components.rst:120
+msgid ""
+"FireSim is an open-source FPGA-accelerated simulation platform, using "
+"Amazon Web Services (AWS) EC2 F1 instances on the public cloud. FireSim "
+"automatically transforms and instruments open-hardware designs into fast "
+"(10s-100s MHz), deterministic, FPGA-based simulators that enable "
+"productive pre-silicon verification and performance validation. To model "
+"I/O, FireSim includes synthesizeable and timing-accurate models for "
+"standard interfaces like DRAM, Ethernet, UART, and others. The use of the"
+" elastic public cloud enable FireSim to scale simulations up to thousands"
+" of nodes. In order to use FireSim, the repository must be cloned and "
+"executed on AWS instances. See :ref:`Simulation/FPGA-Accelerated-"
+"Simulation:FireSim` for more information."
+msgstr ""
+
+#: ../../Chipyard-Basics/Chipyard-Components.rst:128
+msgid "Prototyping"
+msgstr ""
+
+#: ../../Chipyard-Basics/Chipyard-Components.rst:134
+msgid "**FPGA Prototyping**"
+msgstr ""
+
+#: ../../Chipyard-Basics/Chipyard-Components.rst:131
+msgid ""
+"FPGA prototyping is supported in Chipyard using SiFive's ``fpga-shells``."
+" Some examples of FPGAs supported are the Xilinx Arty 35T and VCU118 "
+"boards. For a fast and deterministic simulation with plenty of debugging "
+"tools, please consider using the :ref:`Simulation/FPGA-Accelerated-"
+"Simulation:FireSim` platform. See :ref:`Prototyping/index:Prototyping "
+"Flow` for more information on FPGA prototypes."
+msgstr ""
+
+#: ../../Chipyard-Basics/Chipyard-Components.rst:137
+msgid "VLSI"
+msgstr ""
+
+#: ../../Chipyard-Basics/Chipyard-Components.rst:143
+msgid "**Hammer**"
+msgstr ""
+
+#: ../../Chipyard-Basics/Chipyard-Components.rst:140
+msgid ""
+"Hammer is a VLSI flow designed to provide a layer of abstraction between "
+"general physical design concepts to vendor-specific EDA tool commands. "
+"The HAMMER flow provide automated scripts which generate relevant tool "
+"commands based on a higher level description of physical design "
+"constraints. The Hammer flow also allows for re-use of process technology"
+" knowledge by enabling the construction of process-technology-specific "
+"plug-ins, which describe particular constraints relating to that process "
+"technology (obsolete standard cells, metal layer routing constraints, "
+"etc.). The Hammer flow requires access to proprietary EDA tools and "
+"process technology libraries. See :ref:`VLSI/Hammer:Core HAMMER` for more"
+" information."
+msgstr ""
+
+#: ../../Chipyard-Basics/Configs-Parameters-Mixins.rst:2
+msgid "Configs, Parameters, Mixins, and Everything In Between"
+msgstr ""
+
+#: ../../Chipyard-Basics/Configs-Parameters-Mixins.rst:4
+msgid ""
+"A significant portion of generators in the Chipyard framework use the "
+"Rocket Chip parameter system. This parameter system enables for the "
+"flexible configuration of the SoC without invasive RTL changes. In order "
+"to use the parameter system correctly, we will use several terms and "
+"conventions:"
+msgstr ""
+
+#: ../../Chipyard-Basics/Configs-Parameters-Mixins.rst:9
+msgid "Parameters"
+msgstr ""
+
+#: ../../Chipyard-Basics/Configs-Parameters-Mixins.rst:11
+msgid ""
+"It is important to note that a significant challenge with the Rocket "
+"parameter system is being able to identify the correct parameter to use, "
+"and the impact that parameter has on the overall system. We are still "
+"investigating methods to facilitate parameter exploration and discovery."
+msgstr ""
+
+#: ../../Chipyard-Basics/Configs-Parameters-Mixins.rst:15
+msgid "Configs"
+msgstr ""
+
+#: ../../Chipyard-Basics/Configs-Parameters-Mixins.rst:17
+msgid ""
+"A *config* is a collection of multiple generator parameters being set to "
+"specific values. Configs are additive, can override each other, and can "
+"be composed of other configs (sometimes referred to as config fragments)."
+" The naming convention for an additive config or config fragment is "
+"``With<YourConfigName>``, while the naming convention for a non-additive "
+"config will be ``<YourConfig>``. Configs can take arguments which will "
+"in-turn set parameters in the design or reference other parameters in the"
+" design (see :ref:`Chipyard-Basics/Configs-Parameters-"
+"Mixins:Parameters`)."
+msgstr ""
+
+#: ../../Chipyard-Basics/Configs-Parameters-Mixins.rst:22
+msgid ""
+"This example shows a basic config fragment class that takes in zero "
+"arguments and instead uses hardcoded values to set the RTL design "
+"parameters. In this example, ``MyAcceleratorConfig`` is a Scala case "
+"class that defines a set of variables that the generator can use when "
+"referencing the ``MyAcceleratorKey`` in the design."
+msgstr ""
+
+#: ../../Chipyard-Basics/Configs-Parameters-Mixins.rst:39
+msgid ""
+"This next example shows a \"higher-level\" additive config fragment that "
+"uses prior parameters that were set to derive other parameters."
+msgstr ""
+
+#: ../../Chipyard-Basics/Configs-Parameters-Mixins.rst:53
+msgid ""
+"The following example shows a non-additive config that combines or "
+"\"assembles\" the prior two config fragments using ``++``. The additive "
+"config fragments are applied from the right to left in the list (or "
+"bottom to top in the example). Thus, the order of the parameters being "
+"set will first start with the ``DefaultExampleConfig``, then "
+"``WithMyAcceleratorParams``, then ``WithMyMoreComplexAcceleratorConfig``."
+msgstr ""
+
+#: ../../Chipyard-Basics/Configs-Parameters-Mixins.rst:66
+msgid ""
+"The ``site``, ``here``, and ``up`` objects in "
+"``WithMyMoreComplexAcceleratorConfig`` are maps from configuration keys "
+"to their definitions. The ``site`` map gives you the definitions as seen "
+"from the root of the configuration hierarchy (in this example, "
+"``SomeAdditiveConfig``). The ``here`` map gives the definitions as seen "
+"at the current level of the hierarchy (i.e. in "
+"``WithMyMoreComplexAcceleratorConfig`` itself). The ``up`` map gives the "
+"definitions as seen from the next level up from the current (i.e. from "
+"``WithMyAcceleratorParams``)."
+msgstr ""
+
+#: ../../Chipyard-Basics/Configs-Parameters-Mixins.rst:72
+msgid "Cake Pattern / Mixin"
+msgstr ""
+
+#: ../../Chipyard-Basics/Configs-Parameters-Mixins.rst:74
+msgid ""
+"A cake pattern or mixin is a Scala programming pattern, which enable "
+"\"mixing\" of multiple traits or interface definitions (sometimes "
+"referred to as dependency injection). It is used in the Rocket Chip SoC "
+"library and Chipyard framework in merging multiple system components and "
+"IO interfaces into a large system component."
+msgstr ""
+
+#: ../../Chipyard-Basics/Configs-Parameters-Mixins.rst:77
+msgid ""
+"This example shows the Chipyard default top that composes multiple traits"
+" together into a fully-featured SoC with many optional components."
+msgstr ""
+
+#: ../../Chipyard-Basics/Configs-Parameters-Mixins.rst:86
+msgid ""
+"There are two \"cakes\" or mixins here. One for the lazy module (ex. "
+"``CanHavePeripherySerial``) and one for the lazy module implementation "
+"(ex. ``CanHavePeripherySerialModuleImp`` where ``Imp`` refers to "
+"implementation). The lazy module defines all the logical connections "
+"between generators and exchanges configuration information among them, "
+"while the lazy module implementation performs the actual Chisel RTL "
+"elaboration."
+msgstr ""
+
+#: ../../Chipyard-Basics/Configs-Parameters-Mixins.rst:91
+msgid ""
+"In the ``DigitalTop`` example class, the \"outer\" ``DigitalTop`` "
+"instantiates the \"inner\" ``DigitalTopModule`` as a lazy module "
+"implementation. This delays immediate elaboration of the module until all"
+" logical connections are determined and all configuration information is "
+"exchanged. The ``System`` outer base class, as well as the "
+"``CanHavePeriphery<X>`` outer traits contain code to perform high-level "
+"logical connections. For example, the ``CanHavePeripherySerial`` outer "
+"trait contains code to optionally lazily instantiate the "
+"``SerialAdapter``, and connect the ``SerialAdapter``'s TileLink node to "
+"the Front bus."
+msgstr ""
+
+#: ../../Chipyard-Basics/Configs-Parameters-Mixins.rst:100
+msgid ""
+"The ``ModuleImp`` classes and traits perform elaboration of real RTL. For"
+" example, the ``CanHavePeripherySerialModuleImp`` trait optionally "
+"physically connects the ``SerialAdapter`` module, and instantiates "
+"queues."
+msgstr ""
+
+#: ../../Chipyard-Basics/Configs-Parameters-Mixins.rst:104
+msgid ""
+"In the test harness, the SoC is elaborated with ``val dut = "
+"p(BuildTop)(p)``."
+msgstr ""
+
+#: ../../Chipyard-Basics/Configs-Parameters-Mixins.rst:107
+msgid ""
+"After elaboration, the system submodule of ``ChipTop`` will be a "
+"``DigitalTop`` module, which contains a ``SerialAdapter`` module (among "
+"others), if the config specified for that block to be instantiated."
+msgstr ""
+
+#: ../../Chipyard-Basics/Configs-Parameters-Mixins.rst:110
+msgid ""
+"From a high level, classes which extend ``LazyModule`` *must* reference "
+"their module implementation through ``lazy val module``, and they *may* "
+"optionally reference other lazy modules (which will elaborate as child "
+"modules in the module hierarchy). The \"inner\" modules contain the "
+"implementation for the module, and may instantiate other normal modules "
+"OR lazy modules (for nested Diplomacy graphs, for example)."
+msgstr ""
+
+#: ../../Chipyard-Basics/Configs-Parameters-Mixins.rst:118
+msgid ""
+"The naming convention for an additive mixin or trait is "
+"``CanHave<YourMixin>``. This is shown in the ``Top`` class where things "
+"such as ``CanHavePeripherySerial`` connect a RTL component to a bus and "
+"expose signals to the top-level."
+msgstr ""
+
+#: ../../Chipyard-Basics/Configs-Parameters-Mixins.rst:122
+msgid "Additional References"
+msgstr ""
+
+#: ../../Chipyard-Basics/Configs-Parameters-Mixins.rst:124
+msgid ""
+"Another description of traits/mixins and config fragments is given in "
+":ref:`Customization/Keys-Traits-Configs:Keys, Traits, and Configs`. "
+"Additionally, a brief explanation of some of these topics (with slightly "
+"different naming) is given in the following video: "
+"https://www.youtube.com/watch?v=Eko86PGEoDY."
+msgstr ""
+
+#: ../../Chipyard-Basics/Configs-Parameters-Mixins.rst:127
+msgid ""
+"Chipyard uses the name \"config fragments\" over \"config mixins\" to "
+"avoid confusion between a mixin applying to a config or to the system "
+"``Top`` (even though both are technically Scala mixins)."
+msgstr ""
+
+#: ../../Chipyard-Basics/Development-Ecosystem.rst:2
+msgid "Development Ecosystem"
+msgstr ""
+
+#: ../../Chipyard-Basics/Development-Ecosystem.rst:5
+msgid "Chipyard Approach"
+msgstr ""
+
+#: ../../Chipyard-Basics/Development-Ecosystem.rst:7
+msgid ""
+"The trend towards agile hardware design and evaluation provides an "
+"ecosystem of debugging and implementation tools, that make it easier for "
+"computer architecture researchers to develop novel concepts. Chipyard "
+"hopes to build on this prior work in order to create a singular location "
+"to which multiple projects within the `Berkeley Architecture Research "
+"<https://bar.eecs.berkeley.edu/index.html>`__ can coexist and be used "
+"together. Chipyard aims to be the \"one-stop shop\" for creating and "
+"testing your own unique System on a Chip (SoC)."
+msgstr ""
+
+#: ../../Chipyard-Basics/Development-Ecosystem.rst:12
+msgid "Chisel/FIRRTL"
+msgstr ""
+
+#: ../../Chipyard-Basics/Development-Ecosystem.rst:14
+msgid ""
+"One of the tools to help create new RTL designs quickly is the `Chisel "
+"Hardware Construction Language <https://chisel-lang.org/>`__ and the "
+"`FIRRTL Compiler <https://chisel-lang.org/firrtl/>`__. Chisel is an "
+"embedded language within Scala that provides a set of libraries to help "
+"hardware designers create highly parameterizable RTL. FIRRTL on the other"
+" hand is a compiler for hardware which allows the user to run FIRRTL "
+"passes that can do dead code elimination, circuit analysis, connectivity "
+"checks, and much more! These two tools in combination allow quick design "
+"space exploration and development of new RTL."
+msgstr ""
+
+#: ../../Chipyard-Basics/Development-Ecosystem.rst:20
+msgid "RTL Generators"
+msgstr ""
+
+#: ../../Chipyard-Basics/Development-Ecosystem.rst:22
+msgid ""
+"Within this repository, all of the Chisel RTL is written as generators. "
+"Generators are parametrized programs designed to generate RTL code based "
+"on configuration specifications. Generators can be used to generate "
+"Systems-on-Chip (SoCs) using a collection of system components organized "
+"in unique generator projects. Generators allow you to create a family of "
+"SoC designs instead of a single instance of a design!"
+msgstr ""
+
+#: ../../Chipyard-Basics/Initial-Repo-Setup.rst:2
+msgid "Initial Repository Setup"
+msgstr ""
+
+#: ../../Chipyard-Basics/Initial-Repo-Setup.rst:5
+msgid "Requirements"
+msgstr ""
+
+#: ../../Chipyard-Basics/Initial-Repo-Setup.rst:7
+msgid "Chipyard is developed and tested on Linux-based systems."
+msgstr ""
+
+#: ../../Chipyard-Basics/Initial-Repo-Setup.rst:9
+msgid ""
+"It is possible to use this on macOS or other BSD-based systems, although "
+"GNU tools will need to be installed; it is also recommended to install "
+"the RISC-V toolchain from ``brew``."
+msgstr ""
+
+#: ../../Chipyard-Basics/Initial-Repo-Setup.rst:11
+msgid "Working under Windows is not recommended."
+msgstr ""
+
+#: ../../Chipyard-Basics/Initial-Repo-Setup.rst:14
+msgid ""
+"In CentOS-based platforms, we recommend installing the following "
+"dependencies:"
+msgstr ""
+
+#: ../../Chipyard-Basics/Initial-Repo-Setup.rst:19
+msgid ""
+"In Ubuntu/Debian-based platforms (Ubuntu), we recommend installing the "
+"following dependencies. These dependencies were written based on Ubuntu "
+"16.04 LTS and 18.04 LTS - If they don't work for you, you can try out the"
+" Docker image (:ref:`Chipyard-Basics/Initial-Repo-Setup:Pre-built Docker "
+"Image`) before manually installing or removing dependencies:"
+msgstr ""
+
+#: ../../Chipyard-Basics/Initial-Repo-Setup.rst:25
+msgid ""
+"When running on an Amazon Web Services EC2 FPGA-development instance (for"
+" FireSim), FireSim includes a machine setup script that will install all "
+"of the aforementioned dependencies (and some additional ones)."
+msgstr ""
+
+#: ../../Chipyard-Basics/Initial-Repo-Setup.rst:28
+msgid "Setting up the Chipyard Repo"
+msgstr ""
+
+#: ../../Chipyard-Basics/Initial-Repo-Setup.rst:30
+msgid "Start by fetching Chipyard's sources. Run:"
+msgstr ""
+
+#: ../../Chipyard-Basics/Initial-Repo-Setup.rst:38
+msgid "This will initialize and checkout all of the necessary git submodules."
+msgstr ""
+
+#: ../../Chipyard-Basics/Initial-Repo-Setup.rst:40
+msgid ""
+"When updating Chipyard to a new version, you will also want to rerun this"
+" script to update the submodules. Using git directly will try to "
+"initialize all submodules; this is not recommended unless you expressly "
+"desire this behavior."
+msgstr ""
+
+#: ../../Chipyard-Basics/Initial-Repo-Setup.rst:46
+msgid "Building a Toolchain"
+msgstr ""
+
+#: ../../Chipyard-Basics/Initial-Repo-Setup.rst:48
+msgid ""
+"The `toolchains` directory contains toolchains that include a cross-"
+"compiler toolchain, frontend server, and proxy kernel, which you will "
+"need in order to compile code to RISC-V instructions and run them on your"
+" design. Currently there are two toolchains, one for normal RISC-V "
+"programs, and another for Hwacha (``esp-tools``). For custom "
+"installations, Each tool within the toolchains contains individual "
+"installation procedures within its README file. To get a basic "
+"installation (which is the only thing needed for most Chipyard use-"
+"cases), just the following steps are necessary. This will take about "
+"20-30 minutes. You can expedite the process by setting a ``make`` "
+"environment variable to use parallel cores: ``export MAKEFLAGS=-j8``."
+msgstr ""
+
+#: ../../Chipyard-Basics/Initial-Repo-Setup.rst:58
+msgid ""
+"If you are planning to use the Hwacha vector unit, or other RoCC-based "
+"accelerators, you should build the esp-tools toolchain by adding the "
+"``esp-tools`` argument to the script above. If you are running on an "
+"Amazon Web Services EC2 instance, intending to use FireSim, you can also "
+"use the ``--ec2fast`` flag for an expedited installation of a pre-"
+"compiled toolchain."
+msgstr ""
+
+#: ../../Chipyard-Basics/Initial-Repo-Setup.rst:61
+msgid ""
+"Once the script is run, a ``env.sh`` file is emitted that sets the "
+"``PATH``, ``RISCV``, and ``LD_LIBRARY_PATH`` environment variables. You "
+"can put this in your ``.bashrc`` or equivalent environment setup file to "
+"get the proper variables, or directly include it in your current "
+"environment:"
+msgstr ""
+
+#: ../../Chipyard-Basics/Initial-Repo-Setup.rst:68
+msgid "These variables need to be set for the ``make`` system to work properly."
+msgstr ""
+
+#: ../../Chipyard-Basics/Initial-Repo-Setup.rst:71
+msgid "Pre-built Docker Image"
+msgstr ""
+
+#: ../../Chipyard-Basics/Initial-Repo-Setup.rst:73
+msgid ""
+"An alternative to setting up the Chipyard repository locally is to pull "
+"the pre-built Docker image from Docker Hub. The image comes with all "
+"dependencies installed, Chipyard cloned, and toolchains initialized. This"
+" image sets up baseline Chipyard (not including FireMarshal, FireSim, and"
+" Hammer initializations). Each image comes with a tag that corresponds to"
+" the version of Chipyard cloned/set-up in that image. Not including a tag"
+" during the pull will pull the image with the latest version of Chipyard."
+" First, pull the Docker image. Run:"
+msgstr ""
+
+#: ../../Chipyard-Basics/Initial-Repo-Setup.rst:80
+msgid "To run the Docker container in an interactive shell, run:"
+msgstr ""
+
+#: ../../Chipyard-Basics/Initial-Repo-Setup.rst:87
+msgid "What's Next?"
+msgstr ""
+
+#: ../../Chipyard-Basics/Initial-Repo-Setup.rst:89
+msgid "This depends on what you are planning to do with Chipyard."
+msgstr ""
+
+#: ../../Chipyard-Basics/Initial-Repo-Setup.rst:91
+msgid ""
+"If you intend to run a simulation of one of the vanilla Chipyard "
+"examples, go to :ref:`sw-rtl-sim-intro` and follow the instructions."
+msgstr ""
+
+#: ../../Chipyard-Basics/Initial-Repo-Setup.rst:93
+msgid ""
+"If you intend to run a simulation of a custom Chipyard SoC Configuration,"
+" go to :ref:`Simulation/Software-RTL-Simulation:Simulating A Custom "
+"Project` and follow the instructions."
+msgstr ""
+
+#: ../../Chipyard-Basics/Initial-Repo-Setup.rst:95
+msgid ""
+"If you intend to run a full-system FireSim simulation, go to :ref"
+":`firesim-sim-intro` and follow the instructions."
+msgstr ""
+
+#: ../../Chipyard-Basics/Initial-Repo-Setup.rst:97
+msgid ""
+"If you intend to add a new accelerator, go to :ref:`customization` and "
+"follow the instructions."
+msgstr ""
+
+#: ../../Chipyard-Basics/Initial-Repo-Setup.rst:99
+msgid ""
+"If you want to learn about the structure of Chipyard, go to :ref"
+":`chipyard-components`."
+msgstr ""
+
+#: ../../Chipyard-Basics/Initial-Repo-Setup.rst:101
+msgid ""
+"If you intend to change the generators (BOOM, Rocket, etc) themselves, "
+"see :ref:`generator-index`."
+msgstr ""
+
+#: ../../Chipyard-Basics/Initial-Repo-Setup.rst:103
+msgid ""
+"If you intend to run a tutorial VLSI flow using one of the Chipyard "
+"examples, go to :ref:`tutorial` and follow the instructions."
+msgstr ""
+
+#: ../../Chipyard-Basics/Initial-Repo-Setup.rst:105
+msgid ""
+"If you intend to build a chip using one of the vanilla Chipyard examples,"
+" go to :ref:`build-a-chip` and follow the instructions."
+msgstr ""
+
+#: ../../Chipyard-Basics/Initial-Repo-Setup.rst:108
+msgid "Upgrading Chipyard Release Versions"
+msgstr ""
+
+#: ../../Chipyard-Basics/Initial-Repo-Setup.rst:110
+msgid ""
+"In order to upgrade between Chipyard versions, we recommend using a fresh"
+" clone of the repository (or your fork, with the new release merged into "
+"it)."
+msgstr ""
+
+#: ../../Chipyard-Basics/Initial-Repo-Setup.rst:113
+msgid ""
+"Chipyard is a complex framework that depends on a mix of build systems "
+"and scripts. Specifically, it relies on git submodules, on sbt build "
+"files, and on custom written bash scripts and generated files. For this "
+"reason, upgrading between Chipyard versions is **not** as trivial as just"
+" running ``git submodule update -recursive``. This will result in "
+"recursive cloning of large submodules that are not necessarily used "
+"within your specific Chipyard environments. Furthermore, it will not "
+"resolve the status of stale state generated files which may not be "
+"compatible between release versions."
+msgstr ""
+
+#: ../../Chipyard-Basics/Initial-Repo-Setup.rst:117
+msgid ""
+"If you are an advanced git user, an alternative approach to a fresh "
+"repository clone may be to run ``git clean -dfx``, and then run the "
+"standard Chipyard setup sequence. This approach is dangerous, and **not-"
+"recommended** for users who are not deeply familiar with git, since it "
+"\"blows up\" the repository state and removes all untracked and modified "
+"files without warning. Hence, if you were working on custom un-committed "
+"changes, you would lose them."
+msgstr ""
+
+#: ../../Chipyard-Basics/Initial-Repo-Setup.rst:119
+msgid ""
+"If you would still like to try to perform an in-place manual version "
+"upgrade (**not-recommended**), we recommend at least trying to resolve "
+"stale state in the following areas:"
+msgstr ""
+
+#: ../../Chipyard-Basics/Initial-Repo-Setup.rst:121
+msgid "Delete stale ``target`` directories generated by sbt."
+msgstr ""
+
+#: ../../Chipyard-Basics/Initial-Repo-Setup.rst:123
+msgid "Delete jar collateral generated by FIRRTL (``lib/firrtl.jar``)"
+msgstr ""
+
+#: ../../Chipyard-Basics/Initial-Repo-Setup.rst:125
+msgid "Re-generate generated scripts and source files (for example, ``env.sh``)"
+msgstr ""
+
+#: ../../Chipyard-Basics/Initial-Repo-Setup.rst:127
+msgid ""
+"Re-generating/deleting target software state (Linux kernel binaries, "
+"Linux images) within FireMarshal"
+msgstr ""
+
+#: ../../Chipyard-Basics/Initial-Repo-Setup.rst:130
+msgid ""
+"This is by no means a comprehensive list of potential stale state within "
+"Chipyard. Hence, as mentioned earlier, the recommended method for a "
+"Chipyard version upgrade is a fresh clone (or a merge, and then a fresh "
+"clone)."
+msgstr ""
+
+#: ../../Chipyard-Basics/index.rst:14
+msgid "Chipyard Basics:"
+msgstr ""
+
+#: ../../Chipyard-Basics/index.rst:2
+msgid "Chipyard Basics"
+msgstr ""
+
+#: ../../Chipyard-Basics/index.rst:4
+msgid "These sections will walk you through the basics of the Chipyard framework:"
+msgstr ""
+
+#: ../../Chipyard-Basics/index.rst:6
+msgid "First, we will go over the components of the framework."
+msgstr ""
+
+#: ../../Chipyard-Basics/index.rst:8
+msgid ""
+"Next, we will go over how to understand how Chipyard configures its "
+"designs."
+msgstr ""
+
+#: ../../Chipyard-Basics/index.rst:10
+msgid "Then, we will go over initial framework setup."
+msgstr ""
+
+#: ../../Chipyard-Basics/index.rst:12
+msgid "Hit next to get started!"
+msgstr ""
+

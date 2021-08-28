@@ -1,0 +1,490 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2019, Berkeley Architecture Research
+# This file is distributed under the same license as the Chipyard package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Chipyard \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-08-28 13:06+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: ../../Simulation/FPGA-Accelerated-Simulation.rst:4
+msgid "FPGA-Accelerated Simulation"
+msgstr ""
+
+#: ../../Simulation/FPGA-Accelerated-Simulation.rst:7
+msgid "FireSim"
+msgstr ""
+
+#: ../../Simulation/FPGA-Accelerated-Simulation.rst:9
+msgid ""
+"`FireSim <https://fires.im/>`__ is an open-source cycle-accurate FPGA-"
+"accelerated full-system hardware simulation platform that runs on cloud "
+"FPGAs (Amazon EC2 F1). FireSim allows RTL-level simulation at orders-of-"
+"magnitude faster speeds than software RTL simulators. FireSim also "
+"provides additional device models to allow full-system simulation, "
+"including memory models and network models."
+msgstr ""
+
+#: ../../Simulation/FPGA-Accelerated-Simulation.rst:13
+msgid ""
+"FireSim currently supports running only on Amazon EC2 F1 FPGA-enabled "
+"virtual instances. In order to simulate your Chipyard design using "
+"FireSim, if you have not already, follow the initial EC2 setup "
+"instructions as detailed in the `FireSim documentation  "
+"<http://docs.fires.im/en/latest/Initial-Setup/index.html>`__. Then clone "
+"Chipyard onto your FireSim manager instance, and setup your Chipyard "
+"repository as you would normally."
+msgstr ""
+
+#: ../../Simulation/FPGA-Accelerated-Simulation.rst:20
+msgid "Next, initalize FireSim as a library in Chipyard by running:"
+msgstr ""
+
+#: ../../Simulation/FPGA-Accelerated-Simulation.rst:27
+msgid ""
+"``firesim-setup.sh`` initializes additional submodules and then invokes "
+"firesim's ``build-setup.sh`` script adding ``--library`` to properly "
+"initialize FireSim as a library submodule in chipyard. You may run "
+"``./sims/firesim/build-setup.sh --help`` to see more options."
+msgstr ""
+
+#: ../../Simulation/FPGA-Accelerated-Simulation.rst:32
+msgid ""
+"Finally, source the following environment at the root of the firesim "
+"directory:"
+msgstr ""
+
+#: ../../Simulation/FPGA-Accelerated-Simulation.rst:40
+msgid ""
+"Every time you want to use FireSim with a fresh shell, you must source "
+"this ``sourceme-f1-manager.sh``"
+msgstr ""
+
+#: ../../Simulation/FPGA-Accelerated-Simulation.rst:42
+msgid ""
+"At this point you're ready to use FireSim with Chipyard. If you're not "
+"already familiar with FireSim, please return to the `FireSim Docs "
+"<https://docs.fires.im/en/latest/Initial-Setup/Setting-up-your-Manager-"
+"Instance.html#completing-setup-using-the-manager>`__, and proceed with "
+"the rest of the tutorial."
+msgstr ""
+
+#: ../../Simulation/FPGA-Accelerated-Simulation.rst:48
+msgid "Running your Design in FireSim"
+msgstr ""
+
+#: ../../Simulation/FPGA-Accelerated-Simulation.rst:49
+msgid ""
+"Converting a Chipyard config (one in ``chipyard/src/main/scala`` to run "
+"in FireSim is simple, and can be done either through the traditional "
+"configuration system or through FireSim's build-recipes scheme."
+msgstr ""
+
+#: ../../Simulation/FPGA-Accelerated-Simulation.rst:51
+msgid "A FireSim simulation requires 3 additional config fragments:"
+msgstr ""
+
+#: ../../Simulation/FPGA-Accelerated-Simulation.rst:53
+msgid ""
+"``WithFireSimConfigTweaks`` modifies your design to better fit the "
+"FireSim usage model. This is composed of multiple smaller config "
+"fragments. For example, the removal of clock-gating (using the "
+"``WithoutClockGating`` config fragment) which is required for correct "
+"functioning of the compiler. This config fragment also includes other "
+"config fragments such as the inclusion of UART in the design, which "
+"although may technically be optional,is *strongly* recommended."
+msgstr ""
+
+#: ../../Simulation/FPGA-Accelerated-Simulation.rst:54
+msgid ""
+"``WithDefaultMemModel`` provides a default configuration for FASED memory"
+" models in the FireSim simulation. See the FireSim documentation for "
+"details. This config fragment is currently included by default within "
+"``WithFireSimConfigTweaks``, so it isn't neccessary to add in separately,"
+" but it is required if you choose not to use ``WithFireSimConfigTweaks``."
+msgstr ""
+
+#: ../../Simulation/FPGA-Accelerated-Simulation.rst:55
+msgid ""
+"``WithDefaultFireSimBridges`` sets the ``IOBinders`` key to use FireSim's"
+" Bridge system, which can drive target IOs with software bridge models "
+"running on the simulation host. See the FireSim documentation for "
+"details."
+msgstr ""
+
+#: ../../Simulation/FPGA-Accelerated-Simulation.rst:58
+msgid ""
+"The simplest method to add this config fragments to your custom Chipyard "
+"config is through FireSim's build recipe scheme. After your FireSim "
+"environment is setup, you will define your custom build recipe in "
+"``sims/firesim/deploy/deploy/config_build_recipes.ini``. By prepending "
+"the FireSim config fragments (separated by ``_``) to your Chipyard "
+"configuration, these config fragments will be added to your custom "
+"configuration as if they were listed in a custom Chisel config class "
+"definition. For example, if you would like to convert the Chipyard "
+"``LargeBoomConfig`` to a FireSim simulation with a DDR3 memory model, the"
+" appropriate FireSim ``TARGET_CONFIG`` would be "
+"``DDR3FRFCFSLLC4MB_WithDefaultFireSimBridges_WithFireSimConfigTweaks_chipyard.LargeBoomConfig``."
+" Note that the FireSim config fragments are part of the "
+"``firesim.firesim`` scala package and therefore there do not need to be "
+"prefixed with the full package name as opposed to the Chipyard config "
+"fragments which need to be prefixed with the chipyard package name."
+msgstr ""
+
+#: ../../Simulation/FPGA-Accelerated-Simulation.rst:61
+msgid ""
+"An alternative method to prepending the FireSim config fragments in the "
+"FireSim build recipe is to create a new \"permanent\" FireChip custom "
+"configuration, which includes the FireSim config fragments. We are using "
+"the same target (top) RTL, and only need to specify a new set of "
+"connection behaviors for the IOs of that module. Simply create a matching"
+" config within ``generators/firechip/src/main/scala/TargetConfigs`` that "
+"inherits your config defined in ``chipyard``."
+msgstr ""
+
+#: ../../Simulation/FPGA-Accelerated-Simulation.rst:70
+msgid ""
+"While this option seems to require the maintenance of additional "
+"configuration code, it has the benefit of allowing for the inclusion of "
+"more complex config fragments which also accept custom arguments (for "
+"example, ``WithDefaultMemModel`` can take an optional argument``)"
+msgstr ""
+
+#: ../../Simulation/Software-RTL-Simulation.rst:4
+msgid "Software RTL Simulation"
+msgstr ""
+
+#: ../../Simulation/Software-RTL-Simulation.rst:7
+msgid "Verilator (Open-Source)"
+msgstr ""
+
+#: ../../Simulation/Software-RTL-Simulation.rst:9
+msgid ""
+"`Verilator <https://www.veripool.org/wiki/verilator>`__ is an open-source"
+" LGPL-Licensed simulator maintained by `Veripool "
+"<https://www.veripool.org/>`__. The Chipyard framework can download, "
+"build, and execute simulations using Verilator."
+msgstr ""
+
+#: ../../Simulation/Software-RTL-Simulation.rst:14
+msgid "Synopsys VCS (License Required)"
+msgstr ""
+
+#: ../../Simulation/Software-RTL-Simulation.rst:16
+msgid ""
+"`VCS <https://www.synopsys.com/verification/simulation/vcs.html>`__ is a "
+"commercial RTL simulator developed by Synopsys. It requires commercial "
+"licenses. The Chipyard framework can compile and execute simulations "
+"using VCS. VCS simulation will generally compile faster than Verilator "
+"simulations."
+msgstr ""
+
+#: ../../Simulation/Software-RTL-Simulation.rst:21
+msgid ""
+"To run a VCS simulation, make sure that the VCS simulator is on your "
+"``PATH``."
+msgstr ""
+
+#: ../../Simulation/Software-RTL-Simulation.rst:25
+msgid "Choice of Simulator"
+msgstr ""
+
+#: ../../Simulation/Software-RTL-Simulation.rst:27
+msgid "First, we will start by entering the Verilator or VCS directory:"
+msgstr ""
+
+#: ../../Simulation/Software-RTL-Simulation.rst:29
+msgid ""
+"For an open-source Verilator simulation, enter the ``sims/verilator`` "
+"directory"
+msgstr ""
+
+#: ../../Simulation/Software-RTL-Simulation.rst:36
+msgid "For a proprietry VCS simulation, enter the ``sims/vcs`` directory"
+msgstr ""
+
+#: ../../Simulation/Software-RTL-Simulation.rst:46
+msgid "Simulating The Default Example"
+msgstr ""
+
+#: ../../Simulation/Software-RTL-Simulation.rst:48
+msgid ""
+"To compile the example design, run ``make`` in the selected verilator or "
+"VCS directory. This will elaborate the ``RocketConfig`` in the example "
+"project."
+msgstr ""
+
+#: ../../Simulation/Software-RTL-Simulation.rst:51
+msgid ""
+"The elaboration of ``RocketConfig`` requires about 6.5 GB of main memory."
+" Otherwise the process will fail with ``make: *** [firrtl_temp] Error "
+"137`` which is most likely related to limited resources. Other "
+"configurations might require even more main memory."
+msgstr ""
+
+#: ../../Simulation/Software-RTL-Simulation.rst:53
+msgid ""
+"An executable called ``simulator-chipyard-RocketConfig`` will be "
+"produced. This executable is a simulator that has been compiled based on "
+"the design that was built. You can then use this executable to run any "
+"compatible RV64 code. For instance, to run one of the riscv-tools "
+"assembly tests."
+msgstr ""
+
+#: ../../Simulation/Software-RTL-Simulation.rst:62
+msgid ""
+"In a VCS simulator, the simulator name will be ``simv-chipyard-"
+"RocketConfig`` instead of ``simulator-chipyard-RocketConfig``."
+msgstr ""
+
+#: ../../Simulation/Software-RTL-Simulation.rst:64
+msgid ""
+"The makefiles have a ``run-binary`` rule that simplifies running the "
+"simulation executable. It adds many of the common command line options "
+"for you and redirects the output to a file."
+msgstr ""
+
+#: ../../Simulation/Software-RTL-Simulation.rst:70
+msgid ""
+"Alternatively, we can run a pre-packaged suite of RISC-V assembly or "
+"benchmark tests, by adding the make target ``run-asm-tests`` or ``run-"
+"bmark-tests``. For example:"
+msgstr ""
+
+#: ../../Simulation/Software-RTL-Simulation.rst:79
+msgid ""
+"Before running the pre-packaged suites, you must run the plain ``make`` "
+"command, since the elaboration command generates a ``Makefile`` fragment "
+"that contains the target for the pre-packaged test suites. Otherwise, you"
+" will likely encounter a ``Makefile`` target error."
+msgstr ""
+
+#: ../../Simulation/Software-RTL-Simulation.rst:85
+msgid "Makefile Variables and Commands"
+msgstr ""
+
+#: ../../Simulation/Software-RTL-Simulation.rst:86
+msgid ""
+"You can get a list of useful Makefile variables and commands available "
+"from the Verilator or VCS directories. simply run ``make help``:"
+msgstr ""
+
+#: ../../Simulation/Software-RTL-Simulation.rst:101
+msgid "Simulating A Custom Project"
+msgstr ""
+
+#: ../../Simulation/Software-RTL-Simulation.rst:103
+msgid ""
+"If you later create your own project, you can use environment variables "
+"to build an alternate configuration."
+msgstr ""
+
+#: ../../Simulation/Software-RTL-Simulation.rst:105
+msgid ""
+"In order to construct the simulator with our custom design, we run the "
+"following command within the simulator directory:"
+msgstr ""
+
+#: ../../Simulation/Software-RTL-Simulation.rst:111
+msgid ""
+"Each of these make variables correspond to a particular part of the "
+"design/codebase and are needed so that the make system can correctly "
+"build and make a RTL simulation."
+msgstr ""
+
+#: ../../Simulation/Software-RTL-Simulation.rst:113
+msgid ""
+"The ``SBT_PROJECT`` is the ``build.sbt`` project that holds all of the "
+"source files and that will be run during the RTL build."
+msgstr ""
+
+#: ../../Simulation/Software-RTL-Simulation.rst:115
+msgid ""
+"The ``MODEL`` and ``VLOG_MODEL`` are the top-level class names of the "
+"design. Normally, these are the same, but in some cases these can differ "
+"(if the Chisel class differs than what is emitted in the Verilog)."
+msgstr ""
+
+#: ../../Simulation/Software-RTL-Simulation.rst:117
+msgid ""
+"The ``MODEL_PACKAGE`` is the Scala package (in the Scala code that says "
+"``package ...``) that holds the ``MODEL`` class."
+msgstr ""
+
+#: ../../Simulation/Software-RTL-Simulation.rst:119
+msgid ""
+"The ``CONFIG`` is the name of the class used for the parameter config "
+"while the ``CONFIG_PACKAGE`` is the Scala package it resides in."
+msgstr ""
+
+#: ../../Simulation/Software-RTL-Simulation.rst:121
+msgid ""
+"The ``GENERATOR_PACKAGE`` is the Scala package that holds the Generator "
+"class that elaborates the design."
+msgstr ""
+
+#: ../../Simulation/Software-RTL-Simulation.rst:123
+msgid ""
+"The ``TB`` is the name of the Verilog wrapper that connects the "
+"``TestHarness`` to VCS/Verilator for simulation."
+msgstr ""
+
+#: ../../Simulation/Software-RTL-Simulation.rst:125
+msgid ""
+"Finally, the ``TOP`` variable is used to distinguish between the top-"
+"level of the design and the ``TestHarness`` in our system. For example, "
+"in the normal case, the ``MODEL`` variable specifies the ``TestHarness`` "
+"as the top-level of the design. However, the true top-level design, the "
+"SoC being simulated, is pointed to by the ``TOP`` variable. This "
+"separation allows the infrastructure to separate files based on the "
+"harness or the SoC top level."
+msgstr ""
+
+#: ../../Simulation/Software-RTL-Simulation.rst:130
+msgid ""
+"Common configurations of all these variables are packaged using a "
+"``SUB_PROJECT`` make variable. Therefore, in order to simulate a simple "
+"Rocket-based example system we can use:"
+msgstr ""
+
+#: ../../Simulation/Software-RTL-Simulation.rst:140
+msgid ""
+"All ``make`` targets that can be applied to the default example, can also"
+" be applied to custom project using the custom environment variables. For"
+" example, the following code example will run the RISC-V assembly "
+"benchmark suite on the Hwacha subproject:"
+msgstr ""
+
+#: ../../Simulation/Software-RTL-Simulation.rst:147
+msgid ""
+"Finally, in the ``generated-src/<...>-<package>-<config>/`` directory "
+"resides all of the collateral and Verilog source files for the "
+"build/simulation. Specifically, the SoC top-level (``TOP``) Verilog file "
+"is denoted with ``*.top.v`` while the ``TestHarness`` file is denoted "
+"with ``*.harness.v``."
+msgstr ""
+
+#: ../../Simulation/Software-RTL-Simulation.rst:151
+msgid "Fast Memory Loading"
+msgstr ""
+
+#: ../../Simulation/Software-RTL-Simulation.rst:153
+msgid ""
+"The simulator loads the program binary over a simulated serial line. This"
+" can be quite slow if there is a lot of static data, so the simulator "
+"also allows data to be loaded from a file directly into the DRAM model."
+msgstr ""
+
+#: ../../Simulation/Software-RTL-Simulation.rst:159
+msgid ""
+"The ``.hex`` file should be a text file with a hexadecimal number on each"
+" line."
+msgstr ""
+
+#: ../../Simulation/Software-RTL-Simulation.rst:166
+msgid ""
+"Each line uses little-endian order, so this file would produce the bytes "
+"\"ef be ad de 01 23\". ``LOADMEM_ADDR`` specifies which address in memory"
+" (in hexadecimal) to write the first byte to. The default is 0x81000000."
+msgstr ""
+
+#: ../../Simulation/Software-RTL-Simulation.rst:168
+msgid ""
+"A special target that facilitates automatically generating a hex file for"
+" an entire elf RISC-V exectuable and then running the simulator with the "
+"appropriate flags is also available."
+msgstr ""
+
+#: ../../Simulation/Software-RTL-Simulation.rst:175
+msgid "Generating Waveforms"
+msgstr ""
+
+#: ../../Simulation/Software-RTL-Simulation.rst:177
+msgid ""
+"If you would like to extract waveforms from the simulation, run the "
+"command ``make debug`` instead of just ``make``."
+msgstr ""
+
+#: ../../Simulation/Software-RTL-Simulation.rst:179
+msgid ""
+"For a Verilator simulation, this will generate a vcd file (vcd is a "
+"standard waveform representation file format) that can be loaded to any "
+"common waveform viewer. An open-source vcd-capable waveform viewer is "
+"`GTKWave <http://gtkwave.sourceforge.net/>`__."
+msgstr ""
+
+#: ../../Simulation/Software-RTL-Simulation.rst:182
+msgid ""
+"For a VCS simulation, this will generate a vpd file (this is a "
+"proprietary waveform representation format used by Synopsys) that can be "
+"loaded to vpd-supported waveform viewers. If you have Synopsys licenses, "
+"we recommend using the DVE waveform viewer."
+msgstr ""
+
+#: ../../Simulation/Software-RTL-Simulation.rst:188
+msgid "Additional Verilator Options"
+msgstr ""
+
+#: ../../Simulation/Software-RTL-Simulation.rst:190
+msgid "When building the verilator simulator there are some additional options:"
+msgstr ""
+
+#: ../../Simulation/Software-RTL-Simulation.rst:196
+msgid ""
+"The ``VERILATOR_THREADS=<num>`` option enables the compiled Verilator "
+"simulator to use ``<num>`` parallel threads. On a multi-socket machine, "
+"you will want to make sure all threads are on the same socket by using "
+"``NUMACTL=1`` to enable ``numactl``. By enabling this, you will use "
+"Chipyard's ``numa_prefix`` wrapper, which is a simple wrapper around "
+"``numactl`` that runs your verilated simulator like this: "
+"``$(numa_prefix) ./simulator-<name> <simulator-args>``. Note that both "
+"these flags are mutually exclusive, you can use either independently "
+"(though it makes sense to use ``NUMACTL`` just with "
+"``VERILATOR_THREADS=8`` during a Verilator simulation)."
+msgstr ""
+
+#: ../../Simulation/index.rst:17
+msgid "Simulation:"
+msgstr ""
+
+#: ../../Simulation/index.rst:2
+msgid "Simulation"
+msgstr ""
+
+#: ../../Simulation/index.rst:4
+msgid "Chipyard supports two classes of simulation:"
+msgstr ""
+
+#: ../../Simulation/index.rst:6
+msgid ""
+"Software RTL simulation using commercial or open-source (Verilator) RTL "
+"simulators"
+msgstr ""
+
+#: ../../Simulation/index.rst:7
+msgid "FPGA-accelerated full-system simulation using FireSim"
+msgstr ""
+
+#: ../../Simulation/index.rst:9
+msgid ""
+"Software RTL simulators of Chipyard designs run at O(1 KHz), but compile "
+"quickly and provide full waveforms. Conversely, FPGA-accelerated "
+"simulators run at O(100 MHz), making them appropriate for booting an "
+"operating system and running a complete workload, but have multi-hour "
+"compile times and poorer debug visibility."
+msgstr ""
+
+#: ../../Simulation/index.rst:15
+msgid "Click next to see how to run a simulation."
+msgstr ""
+

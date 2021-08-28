@@ -1,0 +1,1613 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2019, Berkeley Architecture Research
+# This file is distributed under the same license as the Chipyard package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Chipyard \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-08-28 13:06+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: ../../TileLink-Diplomacy-Reference/Diplomacy-Connectors.rst:2
+msgid "Diplomacy Connectors"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Diplomacy-Connectors.rst:4
+msgid ""
+"Nodes in a Diplomacy graph are connected to each other with edges. The "
+"Diplomacy library provides four operators that can be used to form edges "
+"between nodes."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Diplomacy-Connectors.rst:8
+msgid ":="
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Diplomacy-Connectors.rst:10
+msgid ""
+"This is the basic connection operator. It is the same syntax as the "
+"Chisel uni-directional connector, but it is not equivalent. This operator"
+" connects Diplomacy nodes, not Chisel bundles."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Diplomacy-Connectors.rst:14
+msgid ""
+"The basic connection operator always creates a single edge between the "
+"two nodes."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Diplomacy-Connectors.rst:18
+msgid ":=\\*"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Diplomacy-Connectors.rst:20
+msgid ""
+"This is a \"query\" type connection operator. It can create multiple "
+"edges between nodes, with the number of edges determined by the client "
+"node (the node on the right side of the operator). This can be useful if "
+"you are connecting a multi-edge client to a nexus node or adapter node."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Diplomacy-Connectors.rst:26
+msgid ":\\*="
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Diplomacy-Connectors.rst:28
+msgid ""
+"This is a \"star\" type connection operator. It also creates multiple "
+"edges, but the number of edges is determined by the manager (left side of"
+" operator), rather than the client. It's useful for connecting nexus "
+"nodes to multi-edge manager nodes."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Diplomacy-Connectors.rst:34
+msgid ":\\*=\\*"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Diplomacy-Connectors.rst:36
+msgid ""
+"This is a \"flex\" connection operator. It creates multiple edges based "
+"on whichever side of the operator has a known number of edges. This can "
+"be used in generators where the type of node on either side isn't known "
+"until runtime."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:2
+msgid "TileLink Edge Object Methods"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:4
+msgid ""
+"The edge object associated with a TileLink node has several helpful "
+"methods for constructing TileLink messages and retrieving data from them."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:9
+msgid "Get"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:11
+msgid ""
+"Constructor for a TLBundleA encoding a ``Get`` message, which requests "
+"data from memory. The D channel response to this message will be an "
+"``AccessAckData``, which may have multiple beats."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:15
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:38
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:63
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:86
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:113
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:161
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:175
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:188
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:203
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:217
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:232
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:246
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:37
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:87
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:132
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:151
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:169
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:225
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:245
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:270
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:292
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:318
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:398
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:432
+msgid "**Arguments:**"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:17
+msgid "``fromSource: UInt`` - Source ID for this transaction"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:18
+msgid "``toAddress: UInt`` - The address to read from"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:19
+msgid "``lgSize: UInt`` - Base two logarithm of the number of bytes to be read"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:21
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:46
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:71
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:94
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:120
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:138
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:151
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:165
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:179
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:192
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:207
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:221
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:236
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:250
+msgid "**Returns:**"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:23
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:48
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:73
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:96
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:122
+msgid ""
+"A ``(Bool, TLBundleA)`` tuple. The first item in the pair is a boolean "
+"indicating whether or not the operation is legal for this edge. The "
+"second is the A channel bundle."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:28
+msgid "Put"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:30
+msgid ""
+"Constructor for a TLBundleA encoding a ``PutFull`` or ``PutPartial`` "
+"message, which write data to memory. It will be a ``PutPartial`` if the "
+"``mask`` is specified and a ``PutFull`` if it is omitted. The put may "
+"require multiple beats. If that is the case, only ``data`` and ``mask`` "
+"should change for each beat. All other fields must be the same for all "
+"beats in the transaction, including the address. The manager will respond"
+" to this message with a single ``AccessAck``."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:40
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:65
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:88
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:115
+msgid "``fromSource: UInt`` - Source ID for this transaction."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:41
+msgid "``toAddress: UInt`` - The address to write to."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:42
+msgid ""
+"``lgSize: UInt`` - Base two logarithm of the number of bytes to be "
+"written."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:43
+msgid "``data: UInt`` - The data to write on this beat."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:44
+msgid "``mask: UInt`` - (optional) The write mask for this beat."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:53
+msgid "Arithmetic"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:55
+msgid ""
+"Constructor for a TLBundleA encoding an ``Arithmetic`` message, which is "
+"an atomic operation. The possible values for the ``atomic`` field are "
+"defined in the ``TLAtomics`` object. It can be ``MIN``, ``MAX``, "
+"``MINU``, ``MAXU``, or ``ADD``, which correspond to atomic minimum, "
+"maximum, unsigned minimum, unsigned maximum, or addition operations, "
+"respectively. The previous value at the memory location will be returned "
+"in the response, which will be in the form of an ``AccessAckData``."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:66
+msgid "``toAddress: UInt`` - The address to perform an arithmetic operation on."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:67
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:90
+msgid ""
+"``lgSize: UInt`` - Base two logarithm of the number of bytes to operate "
+"on."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:68
+msgid "``data: UInt`` - Right-hand operand of the arithmetic operation"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:69
+msgid "``atomic: UInt`` - Arithmetic operation type (from ``TLAtomics``)"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:78
+msgid "Logical"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:80
+msgid ""
+"Constructor for a TLBundleA encoding a ``Logical`` message, an atomic "
+"operation. The possible values for the ``atomic`` field are ``XOR``, "
+"``OR``, ``AND``, and ``SWAP``, which correspond to atomic bitwise "
+"exclusive or, bitwise inclusive or, bitwise and, and swap operations, "
+"respectively. The previous value at the memory location will be returned "
+"in an ``AccessAckData`` response."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:89
+msgid "``toAddress: UInt`` - The address to perform a logical operation on."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:91
+msgid "``data: UInt`` - Right-hand operand of the logical operation"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:92
+msgid "``atomic: UInt`` - Logical operation type (from ``TLAtomics``)"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:101
+msgid "Hint"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:103
+msgid ""
+"Constructor for a TLBundleA encoding a ``Hint`` message, which is used to"
+" send prefetch hints to caches. The ``param`` argument determines what "
+"kind of hint it is. The possible values come from the ``TLHints`` object "
+"and are ``PREFETCH_READ`` and ``PREFETCH_WRITE``. The first one tells "
+"caches to acquire data in a shared state. The second one tells cache to "
+"acquire data in an exclusive state. If the cache this message reaches is "
+"a last-level cache, there won't be any difference. If the manager this "
+"message reaches is not a cache, it will simply be ignored. In any case, a"
+" ``HintAck`` message will be sent in response."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:116
+msgid "``toAddress: UInt`` - The address to prefetch"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:117
+msgid "``lgSize: UInt`` - Base two logarithm of the number of bytes to prefetch"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:118
+msgid "``param: UInt`` - Hint type (from TLHints)"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:127
+msgid "AccessAck"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:129
+msgid ""
+"Constructor for a TLBundleD encoding an ``AccessAck`` or "
+"``AccessAckData`` message. If the optional ``data`` field is supplied, it"
+" will be an ``AccessAckData``. Otherwise, it will be an ``AccessAck``."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:133
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:147
+msgid "**Arguments**"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:135
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:149
+msgid "``a: TLBundleA`` - The A channel message to acknowledge"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:136
+msgid "``data: UInt`` - (optional) The data to send back"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:140
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:153
+msgid "The ``TLBundleD`` for the D channel message."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:143
+msgid "HintAck"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:145
+msgid "Constructor for a TLBundleD encoding a ``HintAck`` message."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:156
+msgid "first"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:158
+msgid ""
+"This method take a decoupled channel (either the A channel or D channel) "
+"and determines whether the current beat is the first beat in the "
+"transaction."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:163
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:177
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:190
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:205
+msgid "``x: DecoupledIO[TLChannel]`` - The decoupled channel to snoop on."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:167
+msgid ""
+"A ``Boolean`` which is true if the current beat is the first, or false "
+"otherwise."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:170
+msgid "last"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:172
+msgid ""
+"This method take a decoupled channel (either the A channel or D channel) "
+"and determines whether the current beat is the last in the transaction."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:181
+msgid ""
+"A ``Boolean`` which is true if the current beat is the last, or false "
+"otherwise."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:184
+msgid "done"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:186
+msgid "Equivalent to ``x.fire() && last(x)``."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:194
+msgid ""
+"A ``Boolean`` which is true if the current beat is the last and a beat is"
+" sent on this cycle. False otherwise."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:198
+msgid "count"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:200
+msgid ""
+"This method take a decoupled channel (either the A channel or D channel) "
+"and determines the count (starting from 0) of the current beat in the "
+"transaction."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:209
+msgid "A ``UInt`` indicating the count of the current beat."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:212
+msgid "numBeats"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:214
+msgid ""
+"This method takes in a TileLink bundle and gives the number of beats "
+"expected for the transaction."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:219
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:234
+msgid "``x: TLChannel`` - The TileLink bundle to get the number of beats from"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:223
+msgid "A ``UInt`` that is the number of beats in the current transaction."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:226
+msgid "numBeats1"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:228
+msgid ""
+"Similar to ``numBeats`` except it gives the number of beats minus one. If"
+" this is what you need, you should use this instead of doing ``numBeats -"
+" 1.U``, as this is more efficient."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:238
+msgid ""
+"A ``UInt`` that is the number of beats in the current transaction minus "
+"one."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:241
+msgid "hasData"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:243
+msgid ""
+"Determines whether the TileLink message contains data or not. This is "
+"true if the message is a PutFull, PutPartial, Arithmetic, Logical, or "
+"AccessAckData."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:248
+msgid "``x: TLChannel`` - The TileLink bundle to check"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/EdgeFunctions.rst:252
+msgid ""
+"A ``Boolean`` that is true if the current message has data and false "
+"otherwise."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/NodeTypes.rst:4
+msgid "TileLink Node Types"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/NodeTypes.rst:6
+msgid ""
+"Diplomacy represents the different components of an SoC as nodes of a "
+"directed acyclic graph. TileLink nodes can come in several different "
+"types."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/NodeTypes.rst:10
+msgid "Client Node"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/NodeTypes.rst:12
+msgid ""
+"TileLink clients are modules that initiate TileLink transactions by "
+"sending requests on the A channel and receive responses on the D channel."
+" If the client implements TL-C, it will receive probes on the B channel, "
+"send releases on the C channel, and send grant acknowledgements on the E "
+"channel."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/NodeTypes.rst:17
+msgid "The L1 caches and DMA devices in RocketChip/Chipyard have client nodes."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/NodeTypes.rst:19
+msgid ""
+"You can add a TileLink client node to your LazyModule using the TLHelper "
+"object from testchipip like so:"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/NodeTypes.rst:27
+msgid ""
+"The ``name`` argument identifies the node in the Diplomacy graph. It is "
+"the only required argument for TLClientParameters."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/NodeTypes.rst:30
+msgid ""
+"The ``sourceId`` argument specifies the range of source identifiers that "
+"this client will use. Since we have set the range to [0, 4) here, this "
+"client will be able to send up to four requests in flight at a time. Each"
+" request will have a distinct value in its source field. The default "
+"value for this field is ``IdRange(0, 1)``, which means it would only be "
+"able to send a single request inflight."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/NodeTypes.rst:37
+msgid ""
+"The ``requestFifo`` argument is a boolean option which defaults to false."
+" If it is set to true, the client will request that downstream managers "
+"that support it send responses in FIFO order (that is, in the same order "
+"the corresponding requests were sent)."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/NodeTypes.rst:42
+msgid ""
+"The ``visibility`` argument specifies the address ranges that the client "
+"will access. By default it is set to include all addresses. In this "
+"example, we set it to contain a single address range "
+"``AddressSet(0x10000, 0xffff)``, which means that the client will only be"
+" able to access addresses from 0x10000 to 0x1ffff.  normally do not "
+"specify this, but it can help downstream crossbar generators optimize the"
+" hardware by not arbitrating the client to managers with address ranges "
+"that don't overlap with its visibility."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/NodeTypes.rst:50
+msgid ""
+"Inside your lazy module implementation, you can call ``node.out`` to get "
+"a list of bundle/edge pairs. If you used the TLHelper, you only specified"
+" a single client edge, so this list will only have one pair."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/NodeTypes.rst:54
+msgid ""
+"The ``tl`` bundle is a Chisel hardware bundle that connects to the IO of "
+"this module. It contains two (in the case of TL-UL and TL-UH) or five (in"
+" the case of TL-C) decoupled bundles corresponding to the TileLink "
+"channels. This is what you should connect your hardware logic to in order"
+" to actually send/receive TileLink messages."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/NodeTypes.rst:60
+msgid ""
+"The ``edge`` object represents the edge of the Diplomacy graph. It "
+"contains some useful helper functions which will be documented in :ref"
+":`TileLink-Diplomacy-Reference/EdgeFunctions:TileLink Edge Object "
+"Methods`."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/NodeTypes.rst:65
+msgid "Manager Node"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/NodeTypes.rst:67
+msgid ""
+"TileLink managers take requests from clients on the A channel and send "
+"responses back on the D channel. You can create a manager node using the "
+"TLHelper like so:"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/NodeTypes.rst:76
+msgid ""
+"The ``makeManagerNode`` method takes two arguments. The first is "
+"``beatBytes``, which is the physical width of the TileLink interface in "
+"bytes. The second is a TLManagerParameters object."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/NodeTypes.rst:80
+msgid ""
+"The only required argument for ``TLManagerParameters`` is the "
+"``address``, which is the set of address ranges that this manager will "
+"serve. This information is used to route requests from the clients. In "
+"this example, the manager will only take requests for addresses from "
+"0x20000 to 0x20fff. The second argument in ``AddressSet`` is a mask, not "
+"a size. You should generally set it to be one less than a power of two. "
+"Otherwise, the addressing behavior may not be what you expect."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/NodeTypes.rst:88
+msgid ""
+"The second argument is ``resources``, which is usually retrieved from a "
+"``Device`` object. In this case, we use a ``SimpleDevice`` object. This "
+"argument is necessary if you want to add an entry to the DeviceTree in "
+"the BootROM so that it can be read by a Linux driver. The two arguments "
+"to ``SimpleDevice`` are the name and compatibility list for the device "
+"tree entry. For this manager, then, the device tree entry would look like"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/NodeTypes.rst:102
+msgid ""
+"The next argument is ``regionType``, which gives some information about "
+"the caching behavior of the manager. There are seven region types, listed"
+" below:"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/NodeTypes.rst:105
+msgid ""
+"``CACHED``      - An intermediate agent may have cached a copy of the "
+"region for you."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/NodeTypes.rst:106
+msgid ""
+"``TRACKED``     - The region may have been cached by another master, but "
+"coherence is being provided."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/NodeTypes.rst:107
+msgid ""
+"``UNCACHED``    - The region has not been cached yet, but should be "
+"cached when possible."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/NodeTypes.rst:108
+msgid ""
+"``IDEMPOTENT``  - Gets return most recently put content, but content "
+"should not be cached."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/NodeTypes.rst:109
+msgid ""
+"``VOLATILE``    - Content may change without a put, but puts and gets "
+"have no side effects."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/NodeTypes.rst:110
+msgid ""
+"``PUT_EFFECTS`` - Puts produce side effects and so must not be "
+"combined/delayed."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/NodeTypes.rst:111
+msgid ""
+"``GET_EFFECTS`` - Gets produce side effects and so must not be issued "
+"speculatively."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/NodeTypes.rst:113
+msgid ""
+"Next is the ``executable`` argument, which determines if the CPU is "
+"allowed to fetch instructions from this manager. By default it is false, "
+"which is what most MMIO peripherals should set it to."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/NodeTypes.rst:117
+msgid ""
+"The next six arguments start with ``support`` and determine the different"
+" A channel message types that the manager can accept. The definitions of "
+"the message types are explained in :ref:`TileLink-Diplomacy-"
+"Reference/EdgeFunctions:TileLink Edge Object Methods`. The "
+"``TransferSizes`` case class specifies the range of logical sizes (in "
+"bytes) that the manager can accept for the particular message type. This "
+"is an inclusive range and all logical sizes must be powers of two. So in "
+"this case, the manager can accept requests with sizes of 1, 2, 4, or 8 "
+"bytes."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/NodeTypes.rst:125
+msgid ""
+"The final argument shown here is the ``fifoId`` setting, which determines"
+" which FIFO domain (if any) the manager is in. If this argument is set to"
+" ``None`` (the default), the manager will not guarantee any ordering of "
+"the responses. If the ``fifoId`` is set, it will share a FIFO domain with"
+" all other managers that specify the same ``fifoId``. This means that "
+"client requests sent to that FIFO domain will see responses in the same "
+"order."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/NodeTypes.rst:133
+msgid "Register Node"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/NodeTypes.rst:135
+msgid ""
+"While you can directly specify a manager node and write all of the logic "
+"to handle TileLink requests, it is usually much easier to use a register "
+"node. This type of node provides a ``regmap`` method that allows you to "
+"specify control/status registers and automatically generates the logic to"
+" handle the TileLink protocol. More information about how to use register"
+" nodes can be found in :ref:`TileLink-Diplomacy-Reference/Register-"
+"Router:Register Router`."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/NodeTypes.rst:143
+msgid "Identity Node"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/NodeTypes.rst:145
+msgid ""
+"Unlike the previous node types, which had only inputs or only outputs, "
+"the identity node has both. As its name suggests, it simply connects the "
+"inputs to the outputs unchanged. This node is mainly used to combine "
+"multiple nodes into a single node with multiple edges. For instance, say "
+"we have two client lazy modules, each with their own client node."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/NodeTypes.rst:156
+msgid ""
+"Now we instantiate these two clients in another lazy module and expose "
+"their nodes as a single node."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/NodeTypes.rst:164
+msgid "We can also do the same for managers."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/NodeTypes.rst:171
+msgid ""
+"If we want to connect the client and manager groups together, we can now "
+"do this."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/NodeTypes.rst:178
+msgid ""
+"The meaning of the ``:=*`` operator is explained in more detail in the "
+":ref:`TileLink-Diplomacy-Reference/Diplomacy-Connectors:Diplomacy "
+"Connectors` section. In summary, it connects two nodes together using "
+"multiple edges. The edges in the identity node are assigned in order, so "
+"in this case ``client1.node`` will eventually connect to "
+"``manager1.node`` and ``client2.node`` will connect to ``manager2.node``."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/NodeTypes.rst:184
+msgid ""
+"The number of inputs to an identity node should match the number of "
+"outputs. A mismatch will cause an elaboration error."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/NodeTypes.rst:188
+msgid "Adapter Node"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/NodeTypes.rst:190
+msgid ""
+"Like the identity node, the adapter node takes some number of inputs and "
+"produces the same number of outputs. However, unlike the identity node, "
+"the adapter node does not simply pass the connections through unchanged. "
+"It can change the logical and physical interfaces between input and "
+"output and rewrite messages going through. RocketChip provides a library "
+"of adapters, which are catalogued in :ref:`TileLink-Diplomacy-"
+"Reference/Widgets:Diplomatic Widgets`."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/NodeTypes.rst:197
+msgid ""
+"You will rarely need to create an adapter node yourself, but the "
+"invocation is as follows."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/NodeTypes.rst:210
+msgid ""
+"The ``clientFn`` is a function that takes the ``TLClientPortParameters`` "
+"of the input as an argument and returns the corresponding parameters for "
+"the output. The ``managerFn`` takes the ``TLManagerPortParameters`` of "
+"the output as an argument and returns the corresponding parameters for "
+"the input."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/NodeTypes.rst:216
+msgid "Nexus Node"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/NodeTypes.rst:218
+msgid ""
+"The nexus node is similar to the adapter node in that it has a different "
+"output interface than input interface. But it can also have a different "
+"number of inputs than it does outputs. This node type is mainly used by "
+"the ``TLXbar`` widget, which provides a TileLink crossbar generator. You "
+"will also likely not need to define this node type manually, but its "
+"invocation is as follows."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/NodeTypes.rst:235
+msgid ""
+"This has similar arguments as the adapter node's constructor, but instead"
+" of taking single parameters objects as arguments and returning single "
+"objects as results, the functions take and return sequences of "
+"parameters. And as you might expect, the size of the returned sequence "
+"need not be the same size as the input sequence."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Register-Router.rst:2
+msgid "Register Router"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Register-Router.rst:4
+msgid ""
+"Memory-mapped devices generally follow a common pattern. They expose a "
+"set of registers to the CPUs. By writing to a register, the CPU can "
+"change the device's settings or send a command. By reading from a "
+"register, the CPU can query the device's state or retrieve results."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Register-Router.rst:9
+msgid ""
+"While designers can manually instantiate a manager node and write the "
+"logic for exposing registers themselves, it's much easier to use "
+"RocketChip's ``regmap`` interface, which can generate most of the glue "
+"logic."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Register-Router.rst:13
+msgid ""
+"For TileLink devices, you can use the ``regmap`` interface by extending "
+"the ``TLRegisterRouter`` class, as shown in :ref:`mmio-accelerators`, or "
+"you can create a regular LazyModule and instantiate a ``TLRegisterNode``."
+" This section will focus on the second method."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Register-Router.rst:19
+msgid "Basic Usage"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Register-Router.rst:26
+msgid ""
+"The code example above shows a simple lazy module that uses the "
+"``TLRegisterNode`` to memory map hardware registers of different sizes. "
+"The constructor has two required arguments: ``address``, which is the "
+"base address of the registers, and ``device``, which is the device tree "
+"entry. There are also two optional arguments. The ``beatBytes`` argument "
+"is the interface width in bytes. The default value is 4 bytes. The "
+"``concurrency`` argument is the size of the internal queue for TileLink "
+"requests. By default, this value is 0, which means there will be no "
+"queue. This value must be greater than 0 if you wish to decoupled "
+"requests and responses for register accesses. This is discussed in :ref"
+":`TileLink-Diplomacy-Reference/Register-Router:Using Functions`."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Register-Router.rst:37
+msgid ""
+"The main way to interact with the node is to call the ``regmap`` method, "
+"which takes a sequence of pairs. The first element of the pair is an "
+"offset from the base address. The second is a sequence of ``RegField`` "
+"objects, each of which maps a different register. The ``RegField`` "
+"constructor takes two arguments. The first argument is the width of the "
+"register in bits. The second is the register itself."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Register-Router.rst:44
+msgid ""
+"Since the argument is a sequence, you can associate multiple ``RegField``"
+" objects with an offset. If you do, the registers are read or written in "
+"parallel when the offset is accessed. The registers are in little endian "
+"order, so the first register in the list corresponds to the least "
+"significant bits in the value written. In this example, if the CPU wrote "
+"to offset 0x0E with the value 0xAB, ``tinyReg0`` will get the value 0xB "
+"and ``tinyReg1`` would get 0xA."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Register-Router.rst:52
+msgid "Decoupled Interfaces"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Register-Router.rst:54
+msgid ""
+"Sometimes you may want to do something other than read and write from a "
+"hardware register. The ``RegField`` interface also provides support for "
+"reading and writing ``DecoupledIO`` interfaces. For instance, you can "
+"implement a hardware FIFO like so."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Register-Router.rst:64
+msgid ""
+"This variant of the ``RegField`` constructor takes three arguments "
+"instead of two. The first argument is still the bit width. The second is "
+"the decoupled interface to read from. The third is the decoupled "
+"interface to write to. In this example, writing to the \"register\" will "
+"push the data into the queue and reading from it will pop data from the "
+"queue."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Register-Router.rst:70
+msgid ""
+"You need not specify both read and write for a register. You can also "
+"create read-only or write-only registers. So for the previous example, if"
+" you wanted enqueue and dequeue to use different addresses, you could "
+"write the following."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Register-Router.rst:79
+msgid ""
+"The read-only register function can also be used to read signals that "
+"aren't registers."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Register-Router.rst:90
+msgid "Using Functions"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Register-Router.rst:92
+msgid ""
+"You can also create registers using functions. Say, for instance, that "
+"you want to create a counter that gets incremented on a write and "
+"decremented on a read."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Register-Router.rst:101
+msgid ""
+"The functions here are essentially the same as a decoupled interface. The"
+" read function gets passed the ``ready`` signal and returns the ``valid``"
+" and ``bits`` signals. The write function gets passed ``valid`` and "
+"``bits`` and returns ``ready``."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Register-Router.rst:106
+msgid ""
+"You can also pass functions that decouple the read/write request and "
+"response. The request will appear as a decoupled input and the response "
+"as a decoupled output. So for instance, if we wanted to do this for the "
+"previous example."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Register-Router.rst:115
+msgid ""
+"In each function, we set up a state variable ``responding``. The function"
+" is ready to take requests when this is false and is sending a response "
+"when this is true."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Register-Router.rst:119
+msgid ""
+"In this variant, both read and write take an input valid and return an "
+"output ready. The only difference is that bits is an input for read and "
+"an output for write."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Register-Router.rst:123
+msgid ""
+"In order to use this variant, you need to set ``concurrency`` to a value "
+"larger than 0."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Register-Router.rst:127
+msgid "Register Routers for Other Protocols"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Register-Router.rst:129
+msgid ""
+"One useful feature of the register router interface is that you can "
+"easily change the protocol being used. For instance, in the first example"
+" in :ref:`TileLink-Diplomacy-Reference/Register-Router:Basic Usage`, you "
+"could simply change the ``TLRegisterNode`` to and ``AXI4RegisterNode``."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Register-Router.rst:139
+msgid ""
+"Other than the fact that AXI4 nodes don't take a ``device`` argument, and"
+" can only have a single AddressSet instead of multiple, everything else "
+"is unchanged."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:4
+msgid "Diplomatic Widgets"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:6
+msgid ""
+"RocketChip provides a library of diplomatic TileLink and AXI4 widgets. "
+"The most commonly used widgets are documented here. The TileLink widgets "
+"are available from ``freechips.rocketchip.tilelink`` and the AXI4 widgets"
+" from ``freechips.rocketchip.amba.axi4``."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:12
+msgid "TLBuffer"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:14
+msgid ""
+"A widget for buffering TileLink transactions. It simply instantiates "
+"queues for each of the 2 (or 5 for TL-C) decoupled channels. To configure"
+" the queue for each channel, you pass the constructor a "
+"``freechips.rocketchip.diplomacy.BufferParams`` object. The arguments for"
+" this case class are:"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:20
+msgid "``depth: Int`` - The number of entries in the queue"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:21
+msgid ""
+"``flow: Boolean`` - If true, combinationally couple the valid signals so "
+"that an input can be consumed on the same cycle it is enqueued."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:23
+msgid ""
+"``pipe: Boolean`` - If true, combinationally couple the ready signals so "
+"that single-entry queues can run at full rate."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:26
+msgid ""
+"There is an implicit conversion from ``Int`` available. If you pass an "
+"integer instead of a BufferParams object, the queue will be the depth "
+"given in the integer and ``flow`` and ``pipe`` will both be false."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:30
+msgid "You can also use one of the predefined BufferParams objects."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:32
+msgid "``BufferParams.default`` = ``BufferParams(2, false, false)``"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:33
+msgid "``BufferParams.none`` = ``BufferParams(0, false, false)``"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:34
+msgid "``BufferParams.flow`` = ``BufferParams(1, true, false)``"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:35
+msgid "``BufferParams.pipe`` = ``BufferParams(1, false, true)``"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:39
+msgid ""
+"There are four constructors available with zero, one, two, or five "
+"arguments."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:41
+msgid ""
+"The zero-argument constructor uses ``BufferParams.default`` for all of "
+"the channels."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:44
+msgid ""
+"The single-argument constructor takes a ``BufferParams`` object to use "
+"for all channels."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:47
+msgid "The arguments for the two-argument constructor are:"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:49
+msgid "``ace: BufferParams`` - Parameters to use for the A, C, and E channels."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:50
+msgid "``bd: BufferParams`` - Parameters to use for the B and D channels"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:52
+msgid "The arguments for the five-argument constructor are"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:54
+msgid "``a: BufferParams`` - Buffer parameters for the A channel"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:55
+msgid "``b: BufferParams`` - Buffer parameters for the B channel"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:56
+msgid "``c: BufferParams`` - Buffer parameters for the C channel"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:57
+msgid "``d: BufferParams`` - Buffer parameters for the D channel"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:58
+msgid "``e: BufferParams`` - Buffer parameters for the E channel"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:60
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:108
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:138
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:156
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:183
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:209
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:230
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:249
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:274
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:328
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:365
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:411
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:444
+msgid "**Example Usage:**"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:82
+msgid "AXI4Buffer"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:84
+msgid ""
+"Similar to the :ref:`TileLink-Diplomacy-Reference/Widgets:TLBuffer`, but "
+"for AXI4. It also takes ``BufferParams`` objects as arguments."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:89
+msgid ""
+"Like TLBuffer, AXI4Buffer has zero, one, two, and five-argument "
+"constructors."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:91
+msgid ""
+"The zero-argument constructor uses the default BufferParams for all "
+"channels."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:93
+msgid ""
+"The one-argument constructor uses the provided BufferParams for all "
+"channels."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:95
+msgid "The two-argument constructor has the following arguments."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:97
+msgid ""
+"``aw: BufferParams`` - Buffer parameters for the \"ar\", \"aw\", and "
+"\"w\" channels."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:98
+msgid ""
+"``br: BufferParams`` - Buffer parameters for the \"b\", and \"r\" "
+"channels."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:100
+msgid "The five-argument constructor has the following arguments"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:102
+msgid "``aw: BufferParams`` - Buffer parameters for the \"ar\" channel"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:103
+msgid "``w: BufferParams`` - Buffer parameters for the \"w\" channel"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:104
+msgid "``b: BufferParams`` - Buffer parameters for the \"b\" channel"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:105
+msgid "``ar: BufferParams`` - Buffer parameters for the \"ar\" channel"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:106
+msgid "``r: BufferParams`` - Buffer parameters for the \"r\" channel"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:125
+msgid "AXI4UserYanker"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:127
+msgid ""
+"This widget takes an AXI4 port that has a user field and turns it into "
+"one without a user field. The values of the user field from input AR and "
+"AW requests is kept in internal queues associated with the ARID/AWID, "
+"which is then used to associate the correct user field to the responses."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:134
+msgid ""
+"``capMaxFlight: Option[Int]`` - (optional) An option which can hold the "
+"number of requests that can be inflight for each ID. If ``None`` (the "
+"default), the UserYanker will support the maximum number of inflight "
+"requests."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:145
+msgid "AXI4Deinterleaver"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:147
+msgid ""
+"Multi-beat AXI4 read responses for different IDs can potentially be "
+"interleaved. This widget reorders read responses from the slave so that "
+"all of the beats for a single transaction are consecutive."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:153
+msgid ""
+"``maxReadBytes: Int`` - The maximum number of bytes that can be read in a"
+" single transaction."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:163
+msgid "TLFragmenter"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:165
+msgid ""
+"The TLFragmenter widget shrinks the maximum logical transfer size of the "
+"TileLink interface by breaking larger transactions into multiple smaller "
+"transactions."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:171
+msgid ""
+"``minSize: Int`` - Minimum size of transfers supported by all outward "
+"managers."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:172
+msgid ""
+"``maxSize: Int`` - Maximum size of transfers supported after the "
+"Fragmenter is applied."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:173
+msgid ""
+"``alwaysMin: Boolean`` - (optional) Fragment all requests down to minSize"
+" (else fragment to maximum supported by manager). (default: false)"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:174
+msgid ""
+"``earlyAck: EarlyAck.T`` - (optional) Should a multibeat Put be "
+"acknowledged on the first beat or last beat? Possible values (default: "
+"``EarlyAck.None``):"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:177
+msgid "``EarlyAck.AllPuts`` - always acknowledge on first beat."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:178
+msgid ""
+"``EarlyAck.PutFulls`` - acknowledge on first beat if PutFull, otherwise "
+"acknowledge on last beat."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:179
+msgid "``EarlyAck.None`` - always acknowledge on last beat."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:181
+msgid ""
+"``holdFirstDenied: Boolean`` - (optional) Allow the Fragmenter to "
+"unsafely combine multibeat Gets by taking the first denied for the whole "
+"burst. (default: false)"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:194
+msgid "**Additional Notes**"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:196
+msgid "TLFragmenter modifies: PutFull, PutPartial, LogicalData, Get, Hint"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:197
+msgid "TLFragmenter passes: ArithmeticData (truncated to minSize if alwaysMin)"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:198
+msgid ""
+"TLFragmenter cannot modify acquire (could livelock); thus it is unsafe to"
+" put caches on both sides"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:201
+msgid "AXI4Fragmenter"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:203
+msgid ""
+"The AXI4Fragmenter is similar to the :ref:`TileLink-Diplomacy-"
+"Reference/Widgets:TLFragmenter`. The AXI4Fragmenter slices all AXI "
+"accesses into simple power-of-two sized and aligned transfers of the "
+"largest size supported by the manager. This makes it suitable as a first "
+"stage transformation to apply before an AXI4=>TL bridge. It also makes it"
+" suitable for placing after TL=>AXI4 bridge driving an AXI-lite slave."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:216
+msgid "TLSourceShrinker"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:218
+msgid ""
+"The number of source IDs that a manager sees is usually computed based on"
+" the clients that connect to it. In some cases, you may wish to fix the "
+"number of source IDs. For instance, you might do this if you wish to "
+"export the TileLink port to a Verilog black box. This will pose a "
+"problem, however, if the clients require a larger number of source IDs. "
+"In this situation, you will want to use a TLSourceShrinker."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:227
+msgid ""
+"``maxInFlight: Int`` - The maximum number of source IDs that will be sent"
+" from the TLSourceShrinker to the manager."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:239
+msgid "AXI4IdIndexer"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:241
+msgid ""
+"The AXI4 equivalent of :ref:`TileLink-Diplomacy-"
+"Reference/Widgets:TLSourceShrinker`. This limits the number of AWID/ARID "
+"bits in the slave AXI4 interface. Useful for connecting to external or "
+"black box AXI4 ports."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:247
+msgid "``idBits: Int`` - The number of ID bits on the slave interface."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:257
+msgid "**Notes:**"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:259
+msgid ""
+"The AXI4IdIndexer will create a ``user`` field on the slave interface, as"
+" it stores the ID of the master requests in this field. If connecting to "
+"an AXI4 interface that doesn't have a ``user`` field, you'll need to use "
+"the :ref:`TileLink-Diplomacy-Reference/Widgets:AXI4UserYanker`."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:264
+msgid "TLWidthWidget"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:266
+msgid ""
+"This widget changes the physical width of the TileLink interface. The "
+"width of a TileLink interface is configured by managers, but sometimes "
+"you want the client to see a particular width."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:272
+msgid "``innerBeatBytes: Int`` - The physical width (in bytes) seen by the client"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:283
+msgid "TLFIFOFixer"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:285
+msgid ""
+"TileLink managers that declare a FIFO domain must ensure that all "
+"requests to that domain from clients which have requested FIFO ordering "
+"see responses in order. However, they can only control the ordering of "
+"their own responses, and do not have control over how those responses "
+"interleave with responses from other managers in the same FIFO domain. "
+"Responsibility for ensuring FIFO order across managers goes to the "
+"TLFIFOFixer."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:294
+msgid ""
+"``policy: TLFIFOFixer.Policy`` - (optional) Which managers will the "
+"TLFIFOFixer enforce ordering on? (default: ``TLFIFOFixer.all``)"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:297
+msgid "The possible values of ``policy`` are:"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:299
+msgid ""
+"``TLFIFOFixer.all`` - All managers (including those without a FIFO "
+"domain) will have ordering guaranteed"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:301
+msgid ""
+"``TLFIFOFixer.allFIFO`` - All managers that define a FIFO domain will "
+"have ordering guaranteed"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:303
+msgid ""
+"``TLFIFOFixer.allVolatile`` - All managers that have a RegionType of "
+"``VOLATILE``, ``PUT_EFFECTS``, or ``GET_EFFECTS`` will have ordering "
+"guaranteed (see :ref:`TileLink-Diplomacy-Reference/NodeTypes:Manager "
+"Node` for explanation of region types)."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:308
+msgid "TLXbar and AXI4Xbar"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:310
+msgid ""
+"These are crossbar generators for TileLink and AXI4 which will route "
+"requests from TL client / AXI4 master nodes to TL manager / AXI4 slave "
+"nodes based on the addresses defined in the managers / slaves. Normally, "
+"these are constructed without arguments. However, you can change the "
+"arbitration policy, which determines which client ports get precedent in "
+"the arbiters. The default policy is ``TLArbiter.roundRobin``, but you can"
+" change it to ``TLArbiter.lowestIndexFirst`` if you want a fixed "
+"arbitration precedence."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:320
+msgid "All arguments are optional."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:322
+msgid "``arbitrationPolicy: TLArbiter.Policy`` - The arbitration policy to use."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:323
+msgid ""
+"``maxFlightPerId: Int`` - (AXI4 only) The number of transactions with the"
+" same ID that can be inflight at a time. (default: 7)"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:325
+msgid ""
+"``awQueueDepth: Int`` - (AXI4 only) The depth of the write address queue."
+" (default: 2)"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:358
+msgid "TLToAXI4 and AXI4ToTL"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:360
+msgid ""
+"These are converters between the TileLink and AXI4 protocols. TLToAXI4 "
+"takes a TileLink client and connects to an AXI4 slave. AXI4ToTL takes an "
+"AXI4 master and connects to a TileLink manager. Generally you don't want "
+"to override the default arguments of the constructors for these widgets."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:381
+msgid ""
+"You will need to add an :ref:`TileLink-Diplomacy-"
+"Reference/Widgets:AXI4Deinterleaver` after the TLToAXI4 converter because"
+" it cannot deal with interleaved read responses. The TLToAXI4 converter "
+"also uses the AXI4 user field to store some information, so you will need"
+" an :ref:`TileLink-Diplomacy-Reference/Widgets:AXI4UserYanker` if you "
+"want to connect to an AXI4 port without user fields."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:387
+msgid ""
+"Before you connect an AXI4 port to the AXI4ToTL widget, you will need to "
+"add an :ref:`TileLink-Diplomacy-Reference/Widgets:AXI4Fragmenter` and "
+":ref:`TileLink-Diplomacy-Reference/Widgets:AXI4UserYanker` because the "
+"converter cannot deal with multi-beat transactions or user fields."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:392
+msgid "TLROM"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:394
+msgid ""
+"The TLROM widget provides a read-only memory that can be accessed using "
+"TileLink. Note: this widget is in the "
+"``freechips.rocketchip.devices.tilelink`` package, not the "
+"``freechips.rocketchip.tilelink`` package like the others."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:400
+msgid "``base: BigInt`` - The base address of the memory"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:401
+msgid "``size: Int`` - The size of the memory in bytes"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:402
+msgid ""
+"``contentsDelayed: => Seq[Byte]`` - A function which, when called "
+"generates the byte contents of the ROM."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:404
+msgid ""
+"``executable: Boolean`` - (optional) Specify whether the CPU can fetch "
+"instructions from the ROM (default: ``true``)."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:406
+msgid ""
+"``beatBytes: Int`` - (optional) The width of the interface in bytes. "
+"(default: 4)."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:408
+msgid ""
+"``resources: Seq[Resource]`` - (optional) Sequence of resources to add to"
+" the device tree."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:422
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:459
+msgid "**Supported Operations:**"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:424
+msgid ""
+"The TLROM only supports single-beat reads. If you want to perform multi-"
+"beat reads, you should attach a TLFragmenter in front of the ROM."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:428
+msgid "TLRAM and AXI4RAM"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:430
+msgid ""
+"The TLRAM and AXI4RAM widgets provide read-write memories implemented as "
+"SRAMs."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:434
+msgid "``address: AddressSet`` - The address range that this RAM will cover."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:435
+msgid ""
+"``cacheable: Boolean`` - (optional) Can the contents of this RAM be "
+"cached. (default: ``true``)"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:437
+msgid ""
+"``executable: Boolean`` - (optional) Can the contents of this RAM be "
+"fetched as instructions. (default: ``true``)"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:439
+msgid ""
+"``beatBytes: Int`` - (optional) Width of the TL/AXI4 interface in bytes. "
+"(default: 4)"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:441
+msgid ""
+"``atomics: Boolean`` - (optional, TileLink only) Does the RAM support "
+"atomic operations? (default: ``false``)"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:461
+msgid ""
+"TLRAM only supports single-beat TL-UL requests. If you set ``atomics`` to"
+" true, it will also support Logical and Arithmetic operations. Use a "
+"``TLFragmenter`` if you want multi-beat reads/writes."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/Widgets.rst:465
+msgid ""
+"AXI4RAM only supports AXI4-Lite operations, so multi-beat reads/writes "
+"and reads/writes smaller than full-width are not supported. Use an "
+"``AXI4Fragmenter`` if you want to use the full AXI4 protocol."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/index.rst:24
+msgid "Reference"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/index.rst:4
+msgid "TileLink and Diplomacy Reference"
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/index.rst:6
+msgid ""
+"TileLink is the cache coherence and memory protocol used by RocketChip "
+"and other Chipyard generators. It is how different modules like caches, "
+"memories, peripherals, and DMA devices communicate with each other."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/index.rst:10
+msgid ""
+"RocketChip's TileLink implementation is built on top of Diplomacy, a "
+"framework for exchanging configuration information among Chisel "
+"generators in a two-phase elaboration scheme. For a detailed explanation "
+"of Diplomacy, see `the paper by Cook, Terpstra, and Lee "
+"<https://carrv.github.io/2017/papers/cook-diplomacy-carrv2017.pdf>`_."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/index.rst:15
+msgid ""
+"A brief overview of how to connect simple TileLink widgets can be found "
+"in the :ref:`mmio-accelerators` section. This section will provide a "
+"detailed reference for the TileLink and Diplomacy functionality provided "
+"by RocketChip."
+msgstr ""
+
+#: ../../TileLink-Diplomacy-Reference/index.rst:20
+#, python-format
+msgid ""
+"A detailed specification of the TileLink 1.7 protocol can be found on the"
+" `SiFive website <https://sifive.cdn.prismic.io/sifive%2F57f93ecf-"
+"2c42-46f7-9818-bcdd7d39400a_tilelink-spec-1.7.1.pdf>`_."
+msgstr ""
+

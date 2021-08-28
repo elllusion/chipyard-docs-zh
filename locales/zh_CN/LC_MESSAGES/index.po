@@ -1,0 +1,74 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2019, Berkeley Architecture Research
+# This file is distributed under the same license as the Chipyard package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Chipyard\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-08-28 13:06+0800\n"
+"PO-Revision-Date: 2021-08-28 14:25+0800\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.1\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"X-Generator: Poedit 2.3\n"
+
+#: ../../index.rst:7
+msgid "Welcome to Chipyard's documentation!"
+msgstr "欢迎使用 Chipyard's 文档!"
+
+#: ../../index.rst:11
+msgid ""
+"Chipyard is a framework for designing and evaluating full-system "
+"hardware using agile teams. It is composed of a collection of tools and "
+"libraries designed to provide an integration between open-source and "
+"commercial tools for the development of systems-on-chip."
+msgstr ""
+"Chipyard 是一个使用敏捷团队设计和评估全系统硬件的框架. 它由一系列工具和"
+"库组成旨在为片上系统的开发提供开源和商业工具之间的集成."
+
+#: ../../index.rst:14
+msgid ""
+"**New to Chipyard?** Jump to the :ref:`Chipyard-Basics/Initial-Repo-"
+"Setup:Initial Repository Setup` page for setup instructions."
+msgstr ""
+"**Chipyard 新手?** 跳转到初始存储库设置 :ref:`Chipyard-Basics/Initial-"
+"Repo-Setup:Initial Repository Setup` 页面获取设置说明."
+
+#: ../../index.rst:17
+msgid "Getting Help"
+msgstr "获取帮助"
+
+#: ../../index.rst:19
+msgid ""
+"If you have a question about Chipyard that isn't answered by the "
+"existing documentation, feel free to ask for help on the `Chipyard "
+"Google Group <https://groups.google.com/forum/#!forum/chipyard>`_."
+msgstr ""
+"如果您有关于 Chipyard 的问题但现有文档没有答案，请随时在 `Chipyard 谷歌"
+"小组 <https://groups.google.com/forum/#!forum/chipyard>`_ 上寻求帮助."
+
+#: ../../index.rst:24
+msgid "Table of Contents"
+msgstr "目录"
+
+#: ../../index.rst:52
+msgid "Indices and tables"
+msgstr "索引表格"
+
+#: ../../index.rst:54
+msgid ":ref:`genindex`"
+msgstr ""
+
+#: ../../index.rst:55
+msgid ":ref:`modindex`"
+msgstr ""
+
+#: ../../index.rst:56
+msgid ":ref:`search`"
+msgstr ""

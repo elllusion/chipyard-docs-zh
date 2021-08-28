@@ -1,0 +1,1962 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2019, Berkeley Architecture Research
+# This file is distributed under the same license as the Chipyard package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Chipyard \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-08-28 13:06+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: ../../Customization/Boot-Process.rst:2
+msgid "Chipyard Boot Process"
+msgstr ""
+
+#: ../../Customization/Boot-Process.rst:4
+msgid ""
+"This section will describe in detail the process by which a Chipyard-"
+"based SoC boots a Linux kernel and the changes you can make to customize "
+"this process."
+msgstr ""
+
+#: ../../Customization/Boot-Process.rst:8
+msgid "BootROM and RISC-V Frontend Server"
+msgstr ""
+
+#: ../../Customization/Boot-Process.rst:10
+msgid ""
+"The BootROM contains both the first instructions to run when the SoC is "
+"powered on as well as the Device Tree Binary (dtb) which details the "
+"components of the system. The assembly for the BootROM code is located in"
+" `generators/testchipip/src/main/resources/testchipip/bootrom/bootrom.S "
+"<https://github.com/ucb-"
+"bar/testchipip/blob/master/src/main/resources/testchipip/bootrom/bootrom.S>`_."
+" The BootROM address space starts at ``0x10000`` (determined by the "
+"``BootROMParams`` key in the configuration) and execution starts at "
+"address ``0x10040`` (given by the linker script and reset vector in the "
+"``BootROMParams``), which is marked by the ``_hang`` label in the BootROM"
+" assembly."
+msgstr ""
+
+#: ../../Customization/Boot-Process.rst:17
+msgid ""
+"The Chisel generator encodes the assembled instructions into the BootROM "
+"hardware at elaboration time, so if you want to change the BootROM code, "
+"you will need to run ``make`` in the bootrom directory and then "
+"regenerate the Verilog. If you don't want to overwrite the existing "
+"``bootrom.S``, you can also point the generator to a different bootrom "
+"image by overriding the ``BootROMParams`` key in the configuration."
+msgstr ""
+
+#: ../../Customization/Boot-Process.rst:31
+msgid ""
+"The default bootloader simply loops on a wait-for-interrupt (WFI) "
+"instruction as the RISC-V frontend-server (FESVR) loads the actual "
+"program. FESVR is a program that runs on the host CPU and can read/write "
+"arbitrary parts of the target system memory using the Tethered Serial "
+"Interface (TSI)."
+msgstr ""
+
+#: ../../Customization/Boot-Process.rst:36
+msgid ""
+"FESVR uses TSI to load a baremetal executable or second-stage bootloader "
+"into the SoC memory. In :ref:`Simulation/Software-RTL-Simulation:Software"
+" RTL Simulation`, this will be the binary you pass to the simulator. Once"
+" it is finished loading the program, FESVR will write to the software "
+"interrupt register for CPU 0, which will bring CPU 0 out of its WFI loop."
+" Once it receives the interrupt, CPU 0 will write to the software "
+"interrupt registers for the other CPUs in the system and then jump to the"
+" beginning of DRAM to execute the first instruction of the loaded "
+"executable. The other CPUs will be woken up by the first CPU and also "
+"jump to the beginning of DRAM."
+msgstr ""
+
+#: ../../Customization/Boot-Process.rst:46
+msgid ""
+"The executable loaded by FESVR should have memory locations designated as"
+" *tohost* and *fromhost*. FESVR uses these memory locations to "
+"communicate with the executable once it is running. The executable uses "
+"*tohost* to send commands to FESVR for things like printing to the "
+"console, proxying system calls, and shutting down the SoC. The *fromhost*"
+" register is used to send back responses for *tohost* commands and for "
+"sending console input."
+msgstr ""
+
+#: ../../Customization/Boot-Process.rst:55
+msgid "The Berkeley Boot Loader and RISC-V Linux"
+msgstr ""
+
+#: ../../Customization/Boot-Process.rst:57
+msgid ""
+"For baremetal programs, the story ends here. The loaded executable will "
+"run in machine mode until it sends a command through the *tohost* "
+"register telling the FESVR to power off the SoC."
+msgstr ""
+
+#: ../../Customization/Boot-Process.rst:61
+msgid ""
+"However, for booting the Linux Kernel, you will need to use a second-"
+"stage bootloader called the Berkeley Boot Loader, or BBL. This program "
+"reads the device tree encoded in the boot ROM and transforms it into a "
+"format compatible with the Linux kernel. It then sets up virtual memory "
+"and the interrupt controller, loads the kernel, which is embedded in the "
+"bootloader binary as a payload, and starts executing the kernel in "
+"supervisor mode. The bootloader is also responsible for servicing "
+"machine-mode traps from the kernel and proxying them over FESVR."
+msgstr ""
+
+#: ../../Customization/Boot-Process.rst:70
+msgid ""
+"Once BBL jumps into supervisor mode, the Linux kernel takes over and "
+"begins its process. It eventually loads the ``init`` program and runs it "
+"in user mode, thus starting userspace execution."
+msgstr ""
+
+#: ../../Customization/Boot-Process.rst:74
+msgid ""
+"The easiest way to build a BBL image that boots Linux is to use the "
+"FireMarshal tool that lives in the `firesim-software "
+"<https://github.com/firesim/firesim-software>`_ repository. Directions on"
+" how to use FireMarshal can be found in the `FireSim documentation "
+"<https://docs.fires.im/en/latest/Advanced-"
+"Usage/FireMarshal/index.html>`_. Using FireMarshal, you can add custom "
+"kernel configurations and userspace software to your workload."
+msgstr ""
+
+#: ../../Customization/Custom-Chisel.rst:4
+msgid "Integrating Custom Chisel Projects into the Generator Build System"
+msgstr ""
+
+#: ../../Customization/Custom-Chisel.rst:7
+msgid ""
+"This section assumes integration of custom Chisel through git submodules."
+" While it is possible to directly commit custom Chisel into the Chipyard "
+"framework, we heavily recommend managing custom code through git "
+"submodules. Using submodules decouples development of custom features "
+"from development on the Chipyard framework."
+msgstr ""
+
+#: ../../Customization/Custom-Chisel.rst:13
+msgid ""
+"While developing, you want to include Chisel code in a submodule so that "
+"it can be shared by different projects. To add a submodule to the "
+"Chipyard framework, make sure that your project is organized as follows."
+msgstr ""
+
+#: ../../Customization/Custom-Chisel.rst:23
+msgid ""
+"Put this in a git repository and make it accessible. Then add it as a "
+"submodule to under the following directory hierarchy: "
+"``generators/yourproject``."
+msgstr ""
+
+#: ../../Customization/Custom-Chisel.rst:26
+msgid ""
+"The ``build.sbt`` is a minimal file which describes metadata for a Chisel"
+" project. For a simple project, the ``build.sbt`` can even be empty, but "
+"below we provide an example build.sbt."
+msgstr ""
+
+#: ../../Customization/Custom-Chisel.rst:47
+msgid "Then add ``yourproject`` to the Chipyard top-level build.sbt file."
+msgstr ""
+
+#: ../../Customization/Custom-Chisel.rst:53
+msgid ""
+"You can then import the classes defined in the submodule in a new project"
+" if you add it as a dependency. For instance, if you want to use this "
+"code in the ``chipyard`` project, change the final line in build.sbt to "
+"the following."
+msgstr ""
+
+#: ../../Customization/Custom-Core.rst:4
+msgid "Adding a custom core"
+msgstr ""
+
+#: ../../Customization/Custom-Core.rst:6
+msgid ""
+"You may want to integrate a custom RISC-V core into the Chipyard "
+"framework. This documentation page provides step-by-step instructions on "
+"how to achieve this."
+msgstr ""
+
+#: ../../Customization/Custom-Core.rst:11
+msgid ""
+"RoCC is currently not supported by cores other than Rocket and BOOM. "
+"Please use Rocket or BOOM as the RoCC base core if you need to use RoCC."
+msgstr ""
+
+#: ../../Customization/Custom-Core.rst:15
+msgid ""
+"This page contains links to the files that contains important definitions"
+" in the Rocket chip repository, which is maintained separately from "
+"Chipyard. If you find any discrepancy between the code on this page and "
+"the code in the source file, please report it through GitHub issues!"
+msgstr ""
+
+#: ../../Customization/Custom-Core.rst:20
+msgid "Wrap Verilog Module with Blackbox (Optional)"
+msgstr ""
+
+#: ../../Customization/Custom-Core.rst:22
+msgid ""
+"Since Chipyard uses Scala and Chisel, if the top module of your core is "
+"not in Chisel, you will first need to create a Verilog blackbox for it so"
+" that it can be processed by Chipyard. See :ref:`incorporating-verilog-"
+"blocks` for instructions."
+msgstr ""
+
+#: ../../Customization/Custom-Core.rst:26
+msgid "Create Parameter Case Classes"
+msgstr ""
+
+#: ../../Customization/Custom-Core.rst:28
+msgid ""
+"Chipyard will generate a core for every ``InstantiableTileParams`` object"
+" it discovered in the ``TilesLocated(InSubsystem)`` key. This object is "
+"derived from``TileParams``, a trait containing the information needed to "
+"create a tile. All cores must have their own implementation of "
+"``InstantiableTileParams``, as well as ``CoreParams`` which is passed as "
+"a field in ``TileParams``."
+msgstr ""
+
+#: ../../Customization/Custom-Core.rst:32
+msgid ""
+"``TileParams`` holds the parameters for the tile, which include "
+"parameters for all components in the tile (e.g. core, cache, MMU, etc.), "
+"while ``CoreParams`` contains parameters specific to the core on the "
+"tile. They must be implemented as case classes with fields that can be "
+"overridden by other config fragments as the constructor parameters. See "
+"the appendix at the bottom of the page for a list of variable to be "
+"implemented. You can also add custom fields to them, but standard fields "
+"should always be preferred."
+msgstr ""
+
+#: ../../Customization/Custom-Core.rst:38
+msgid ""
+"``InstantiableTileParams[TileType]`` holds the constructor of "
+"``TileType`` on top of the fields of ``TileParams``, where ``TileType`` "
+"is the tile class (see the next section). All custom cores will also need"
+" to implement ``instantiate()`` in their tile parameter class to return a"
+" new instance of the tile class ``TileType``."
+msgstr ""
+
+#: ../../Customization/Custom-Core.rst:43
+msgid ""
+"``TileParams`` (in the file `BaseTile.scala "
+"<https://github.com/chipsalliance/rocket-"
+"chip/blob/master/src/main/scala/tile/BaseTile.scala>`_) , "
+"``InstantiableTileParams`` (in the file `BaseTile.scala "
+"<https://github.com/chipsalliance/rocket-"
+"chip/blob/master/src/main/scala/tile/BaseTile.scala>`_), ``CoreParams`` "
+"(in the file `Core.scala <https://github.com/chipsalliance/rocket-"
+"chip/blob/master/src/main/scala/tile/Core.scala>`_), and ``FPUParams`` "
+"(in the file `FPU.scala <https://github.com/chipsalliance/rocket-"
+"chip/blob/master/src/main/scala/tile/FPU.scala>`_) contains the following"
+" fields:"
+msgstr ""
+
+#: ../../Customization/Custom-Core.rst:125
+msgid ""
+"Most of the fields here (marked \"Rocket spcific\") are originally "
+"designed for the Rocket core and thus contain some implementation-"
+"specific details, but many of them are general enough to be useful for "
+"other cores. You may ignore any fields marked \"Rocket specific\" and use"
+" their default values; however, if you need to store additional "
+"information with meaning or usage similar to these \"Rocket specific\" "
+"fields, it is recommended to use these fields instead of creating your "
+"own custom fields."
+msgstr ""
+
+#: ../../Customization/Custom-Core.rst:131
+msgid ""
+"You will also need a ``CanAttachTile`` class to add the tile config into "
+"the config system, with the following format:"
+msgstr ""
+
+#: ../../Customization/Custom-Core.rst:138
+msgid ""
+"During elaboration, Chipyard will look for subclasses of "
+"``CanAttachTile`` in the config system and instantiate a tile from the "
+"parameters in this class for every such class it found."
+msgstr ""
+
+#: ../../Customization/Custom-Core.rst:143
+msgid ""
+"Implementations may choose to ignore some fields here or use them in a "
+"non-standard way, but using an inaccurate value may break Chipyard "
+"components that rely on them (e.g. an inaccurate indication of supported "
+"ISA extension will result in an incorrect test suite being generated) as "
+"well as any custom modules that use them. ALWAYS document any fields you "
+"ignore or with altered usage in your core implementation, and if you are "
+"implementing other devices that would look up these config values, also "
+"document them. \"Rocket specific\" values are generally safe to ignore, "
+"but you should document them if you use them."
+msgstr ""
+
+#: ../../Customization/Custom-Core.rst:151
+msgid "Create Tile Class"
+msgstr ""
+
+#: ../../Customization/Custom-Core.rst:153
+msgid ""
+"In Chipyard, all Tiles are diplomatically instantiated. In the first "
+"phase, diplomatic nodes which specify Tile-to-System interconnects are "
+"evaluated, while in the second \"Module Implementation\" phase, hardware "
+"is elaborated. See :ref:`tilelink_and_diplomacy` for more details. In "
+"this step, you will need to implement a tile class for your core, which "
+"specifies the constraints on the core's parameters and the connections "
+"with other diplomatic nodes. This class usually contains "
+"Diplomacy/TileLink code only, and Chisel RTL code should not go here."
+msgstr ""
+
+#: ../../Customization/Custom-Core.rst:159
+msgid ""
+"All tile classes implement ``BaseTile`` and will normally implement "
+"``SinksExternalInterrupts`` and ``SourcesExternalNotifications``, which "
+"allow the tile to accept external interrupt. A typical tile has the "
+"following form:"
+msgstr ""
+
+#: ../../Customization/Custom-Core.rst:168
+msgid "Connect TileLink Buses"
+msgstr ""
+
+#: ../../Customization/Custom-Core.rst:170
+msgid ""
+"Chipyard uses TileLink as its onboard bus protocol. If your core doesn't "
+"use TileLink, you will need to insert converters between the core's "
+"memory protocol and TileLink within the Tile module. in the tile class. "
+"Below is an example of how to connect a core using AXI4 to the TileLink "
+"bus with converters provided by Rocket chip:"
+msgstr ""
+
+#: ../../Customization/Custom-Core.rst:180
+msgid ""
+"Remember, you may not need all of these intermediate widgets. See "
+":ref:`diplomatic_widgets` for the meaning of each intermediate widget. If"
+" you are using TileLink, then you only need the tap node and the TileLink"
+" node used by your components. Chipyard also provides converters for AHB,"
+" APB and AXIS, and most of the AXI4 widgets has equivalent widget for "
+"these bus protocol; see the source files in ``generators/rocket-"
+"chip/src/main/scala/amba`` for more info."
+msgstr ""
+
+#: ../../Customization/Custom-Core.rst:185
+msgid ""
+"If you are using some other bus protocol, you may implement your own "
+"converters, using the files in ``generators/rocket-"
+"chip/src/main/scala/amba`` as the template, but it is not recommended "
+"unless you are familiar with TileLink."
+msgstr ""
+
+#: ../../Customization/Custom-Core.rst:188
+msgid ""
+"``memAXI4Node`` is an AXI4 master node and is defined as following in our"
+" example:"
+msgstr ""
+
+#: ../../Customization/Custom-Core.rst:195
+msgid ""
+"where ``portName`` and ``idBits`` (number of bits to represent a port ID)"
+" are the parameter provides by the tile. Make sure to read "
+":ref:`node_types` to check out what type of nodes Chipyard supports and "
+"their parameters!"
+msgstr ""
+
+#: ../../Customization/Custom-Core.rst:198
+msgid ""
+"Also, by default, there are boundary buffers for both master and slave "
+"connections to the bus when they are leaving the tile, and you can "
+"override the following two functions to control how to buffer the bus "
+"requests/responses: (You can find the definition of these two functions "
+"in the class ``BaseTile`` in the file `BaseTile.scala "
+"<https://github.com/chipsalliance/rocket-"
+"chip/blob/master/src/main/scala/tile/BaseTile.scala>`_)"
+msgstr ""
+
+#: ../../Customization/Custom-Core.rst:209
+msgid ""
+"You can find more information on ``TLBuffer`` in "
+":ref:`diplomatic_widgets`."
+msgstr ""
+
+#: ../../Customization/Custom-Core.rst:212
+msgid "Create Implementation Class"
+msgstr ""
+
+#: ../../Customization/Custom-Core.rst:214
+msgid ""
+"The implementation class contains the parameterized, actual hardware that"
+" depends on the values resolved by the Diplomacy framework according to "
+"the info provided in the Tile class. This class will normally contains "
+"Chisel RTL code. If your core is in Verilog, you will need to instantiate"
+" the black box class that wraps your Verilog implementation and connect "
+"it with the buses and other components. No Diplomacy/TileLink code should"
+" be in this class; you should only connect the IO signals in TileLink "
+"interfaces or other diplomatically defined components, which are located "
+"in the tile class."
+msgstr ""
+
+#: ../../Customization/Custom-Core.rst:220
+msgid "The implementation class for your core is of the following form:"
+msgstr ""
+
+#: ../../Customization/Custom-Core.rst:227
+msgid ""
+"If you create an AXI4 node (or equivalents), you will need to connect "
+"them to your core. You can connect a port like this:"
+msgstr ""
+
+#: ../../Customization/Custom-Core.rst:235
+msgid "Connect Interrupt"
+msgstr ""
+
+#: ../../Customization/Custom-Core.rst:237
+msgid ""
+"Chipyard allows a tile to either receive interrupts from other devices or"
+" initiate interrupts to notify other cores/devices. In the tile that "
+"inherited ``SinksExternalInterrupts``, one can create a "
+"``TileInterrupts`` object (a Chisel bundle) and call "
+"``decodeCoreInterrupts()`` with the object as the argument. Note that you"
+" should call this function in the implementation class since it returns a"
+" Chisel bundle used by RTL code. You can then read the interrupt bits "
+"from the ``TileInterrupts`` bundle we create above. The definition of "
+"``TileInterrupts`` (in the file `Interrupts.scala "
+"<https://github.com/chipsalliance/rocket-"
+"chip/blob/master/src/main/scala/tile/Interrupts.scala>`_) is"
+msgstr ""
+
+#: ../../Customization/Custom-Core.rst:255
+msgid ""
+"Here is an example on how to connect these signals in the implementation "
+"class:"
+msgstr ""
+
+#: ../../Customization/Custom-Core.rst:262
+msgid ""
+"Also, the tile can also notify other cores or devices for some events by "
+"calling following functions in ``SourcesExternalNotifications`` from the "
+"implementation class: (These functions can be found in in the trait "
+"``SourcesExternalNotifications`` in the file `Interrupts.scala "
+"<https://github.com/chipsalliance/rocket-"
+"chip/blob/master/src/main/scala/tile/Interrupts.scala>`_)"
+msgstr ""
+
+#: ../../Customization/Custom-Core.rst:274
+msgid "Here is an example on how to use these functions to raise interrupt."
+msgstr ""
+
+#: ../../Customization/Custom-Core.rst:282
+msgid "Create Config Fragments to Integrate the Core"
+msgstr ""
+
+#: ../../Customization/Custom-Core.rst:284
+msgid ""
+"To use your core in a Chipyard config, you will need a config fragment "
+"that will create a ``TileParams`` object of your core in the current "
+"config. An example of such config will be like this:"
+msgstr ""
+
+#: ../../Customization/Custom-Core.rst:292
+msgid ""
+"Chipyard looks up the tile parameters in the field "
+"``TilesLocated(InSubsystem)``, whose type is a list of "
+"``InstantiableTileParams``. This config fragment simply appends new tile "
+"parameters to the end of this list."
+msgstr ""
+
+#: ../../Customization/Custom-Core.rst:295
+msgid ""
+"Now you have finished all the steps to prepare your cores for Chipyard! "
+"To generate the custom core, simply follow the instructions in "
+":ref:`custom_chisel` to add your project to the build system, then create"
+" a config by following the steps in :ref:`hetero_socs_`. You can now run "
+"most desired workflows for the new config just as you would for the "
+"built-in cores (depending on the functionality your core supports)."
+msgstr ""
+
+#: ../../Customization/Custom-Core.rst:299
+msgid ""
+"If you would like to see an example of a complete third-party Verilog "
+"core integrated into Chipyard, "
+"``generators/ariane/src/main/scala/CVA6Tile.scala`` provides a concrete "
+"example of the CVA6 core. Note that this particular example includes "
+"additional nuances with respect to the interaction of the AXI interface "
+"with the memory coherency system."
+msgstr ""
+
+#: ../../Customization/DMA-Devices.rst:4
+msgid "Adding a DMA Device"
+msgstr ""
+
+#: ../../Customization/DMA-Devices.rst:6
+msgid ""
+"DMA devices are Tilelink widgets which act as masters. In other words, "
+"DMA devices can send their own read and write requests to the chip's "
+"memory system."
+msgstr ""
+
+#: ../../Customization/DMA-Devices.rst:10
+msgid ""
+"For IO devices or accelerators (like a disk or network driver), instead "
+"of having the CPU poll data from the device, we may want to have the "
+"device write directly to the coherent memory system instead. For example,"
+" here is a device that writes zeros to the memory at a configured "
+"address."
+msgstr ""
+
+#: ../../Customization/DMA-Devices.rst:23
+msgid ""
+"We use ``TLHelper.makeClientNode`` to create a TileLink client node for "
+"us. We then connect the client node to the memory system through the "
+"front bus (fbus). For more info on creating TileLink client nodes, take a"
+" look at :ref:`TileLink-Diplomacy-Reference/NodeTypes:Client Node`."
+msgstr ""
+
+#: ../../Customization/DMA-Devices.rst:27
+msgid ""
+"Once we've created our top-level module including the DMA widget, we can "
+"create a configuration for it as we did before."
+msgstr ""
+
+#: ../../Customization/Dsptools-Blocks.rst:3
+msgid ""
+"Dsptools is a Chisel library that aids in writing custom signal "
+"processing accelerators. It does this by: * Giving types and helpers that"
+" allow you to express mathematical operations more directly. * "
+"Typeclasses that let you write polymorphic generators, for example an FIR"
+" filter generator that works for both real- and complex-valued filters. *"
+" Structures for packaging DSP blocks and integrating them into a "
+"rocketchip-based SoC. * Test harnesses for testing DSP circuits, as well "
+"as VIP-style drivers and monitors for DSP blocks."
+msgstr ""
+
+#: ../../Customization/Dsptools-Blocks.rst:9
+msgid ""
+"The `Dsptools repository <https://github.com/ucb-bar/dsptools/>`_ has "
+"more documentation."
+msgstr ""
+
+#: ../../Customization/Dsptools-Blocks.rst:13
+msgid "Dsptools Blocks"
+msgstr ""
+
+#: ../../Customization/Dsptools-Blocks.rst:14
+msgid ""
+"A ``DspBlock`` is the basic unit of signal processing functionality that "
+"can be integrated into an SoC. It has a AXI4-stream interface and an "
+"optional memory interface. The idea is that these ``DspBlocks`` can be "
+"easily designed, unit tested, and assembled lego-style to build complex "
+"functionality. A ``DspChain`` is one example of how to assemble "
+"``DspBlocks``, in which case the streaming interfaces are connected "
+"serially into a pipeline, and a bus is instatiated and connected to every"
+" block with a memory interface."
+msgstr ""
+
+#: ../../Customization/Dsptools-Blocks.rst:19
+msgid ""
+"Chipyard has example designs that integrate a ``DspBlock`` to a "
+"rocketchip-based SoC as an MMIO peripheral. The custom ``DspBlock`` has a"
+" ``ReadQueue`` before it and a ``WriteQueue`` after it, which allow "
+"memory mapped access to the streaming interfaces so the rocket core can "
+"interact with the ``DspBlock`` [#]_.  This section will primarily focus "
+"on designing Tilelink-based peripherals. However, through the resources "
+"provided in Dsptools, one could also define an AXI4-based peripheral by "
+"following similar steps. Furthermore, the examples here are simple, but "
+"can be extended to implement more complex accelerators, for example an "
+"`OFDM baseband <https://github.com/grebe/ofdm>`_ or a `spectrometer "
+"<https://github.com/ucb-art/craft2-chip>`_."
+msgstr ""
+
+#: ../../Customization/Dsptools-Blocks.rst:26
+msgid ""
+"For this example, we will show you how to connect a simple FIR filter "
+"created using Dsptools as an MMIO peripheral as shown in the figure "
+"above. The full code can be found in "
+"``generators/chipyard/src/main/scala/example/dsptools/GenericFIR.scala``."
+" That being said, one could substitute any module with a ready valid "
+"interface in the place of the FIR and achieve the same results. As long "
+"as the read and valid signals of the module are attached to those of a "
+"corresponding ``DSPBlock`` wrapper, and that wrapper is placed in a chain"
+" with a ``ReadQueue`` and a ``WriteQueue``, following the general outline"
+" establised by these steps will allow you to interact with that block as "
+"a memory mapped IO."
+msgstr ""
+
+#: ../../Customization/Dsptools-Blocks.rst:28
+msgid ""
+"The module ``GenericFIR`` is the overall wrapper of our FIR module. This "
+"module links together a variable number of ``GenericFIRDirectCell`` "
+"submodules, each of which performs the computations for one coefficient "
+"in a FIR direct form architecture. It is important to note that both "
+"modules are type-generic, which means that they can be instantiated for "
+"any datatype ``T`` that implements ``Ring`` operations (e.g. addition, "
+"multiplication, identities)."
+msgstr ""
+
+#: ../../Customization/Dsptools-Blocks.rst:41
+msgid "Creating a DspBlock"
+msgstr ""
+
+#: ../../Customization/Dsptools-Blocks.rst:43
+msgid ""
+"The first step in attaching the FIR filter as a MMIO peripheral is to "
+"create an abstract subclass of ``DspBlock`` the wraps around the "
+"``GenericFIR`` module. Streaming outputs and inputs are packed and "
+"unpacked into ``UInt`` s. If there were control signals, this is where "
+"they'd go from raw IOs to memory mapped. The main steps of this process "
+"are as follows."
+msgstr ""
+
+#: ../../Customization/Dsptools-Blocks.rst:45
+msgid "Instantiate a ``GenericFIR`` within ``GenericFIRBlock``."
+msgstr ""
+
+#: ../../Customization/Dsptools-Blocks.rst:46
+msgid "Attach the ready and valid signals from the in and out connections."
+msgstr ""
+
+#: ../../Customization/Dsptools-Blocks.rst:47
+msgid ""
+"Cast the module input data to the input type of ``GenericFIR`` "
+"(``GenericFIRBundle``) and attach."
+msgstr ""
+
+#: ../../Customization/Dsptools-Blocks.rst:48
+msgid ""
+"Cast the output of ``GenericFIR`` to ``UInt`` and attach to the module "
+"output."
+msgstr ""
+
+#: ../../Customization/Dsptools-Blocks.rst:55
+msgid ""
+"Note that at this point the ``GenericFIRBlock`` does not have a type of "
+"memory interface specified. This abstract class can be used to create "
+"different flavors that use AXI-4, TileLink, AHB, or whatever other memory"
+" interface you like like."
+msgstr ""
+
+#: ../../Customization/Dsptools-Blocks.rst:58
+msgid "Connecting DspBlock by TileLink"
+msgstr ""
+
+#: ../../Customization/Dsptools-Blocks.rst:59
+msgid ""
+"With these classes implemented, you can begin to construct the chain by "
+"extending ``GenericFIRBlock`` while using the ``TLDspBlock`` trait via "
+"mixin."
+msgstr ""
+
+#: ../../Customization/Dsptools-Blocks.rst:66
+msgid ""
+"We can then construct the final chain by utilizing the ``TLWriteQueue`` "
+"and ``TLReadeQueue`` modules found in "
+"``generators/chipyard/src/main/scala/example/dsptools/DspBlocks.scala``. "
+"The chain is created by passing a list of factory functions to the "
+"constructor of ``TLChain``. The constructor then automatically "
+"instantiates these ``DspBlocks``, connects their stream nodes in order, "
+"creates a bus, and connects any ``DspBlocks`` that have memory interfaces"
+" to the bus."
+msgstr ""
+
+#: ../../Customization/Dsptools-Blocks.rst:74
+msgid "Top Level Traits"
+msgstr ""
+
+#: ../../Customization/Dsptools-Blocks.rst:75
+msgid ""
+"As in the previous MMIO example, we use a cake pattern to hook up our "
+"module to our SoC."
+msgstr ""
+
+#: ../../Customization/Dsptools-Blocks.rst:82
+msgid ""
+"Note that this is the point at which we decide the datatype for our FIR. "
+"You could create different configs that use different types for the FIR, "
+"for example a config that instantiates a complex-valued FIR filter."
+msgstr ""
+
+#: ../../Customization/Dsptools-Blocks.rst:85
+msgid "Constructing the Top and Config"
+msgstr ""
+
+#: ../../Customization/Dsptools-Blocks.rst:87
+msgid ""
+"Once again following the path of the previous MMIO example, we now want "
+"to mix our traits into the system as a whole. The code is from "
+"``generators/chipyard/src/main/scala/DigitalTop.scala``"
+msgstr ""
+
+#: ../../Customization/Dsptools-Blocks.rst:94
+msgid ""
+"Finally, we create the configuration class in "
+"``generators/chipyard/src/main/scala/config/RocketConfigs.scala`` that "
+"uses the ``WithFIR`` mixin defined in "
+"``generators/chipyard/src/main/scala/example/dsptools/GenericFIR.scala``."
+msgstr ""
+
+#: ../../Customization/Dsptools-Blocks.rst:107
+msgid "FIR Testing"
+msgstr ""
+
+#: ../../Customization/Dsptools-Blocks.rst:109
+msgid ""
+"We can now test that the FIR is working. The test program is found in "
+"``tests/streaming-fir.c``."
+msgstr ""
+
+#: ../../Customization/Dsptools-Blocks.rst:114
+msgid ""
+"The test feed a series of values into the fir and compares the output to "
+"a golden model of computation. The base of the module's MMIO write region"
+" is at 0x2000 and the base of the read region is at 0x2100 by default."
+msgstr ""
+
+#: ../../Customization/Dsptools-Blocks.rst:116
+msgid ""
+"Compiling this program with ``make`` produces a ``streaming-fir.riscv`` "
+"executable."
+msgstr ""
+
+#: ../../Customization/Dsptools-Blocks.rst:118
+msgid "Now we can run our simulation."
+msgstr ""
+
+#: ../../Customization/Dsptools-Blocks.rst:125
+msgid ""
+"``ReadQueue`` and ``WriteQueue`` are good illustrations of how to write a"
+" ``DspBlock`` and how they can be integrated into rocket, but in a real "
+"design a DMA engine would be preferred. ``ReadQueue`` will stall the "
+"processor if you try to read an empty queue, and ``WriteQueue`` will "
+"stall if you try to write to a full queue, which a DMA engine can more "
+"elegantly avoid. Furthermore, a DMA engine can do the work of moving "
+"data, freeing the processor to do other useful work (or sleep)."
+msgstr ""
+
+#: ../../Customization/Firrtl-Transforms.rst:4
+msgid "Adding a Firrtl Transform"
+msgstr ""
+
+#: ../../Customization/Firrtl-Transforms.rst:6
+msgid ""
+"Similar to how LLVM IR passes can perform transformations and "
+"optimizations on software, FIRRTL transforms can modify Chisel-elaborated"
+" RTL. As mentioned in Section :ref:`Tools/FIRRTL:firrtl`, transforms are "
+"modifications that happen on the FIRRTL IR that can modify a circuit. "
+"Transforms are a powerful tool to take in the FIRRTL IR that is emitted "
+"from Chisel and run analysis or convert the circuit into a new form."
+msgstr ""
+
+#: ../../Customization/Firrtl-Transforms.rst:12
+msgid "Where to add transforms"
+msgstr ""
+
+#: ../../Customization/Firrtl-Transforms.rst:14
+msgid ""
+"In Chipyard, the FIRRTL compiler is called multiple times to create a "
+"\"Top\" file that contains the DUT and a \"Harness\" file containing the "
+"test harness, which instantiates the DUT. The \"Harness\" file does not "
+"contain the DUT's module definition or any of its submodules. This is "
+"done by the ``tapeout`` SBT project (located in "
+"``tools/barstools/tapeout``) which calls ``GenerateTopAndHarness`` (a "
+"function that wraps the multiple FIRRTL compiler calls and extra "
+"transforms)."
+msgstr ""
+
+#: ../../Customization/Firrtl-Transforms.rst:23
+msgid ""
+"If you look inside of the "
+"`tools/barstools/tapeout/src/main/scala/transforms/Generate.scala "
+"<https://github.com/ucb-"
+"bar/barstools/blob/master/tapeout/src/main/scala/transforms/Generate.scala>`__"
+" file, you can see that FIRRTL is invoked twice, once for the \"Top\" and"
+" once for the \"Harness\". If you want to add transforms to just modify "
+"the DUT, you can add them to ``topTransforms``. Otherwise, if you want to"
+" add transforms to just modify the test harness, you can add them to "
+"``harnessTransforms``."
+msgstr ""
+
+#: ../../Customization/Firrtl-Transforms.rst:27
+msgid ""
+"For more information on Barstools, please visit the "
+":ref:`Tools/Barstools:Barstools` section."
+msgstr ""
+
+#: ../../Customization/Firrtl-Transforms.rst:30
+msgid "Examples of transforms"
+msgstr ""
+
+#: ../../Customization/Firrtl-Transforms.rst:32
+msgid ""
+"There are multiple examples of transforms that you can apply and are "
+"spread across the FIRRTL ecosystem. Within FIRRTL there is a default set "
+"of supported transforms located in "
+"https://github.com/freechipsproject/firrtl/tree/master/src/main/scala/firrtl/transforms."
+" This includes transforms that can flatten modules (``Flatten``), group "
+"modules together (``GroupAndDedup``), and more."
+msgstr ""
+
+#: ../../Customization/Firrtl-Transforms.rst:36
+msgid ""
+"Transforms can be standalone or can take annotations as input. "
+"Annotations are used to pass information between FIRRTL transforms. This "
+"includes information on what modules to flatten, group, and more. "
+"Annotations can be added to the code by adding them to your Chisel source"
+" or by creating a serialized annotation ``json`` file and adding it to "
+"the FIRRTL compiler (note: annotating the Chisel source will "
+"automatically serialize the annotation as a ``json`` snippet into the "
+"build system for you). **The recommended way to annotate something is to "
+"do it in the Chisel source, but not all annotation types have Chisel "
+"APIs**."
+msgstr ""
+
+#: ../../Customization/Firrtl-Transforms.rst:42
+msgid ""
+"The example below shows two ways to annotate the signal using the "
+"``DontTouchAnnotation`` (makes sure that a particular signal is not "
+"removed by the \"Dead Code Elimination\" pass in FIRRTL):"
+msgstr ""
+
+#: ../../Customization/Firrtl-Transforms.rst:45
+msgid ""
+"use the Chisel API/wrapper function called ``dontTouch`` that does this "
+"automatically for you (more `dontTouch <https://www.chisel-"
+"lang.org/api/SNAPSHOT/chisel3/dontTouch$.html>`__ information):"
+msgstr ""
+
+#: ../../Customization/Firrtl-Transforms.rst:46
+msgid ""
+"directly annotate the signal with the ``annotate`` function and the "
+"``DontTouchAnnotation`` class if there is no Chisel API for it (note: "
+"most FIRRTL annotations have Chisel APIs for them)"
+msgstr ""
+
+#: ../../Customization/Firrtl-Transforms.rst:72
+msgid "Here is an example of the ``DontTouchAnnotation`` when it is serialized:"
+msgstr ""
+
+#: ../../Customization/Firrtl-Transforms.rst:83
+msgid ""
+"In this case, the specific syntax depends on the type of annotation and "
+"its fields. One of the easier ways to figure out the serialized syntax is"
+" to first try and find a Chisel annotation to add to the code. Then you "
+"can look at the collateral that is generated from the build system, find "
+"the ``*.anno.json``, and find the proper syntax for the annotation."
+msgstr ""
+
+#: ../../Customization/Firrtl-Transforms.rst:88
+msgid ""
+"Once ``yourAnnoFile.json`` is created then you can add ``-faf "
+"yourAnnoFile.json`` to the FIRRTL compiler invocation in ``common.mk``."
+msgstr ""
+
+#: ../../Customization/Firrtl-Transforms.rst:96
+msgid ""
+"If you are interested in writing FIRRTL transforms please refer to the "
+"FIRRTL documentation located here: "
+"https://github.com/freechipsproject/firrtl/wiki."
+msgstr ""
+
+#: ../../Customization/Heterogeneous-SoCs.rst:4
+msgid "Heterogeneous SoCs"
+msgstr ""
+
+#: ../../Customization/Heterogeneous-SoCs.rst:6
+msgid ""
+"The Chipyard framework involves multiple cores and accelerators that can "
+"be composed in arbitrary ways. This discussion will focus on how you "
+"combine Rocket, BOOM and Hwacha in particular ways to create a unique "
+"SoC."
+msgstr ""
+
+#: ../../Customization/Heterogeneous-SoCs.rst:10
+msgid "Creating a Rocket and BOOM System"
+msgstr ""
+
+#: ../../Customization/Heterogeneous-SoCs.rst:12
+msgid ""
+"Instantiating an SoC with Rocket and BOOM cores is all done with the "
+"configuration system and two specific config fragments. Both BOOM and "
+"Rocket have config fragments labelled "
+"``WithN{Small|Medium|Large|etc.}BoomCores(X)`` and ``WithNBigCores(X)`` "
+"that automatically create ``X`` copies of the core/tile [1]_. When used "
+"together you can create a heterogeneous system."
+msgstr ""
+
+#: ../../Customization/Heterogeneous-SoCs.rst:16
+msgid "The following example shows a dual core BOOM with a single core Rocket."
+msgstr ""
+
+#: ../../Customization/Heterogeneous-SoCs.rst:25
+msgid "Adding Hwachas"
+msgstr ""
+
+#: ../../Customization/Heterogeneous-SoCs.rst:27
+msgid ""
+"Adding a Hwacha accelerator is as easy as adding the "
+"``DefaultHwachaConfig`` so that it can setup the Hwacha parameters and "
+"add itself to the ``BuildRoCC`` parameter. An example of adding a Hwacha "
+"to all tiles in the system is below."
+msgstr ""
+
+#: ../../Customization/Heterogeneous-SoCs.rst:35
+msgid ""
+"In this example, Hwachas are added to both BOOM tiles and to the Rocket "
+"tile. All with the same Hwacha parameters."
+msgstr ""
+
+#: ../../Customization/Heterogeneous-SoCs.rst:39
+msgid "Assigning Accelerators to Specific Tiles with MultiRoCC"
+msgstr ""
+
+#: ../../Customization/Heterogeneous-SoCs.rst:41
+msgid ""
+"Located in ``generators/chipyard/src/main/scala/ConfigFragments.scala`` "
+"is a config fragment that provides support for adding RoCC accelerators "
+"to specific tiles in your SoC. Named ``MultiRoCCKey``, this key allows "
+"you to attach RoCC accelerators based on the ``hartId`` of the tile. For "
+"example, using this allows you to create a 8 tile system with a RoCC "
+"accelerator on only a subset of the tiles. An example is shown below with"
+" two BOOM cores, and one Rocket tile with a RoCC accelerator (Hwacha) "
+"attached."
+msgstr ""
+
+#: ../../Customization/Heterogeneous-SoCs.rst:51
+msgid ""
+"The ``WithMultiRoCCHwacha`` config fragment assigns a Hwacha accelerator "
+"to a particular ``hartId`` (in this case, the ``hartId`` of ``0`` "
+"corresponds to the Rocket core). Finally, the ``WithMultiRoCC`` config "
+"fragment is called. This config fragment sets the ``BuildRoCC`` key to "
+"use the ``MultiRoCCKey`` instead of the default. This must be used after "
+"all the RoCC parameters are set because it needs to override the "
+"``BuildRoCC`` parameter. If this is used earlier in the configuration "
+"sequence, then MultiRoCC does not work."
+msgstr ""
+
+#: ../../Customization/Heterogeneous-SoCs.rst:57
+msgid ""
+"This config fragment can be changed to put more accelerators on more "
+"cores by changing the arguments to cover more ``hartId``'s (i.e. "
+"``WithMultiRoCCHwacha(0,1,3,6,...)``)."
+msgstr ""
+
+#: ../../Customization/Heterogeneous-SoCs.rst:59
+msgid ""
+"Since config fragments are applied from right-to-left (or bottom-to-top "
+"as they are formatted here), the right-most config fragment specifying a "
+"core (which is ``freechips.rocketchip.subsystem.WithNBigCores`` in the "
+"example above) gets the first hart ID. Consider this config:"
+msgstr ""
+
+#: ../../Customization/Heterogeneous-SoCs.rst:69
+msgid ""
+"This specifies an SoC with three Rocket cores and two BOOM cores. The "
+"Rocket cores would have hart IDs 0, 1, and 2, while the BOOM cores would "
+"have hard IDs 3 and 4. On the other hand, consider this config which "
+"reverses the order of those two fragments:"
+msgstr ""
+
+#: ../../Customization/Heterogeneous-SoCs.rst:80
+msgid ""
+"This also specifies an SoC with three Rocket cores and two BOOM cores, "
+"but because the BOOM config fragment is evaluated before the Rocket "
+"config fragment, the hart IDs are reversed. The BOOM cores would have "
+"hart IDs 0 and 1, while the Rocket cores would have hard IDs 2, 3, and 4."
+msgstr ""
+
+#: ../../Customization/Heterogeneous-SoCs.rst:83
+msgid ""
+"Note, in this section \"core\" and \"tile\" are used interchangeably but "
+"there is subtle distinction between a \"core\" and \"tile\" (\"tile\" "
+"contains a \"core\", L1D/I$, PTW). For many places in the documentation, "
+"we usually use \"core\" to mean \"tile\" (doesn't make a large difference"
+" but worth the mention)."
+msgstr ""
+
+#: ../../Customization/IOBinders.rst:2
+msgid "IOBinders and HarnessBinders"
+msgstr ""
+
+#: ../../Customization/IOBinders.rst:4
+msgid ""
+"In Chipyard we use special ``Parameters`` keys, ``IOBinders`` and "
+"``HarnessBinders`` to bridge the gap between digital system IOs and "
+"TestHarness collateral."
+msgstr ""
+
+#: ../../Customization/IOBinders.rst:7
+msgid "IOBinders"
+msgstr ""
+
+#: ../../Customization/IOBinders.rst:9
+msgid ""
+"The ``IOBinder`` functions are responsible for instantiating IO cells and"
+" IOPorts in the ``ChipTop`` layer."
+msgstr ""
+
+#: ../../Customization/IOBinders.rst:11
+msgid ""
+"``IOBinders`` are typically defined using the ``OverrideIOBinder`` or "
+"``ComposeIOBinder`` macros. An ``IOBinder`` consists of a function "
+"matching ``Systems`` with a given trait that generates IO ports and "
+"IOCells, and returns a list of generated ports and cells."
+msgstr ""
+
+#: ../../Customization/IOBinders.rst:13
+msgid ""
+"For example, the ``WithUARTIOCells`` IOBinder will, for any ``System`` "
+"that might have UART ports (``HasPeripheryUARTModuleImp``, generate ports"
+" within the ``ChipTop`` (``ports``) as well as IOCells with the "
+"appropriate type and direction (``cells2d``). This function returns a the"
+" list of generated ports, and the list of generated IOCells. The list of "
+"generated ports is passed to the ``HarnessBinders`` such that they can be"
+" connected to ``TestHarness`` devices."
+msgstr ""
+
+#: ../../Customization/IOBinders.rst:22
+msgid "HarnessBinders"
+msgstr ""
+
+#: ../../Customization/IOBinders.rst:24
+msgid ""
+"The ``HarnessBinder`` functions determine what modules to bind to the IOs"
+" of a ``ChipTop`` in the ``TestHarness``. The ``HarnessBinder`` interface"
+" is designed to be reused across various simulation/implementation modes,"
+" enabling decoupling of the target design from simulation and testing "
+"concerns."
+msgstr ""
+
+#: ../../Customization/IOBinders.rst:26
+msgid ""
+"For SW RTL or GL simulations, the default set of ``HarnessBinders`` "
+"instantiate software-simulated models of various devices, for example "
+"external memory or UART, and connect those models to the IOs of the "
+"``ChipTop``."
+msgstr ""
+
+#: ../../Customization/IOBinders.rst:27
+msgid ""
+"For FireSim simulations, FireSim-specific ``HarnessBinders`` instantiate "
+"``Bridges``, which faciliate cycle-accurate simulation across the "
+"simulated chip's IOs. See the FireSim documentation for more details."
+msgstr ""
+
+#: ../../Customization/IOBinders.rst:28
+msgid ""
+"In the future, a Chipyard FPGA prototyping flow may use "
+"``HarnessBinders`` to connect ``ChipTop`` IOs to other devices or IOs in "
+"the FPGA harness."
+msgstr ""
+
+#: ../../Customization/IOBinders.rst:30
+msgid ""
+"Like ``IOBinders``, ``HarnessBinders`` are defined using macros "
+"(``OverrideHarnessBinder, ComposeHarnessBinder``), and match ``Systems`` "
+"with a given trait. However, ``HarnessBinders`` are also passed a "
+"reference to the ``TestHarness`` (``th: HasHarnessSignalReferences``) and"
+" the list of ports generated by the corresponding ``IOBinder`` (``ports: "
+"Seq[Data]``)."
+msgstr ""
+
+#: ../../Customization/IOBinders.rst:32
+msgid ""
+"For exmaple, the ``WithUARTAdapter`` will connect the UART SW display "
+"adapter to the ports generated by the ``WithUARTIOCells`` described "
+"earlier, if those ports are present."
+msgstr ""
+
+#: ../../Customization/IOBinders.rst:39
+msgid ""
+"The ``IOBinder`` and ``HarnessBinder`` system is designed to enable "
+"decoupling of concerns between the target design and the simulation "
+"system."
+msgstr ""
+
+#: ../../Customization/IOBinders.rst:41
+msgid ""
+"For a given set of chip IOs, there may be not only multiple simulation "
+"platforms (\"harnesses\", so-to-speak), but also multiple simulation "
+"strategies. For example, the choice of whether to connect the backing "
+"AXI4 memory port to an accurate DRAM model (``SimDRAM``) or a simple "
+"simulated memory model (``SimAXIMem``) is isolated in ``HarnessBinders``,"
+" and does not affect target RTL generation."
+msgstr ""
+
+#: ../../Customization/IOBinders.rst:43
+msgid ""
+"Similarly, for a given simulation platform and strategy, there may be "
+"multiple strategies for generating the chip IOs. This target-design "
+"configuration is isolated in the ``IOBinders``."
+msgstr ""
+
+#: ../../Customization/Incorporating-Verilog-Blocks.rst:4
+msgid "Incorporating Verilog Blocks"
+msgstr ""
+
+#: ../../Customization/Incorporating-Verilog-Blocks.rst:6
+msgid ""
+"Working with existing Verilog IP is an integral part of many chip design "
+"flows. Fortunately, both Chisel and Chipyard provide extensive support "
+"for Verilog integration."
+msgstr ""
+
+#: ../../Customization/Incorporating-Verilog-Blocks.rst:10
+msgid ""
+"Here, we will examine the process of incorporating an MMIO peripheral "
+"that uses a Verilog implementation of Greatest Common Denominator (GCD) "
+"algorithm. There are a few steps to adding a Verilog peripheral:"
+msgstr ""
+
+#: ../../Customization/Incorporating-Verilog-Blocks.rst:14
+msgid "Adding a Verilog resource file to the project"
+msgstr ""
+
+#: ../../Customization/Incorporating-Verilog-Blocks.rst:15
+msgid "Defining a Chisel ``BlackBox`` representing the Verilog module"
+msgstr ""
+
+#: ../../Customization/Incorporating-Verilog-Blocks.rst:16
+msgid "Instantiating the ``BlackBox`` and interfacing ``RegField`` entries"
+msgstr ""
+
+#: ../../Customization/Incorporating-Verilog-Blocks.rst:17
+msgid "Setting up a chip ``Top`` and ``Config`` that use the peripheral"
+msgstr ""
+
+#: ../../Customization/Incorporating-Verilog-Blocks.rst:20
+msgid "Adding a Verilog Blackbox Resource File"
+msgstr ""
+
+#: ../../Customization/Incorporating-Verilog-Blocks.rst:22
+msgid ""
+"As before, it is possible to incorporate peripherals as part of your own "
+"generator project. However, Verilog resource files must go in a different"
+" directory from Chisel (Scala) sources."
+msgstr ""
+
+#: ../../Customization/Incorporating-Verilog-Blocks.rst:36
+msgid ""
+"In addition to the steps outlined in the previous section on adding a "
+"project to the ``build.sbt`` at the top level, it is also necessary to "
+"add any projects that contain Verilog IP as dependencies to the "
+"``tapeout`` project. This ensures that the Verilog sources are visible to"
+" the downstream FIRRTL passes that provide utilities for integrating "
+"Verilog files into the build process, which are part of the ``tapeout`` "
+"package in ``barstools/tapeout``."
+msgstr ""
+
+#: ../../Customization/Incorporating-Verilog-Blocks.rst:50
+msgid ""
+"For this concrete GCD example, we will be using a ``GCDMMIOBlackBox`` "
+"Verilog module that is defined in the ``chipyard`` project. The Scala and"
+" Verilog sources follow the prescribed directory layout."
+msgstr ""
+
+#: ../../Customization/Incorporating-Verilog-Blocks.rst:67
+msgid "Defining a Chisel BlackBox"
+msgstr ""
+
+#: ../../Customization/Incorporating-Verilog-Blocks.rst:69
+msgid ""
+"A Chisel ``BlackBox`` module provides a way of instantiating a module "
+"defined by an external Verilog source. The definition of the blackbox "
+"includes several aspects that allow it to be translated to an instance of"
+" the Verilog module:"
+msgstr ""
+
+#: ../../Customization/Incorporating-Verilog-Blocks.rst:74
+msgid ""
+"An ``io`` field: a bundle with fields corresponding to the portlist of "
+"the Verilog module."
+msgstr ""
+
+#: ../../Customization/Incorporating-Verilog-Blocks.rst:75
+msgid ""
+"A constructor parameter that takes a ``Map`` from Verilog parameter name "
+"to elaborated value"
+msgstr ""
+
+#: ../../Customization/Incorporating-Verilog-Blocks.rst:76
+msgid "One or more resources added to indicate Verilog source dependencies"
+msgstr ""
+
+#: ../../Customization/Incorporating-Verilog-Blocks.rst:78
+msgid ""
+"Of particular interest is the fact that parameterized Verilog modules can"
+" be passed the full space of possible parameter values. These values may "
+"depend on elaboration-time values in the Chisel generator, as the "
+"bitwidth of the GCD calculation does in this example."
+msgstr ""
+
+#: ../../Customization/Incorporating-Verilog-Blocks.rst:83
+msgid "**Verilog GCD port list and parameters**"
+msgstr ""
+
+#: ../../Customization/Incorporating-Verilog-Blocks.rst:90
+msgid "**Chisel BlackBox Definition**"
+msgstr ""
+
+#: ../../Customization/Incorporating-Verilog-Blocks.rst:98
+msgid "Instantiating the BlackBox and Defining MMIO"
+msgstr ""
+
+#: ../../Customization/Incorporating-Verilog-Blocks.rst:100
+msgid ""
+"Next, we must instantiate the blackbox. In order to take advantage of "
+"diplomatic memory mapping on the system bus, we still have to integrate "
+"the peripheral at the Chisel level by mixing peripheral-specific traits "
+"into a ``TLRegisterRouter``. The ``params`` member and ``HasRegMap`` base"
+" trait should look familiar from the previous memory-mapped GCD device "
+"example."
+msgstr ""
+
+#: ../../Customization/Incorporating-Verilog-Blocks.rst:114
+msgid "Defining a Chip with a BlackBox"
+msgstr ""
+
+#: ../../Customization/Incorporating-Verilog-Blocks.rst:116
+msgid ""
+"Since we've parameterized the GCD instantiation to choose between the "
+"Chisel and the Verilog module, creating a config is easy."
+msgstr ""
+
+#: ../../Customization/Incorporating-Verilog-Blocks.rst:124
+msgid ""
+"You can play with the parameterization of the mixin to choose a TL/AXI4, "
+"BlackBox/Chisel version of the GCD."
+msgstr ""
+
+#: ../../Customization/Incorporating-Verilog-Blocks.rst:128
+msgid "Software Testing"
+msgstr ""
+
+#: ../../Customization/Incorporating-Verilog-Blocks.rst:130
+msgid ""
+"The GCD module has a more complex interface, so polling is used to check "
+"the status of the device before each triggering read or write."
+msgstr ""
+
+#: ../../Customization/Incorporating-Verilog-Blocks.rst:140
+msgid "Support for Verilog Within Chipyard Tool Flows"
+msgstr ""
+
+#: ../../Customization/Incorporating-Verilog-Blocks.rst:142
+msgid ""
+"There are important differences in how Verilog blackboxes are treated by "
+"various flows within the Chipyard framework. Some flows within Chipyard "
+"rely on FIRRTL in order to provide robust, non-invasive transformations "
+"of source code. Since Verilog blackboxes remain blackboxes in FIRRTL, "
+"their ability to be processed by FIRRTL transforms is limited, and some "
+"advanced features of Chipyard may provide weaker support for blackboxes. "
+"Note that the remainder of the design (the \"non-Verilog\" part of the "
+"design) may still generally be transformed or augmented by any Chipyard "
+"FIRRTL transform."
+msgstr ""
+
+#: ../../Customization/Incorporating-Verilog-Blocks.rst:152
+msgid "Verilog blackboxes are fully supported for generating tapeout-ready RTL"
+msgstr ""
+
+#: ../../Customization/Incorporating-Verilog-Blocks.rst:153
+msgid "HAMMER workflows offer robust support for integrating Verilog blackboxes"
+msgstr ""
+
+#: ../../Customization/Incorporating-Verilog-Blocks.rst:154
+msgid ""
+"FireSim relies on FIRRTL transformations to generate a decoupled FPGA "
+"simulator. Therefore, support for Verilog blackboxes in FireSim is "
+"currently limited but rapidly evolving. Stay tuned!"
+msgstr ""
+
+#: ../../Customization/Incorporating-Verilog-Blocks.rst:157
+msgid ""
+"Custom FIRRTL transformations and analyses may sometimes be able to "
+"handle blackbox Verilog, depending on the mechanism of the particular "
+"transform"
+msgstr ""
+
+#: ../../Customization/Incorporating-Verilog-Blocks.rst:161
+msgid ""
+"As mentioned earlier in this section, ``BlackBox`` resource files must be"
+" integrated into the build process, so any project providing ``BlackBox``"
+" resources must be made visible to the ``tapeout`` project in "
+"``build.sbt``"
+msgstr ""
+
+#: ../../Customization/Keys-Traits-Configs.rst:4
+msgid "Keys, Traits, and Configs"
+msgstr ""
+
+#: ../../Customization/Keys-Traits-Configs.rst:6
+msgid ""
+"You have probably seen snippets of Chisel referencing keys, traits, and "
+"configs by this point. This section aims to elucidate the interactions "
+"between these Chisel/Scala components, and provide best practices for how"
+" these should be used to create a parameterized design and configure it."
+msgstr ""
+
+#: ../../Customization/Keys-Traits-Configs.rst:10
+msgid "We will continue to use the GCD example."
+msgstr ""
+
+#: ../../Customization/Keys-Traits-Configs.rst:13
+msgid "Keys"
+msgstr ""
+
+#: ../../Customization/Keys-Traits-Configs.rst:15
+msgid ""
+"Keys specify some parameter which controls some custom widget. Keys "
+"should typically be implemented as **Option types**, with a default value"
+" of ``None`` that means no change in the system. In other words, the "
+"default behavior when the user does not explicitly set the key should be "
+"a no-op."
+msgstr ""
+
+#: ../../Customization/Keys-Traits-Configs.rst:17
+msgid ""
+"Keys should be defined and documented in sub-projects, since they "
+"generally deal with some specific block, and not system-level "
+"integration. (We make an exception for the example GCD widget)."
+msgstr ""
+
+#: ../../Customization/Keys-Traits-Configs.rst:24
+msgid ""
+"The object within a key is typically a ``case class XXXParams``, which "
+"defines a set of parameters which some block accepts. For example, the "
+"GCD widget's ``GCDParams`` parameterizes its address, operand widths, "
+"whether the widget should be connected by Tilelink or AXI4, and whether "
+"the widget should use the blackbox-Verilog implementation, or the Chisel "
+"implementation."
+msgstr ""
+
+#: ../../Customization/Keys-Traits-Configs.rst:32
+msgid ""
+"Accessing the value stored in the key is easy in Chisel, as long as the "
+"``implicit p: Parameters`` object is being passed through to the relevant"
+" module. For example, ``p(GCDKey).get.address`` returns the address field"
+" of ``GCDParams``. Note this only works if ``GCDKey`` was not set to "
+"``None``, so your Chisel should check for that case!"
+msgstr ""
+
+#: ../../Customization/Keys-Traits-Configs.rst:35
+msgid "Traits"
+msgstr ""
+
+#: ../../Customization/Keys-Traits-Configs.rst:37
+msgid ""
+"Typically, most custom blocks will need to modify the behavior of some "
+"pre-existing block. For example, the GCD widget needs the ``DigitalTop`` "
+"module to instantiate and connect the widget via Tilelink, generate a "
+"top-level ``gcd_busy`` port, and connect that to the module as well. "
+"Traits let us do this without modifying the existing code for the "
+"``DigitalTop``, and enables compartmentalization of code for different "
+"custom blocks."
+msgstr ""
+
+#: ../../Customization/Keys-Traits-Configs.rst:39
+msgid ""
+"Top-level traits specify that the ``DigitalTop`` has been parameterized "
+"to read some custom key and optionally instantiate and connect a widget "
+"defined by that key. Traits **should not** mandate the instantiation of "
+"custom logic. In other words, traits should be written with ``CanHave`` "
+"semantics, where the default behavior when the key is unset is a no-op."
+msgstr ""
+
+#: ../../Customization/Keys-Traits-Configs.rst:41
+msgid ""
+"Top-level traits should be defined and documented in subprojects, "
+"alongside their corresponding keys. The traits should then be added to "
+"the ``DigitalTop`` being used by Chipyard."
+msgstr ""
+
+#: ../../Customization/Keys-Traits-Configs.rst:43
+msgid ""
+"Below we see the traits for the GCD example. The Lazy trait connects the "
+"GCD module to the Diplomacy graph, while the Implementation trait causes "
+"the ``DigitalTop`` to instantiate an additional port and concretely "
+"connect it to the GCD module."
+msgstr ""
+
+#: ../../Customization/Keys-Traits-Configs.rst:50
+msgid "These traits are added to the default ``DigitalTop`` in Chipyard."
+msgstr ""
+
+#: ../../Customization/Keys-Traits-Configs.rst:58
+msgid "Config Fragments"
+msgstr ""
+
+#: ../../Customization/Keys-Traits-Configs.rst:60
+msgid ""
+"Config fragments set the keys to a non-default value. Together, the "
+"collection of config fragments which define a configuration generate the "
+"values for all the keys used by the generator."
+msgstr ""
+
+#: ../../Customization/Keys-Traits-Configs.rst:62
+msgid ""
+"For example, the ``WithGCD`` config fragment is parameterized by the type"
+" of GCD widget you want to instantiate. When this config fragment is "
+"added to a config, the ``GCDKey`` is set to a instance of ``GCDParams``, "
+"informing the previously mentioned traits to instantiate and connect the "
+"GCD widget appropriately."
+msgstr ""
+
+#: ../../Customization/Keys-Traits-Configs.rst:69
+msgid "We can use this config fragment when composing our configs."
+msgstr ""
+
+#: ../../Customization/Keys-Traits-Configs.rst:77
+msgid ""
+"Readers who want more information on the configuration system may be "
+"interested in reading :ref:`cdes`."
+msgstr ""
+
+#: ../../Customization/MMIO-Peripherals.rst:4
+msgid "MMIO Peripherals"
+msgstr ""
+
+#: ../../Customization/MMIO-Peripherals.rst:6
+msgid ""
+"The easiest way to create a MMIO peripheral is to use the "
+"``TLRegisterRouter`` or ``AXI4RegisterRouter`` widgets, which abstracts "
+"away the details of handling the interconnect protocols and provides a "
+"convenient interface for specifying memory-mapped registers. Since "
+"Chipyard and Rocket Chip SoCs primarily use Tilelink as the on-chip "
+"interconnect protocol, this section will primarily focus on designing "
+"Tilelink-based peripherals. However, see "
+"``generators/chipyard/src/main/scala/example/GCD.scala`` for how an "
+"example AXI4 based peripheral is defined and connected to the Tilelink "
+"graph through converters."
+msgstr ""
+
+#: ../../Customization/MMIO-Peripherals.rst:8
+msgid ""
+"To create a RegisterRouter-based peripheral, you will need to specify a "
+"parameter case class for the configuration settings, a bundle trait with "
+"the extra top-level ports, and a module implementation containing the "
+"actual RTL."
+msgstr ""
+
+#: ../../Customization/MMIO-Peripherals.rst:10
+msgid ""
+"For this example, we will show how to connect a MMIO peripheral which "
+"computes the GCD. The full code can be found in "
+"``generators/chipyard/src/main/scala/example/GCD.scala``."
+msgstr ""
+
+#: ../../Customization/MMIO-Peripherals.rst:13
+msgid ""
+"In this case we use a submodule ``GCDMMIOChiselModule`` to actually "
+"perform the GCD. The ``GCDModule`` class only creates the registers and "
+"hooks them up using ``regmap``."
+msgstr ""
+
+#: ../../Customization/MMIO-Peripherals.rst:26
+msgid "Advanced Features of RegField Entries"
+msgstr ""
+
+#: ../../Customization/MMIO-Peripherals.rst:28
+msgid ""
+"``RegField`` exposes polymorphic ``r`` and ``w`` methods that allow read-"
+" and write-only memory-mapped registers to be interfaced to hardware in "
+"multiple ways."
+msgstr ""
+
+#: ../../Customization/MMIO-Peripherals.rst:32
+msgid ""
+"``RegField.r(2, status)`` is used to create a 2-bit, read-only register "
+"that captures the current value of the ``status`` signal when read."
+msgstr ""
+
+#: ../../Customization/MMIO-Peripherals.rst:33
+msgid ""
+"``RegField.r(params.width, gcd)`` \"connects\" the decoupled handshaking "
+"interface ``gcd`` to a read-only memory-mapped register. When this "
+"register is read via MMIO, the ``ready`` signal is asserted. This is in "
+"turn connected to ``output_ready`` on the GCD module through the glue "
+"logic."
+msgstr ""
+
+#: ../../Customization/MMIO-Peripherals.rst:34
+msgid ""
+"``RegField.w(params.width, x)`` exposes a plain register via MMIO, but "
+"makes it write-only."
+msgstr ""
+
+#: ../../Customization/MMIO-Peripherals.rst:35
+msgid ""
+"``RegField.w(params.width, y)`` associates the decoupled interface signal"
+" ``y`` with a write-only memory-mapped register, causing ``y.valid`` to "
+"be asserted when the register is written."
+msgstr ""
+
+#: ../../Customization/MMIO-Peripherals.rst:37
+msgid ""
+"Since the ready/valid signals of ``y`` are connected to the "
+"``input_ready`` and ``input_valid`` signals of the GCD module, "
+"respectively, this register map and glue logic has the effect of "
+"triggering the GCD algorithm when ``y`` is written. Therefore, the "
+"algorithm is set up by first writing ``x`` and then performing a "
+"triggering write to ``y``. Polling can be used for status checks."
+msgstr ""
+
+#: ../../Customization/MMIO-Peripherals.rst:46
+msgid "Connecting by TileLink"
+msgstr ""
+
+#: ../../Customization/MMIO-Peripherals.rst:48
+msgid ""
+"Once you have these classes, you can construct the final peripheral by "
+"extending the ``TLRegisterRouter`` and passing the proper arguments. The "
+"first set of arguments determines where the register router will be "
+"placed in the global address map and what information will be put in its "
+"device tree entry. The second set of arguments is the IO bundle "
+"constructor, which we create by extending ``TLRegBundle`` with our bundle"
+" trait. The final set of arguments is the module constructor, which we "
+"create by extends ``TLRegModule`` with our module trait. Notice how we "
+"can create an analogous AXI4 version of our peripheral."
+msgstr ""
+
+#: ../../Customization/MMIO-Peripherals.rst:62
+msgid "Top-level Traits"
+msgstr ""
+
+#: ../../Customization/MMIO-Peripherals.rst:64
+msgid ""
+"After creating the module, we need to hook it up to our SoC. Rocket Chip "
+"accomplishes this using the cake pattern. This basically involves placing"
+" code inside traits. In the Rocket Chip cake, there are two kinds of "
+"traits: a ``LazyModule`` trait and a module implementation trait."
+msgstr ""
+
+#: ../../Customization/MMIO-Peripherals.rst:69
+msgid ""
+"The ``LazyModule`` trait runs setup code that must execute before all the"
+" hardware gets elaborated. For a simple memory-mapped peripheral, this "
+"just involves connecting the peripheral's TileLink node to the MMIO "
+"crossbar."
+msgstr ""
+
+#: ../../Customization/MMIO-Peripherals.rst:77
+msgid ""
+"Note that the ``GCDTL`` class we created from the register router is "
+"itself a ``LazyModule``. Register routers have a TileLink node simply "
+"named \"node\", which we can hook up to the Rocket Chip bus. This will "
+"automatically add address map and device tree entries for the peripheral."
+" Also observe how we have to place additional AXI4 buffers and converters"
+" for the AXI4 version of this peripheral."
+msgstr ""
+
+#: ../../Customization/MMIO-Peripherals.rst:82
+msgid ""
+"For peripherals which instantiate a concrete module, or which need to be "
+"connected to concrete IOs or wires, a matching concrete trait is "
+"necessary. We will make our GCD example output a ``gcd_busy`` signal as a"
+" top-level port to demonstrate. In the concrete module implementation "
+"trait, we instantiate the top level IO (a concrete object) and wire it to"
+" the IO of our lazy module."
+msgstr ""
+
+#: ../../Customization/MMIO-Peripherals.rst:91
+msgid "Constructing the DigitalTop and Config"
+msgstr ""
+
+#: ../../Customization/MMIO-Peripherals.rst:93
+msgid ""
+"Now we want to mix our traits into the system as a whole. This code is "
+"from ``generators/chipyard/src/main/scala/DigitalTop.scala``."
+msgstr ""
+
+#: ../../Customization/MMIO-Peripherals.rst:101
+msgid ""
+"Just as we need separate traits for ``LazyModule`` and module "
+"implementation, we need two classes to build the system. The "
+"``DigitalTop`` class contains the set of traits which parameterize and "
+"define the ``DigitalTop``. Typically these traits will optionally add IOs"
+" or peripherals to the ``DigitalTop``. The ``DigitalTop`` class includes "
+"the pre-elaboration code and also a ``lazy val`` to produce the module "
+"implementation (hence ``LazyModule``). The ``DigitalTopModule`` class is "
+"the actual RTL that gets synthesized."
+msgstr ""
+
+#: ../../Customization/MMIO-Peripherals.rst:108
+msgid ""
+"And finally, we create a configuration class in "
+"``generators/chipyard/src/main/scala/config/RocketConfigs.scala`` that "
+"uses the ``WithGCD`` config fragment defined earlier."
+msgstr ""
+
+#: ../../Customization/MMIO-Peripherals.rst:121
+msgid "Testing"
+msgstr ""
+
+#: ../../Customization/MMIO-Peripherals.rst:123
+msgid ""
+"Now we can test that the GCD is working. The test program is in "
+"``tests/gcd.c``."
+msgstr ""
+
+#: ../../Customization/MMIO-Peripherals.rst:128
+msgid ""
+"This just writes out to the registers we defined earlier. The base of the"
+" module's MMIO region is at 0x2000 by default. This will be printed out "
+"in the address map portion when you generate the Verilog code. You can "
+"also see how this changes the emitted ``.json`` addressmap files in "
+"``generated-src``."
+msgstr ""
+
+#: ../../Customization/MMIO-Peripherals.rst:133
+msgid "Compiling this program with ``make`` produces a ``gcd.riscv`` executable."
+msgstr ""
+
+#: ../../Customization/MMIO-Peripherals.rst:135
+msgid "Now with all of that done, we can go ahead and run our simulation."
+msgstr ""
+
+#: ../../Customization/Memory-Hierarchy.rst:4
+msgid "Memory Hierarchy"
+msgstr ""
+
+#: ../../Customization/Memory-Hierarchy.rst:7
+msgid "The L1 Caches"
+msgstr ""
+
+#: ../../Customization/Memory-Hierarchy.rst:9
+msgid ""
+"Each CPU tile has an L1 instruction cache and L1 data cache. The size and"
+" associativity of these caches can be configured. The default "
+"``RocketConfig`` uses 16 KiB, 4-way set-associative instruction and data "
+"caches. However, if you use the ``WithNMedCores`` or ``WithNSmallCores`` "
+"configurations, you can configure 4 KiB direct-mapped caches for L1I and "
+"L1D."
+msgstr ""
+
+#: ../../Customization/Memory-Hierarchy.rst:15
+msgid ""
+"If you only want to change the size or associativity, there are config "
+"fragments for those too. See :ref:`Customization/Keys-Traits-"
+"Configs:Config Fragments` for how to add these to a custom ``Config``."
+msgstr ""
+
+#: ../../Customization/Memory-Hierarchy.rst:26
+msgid ""
+"You can also configure the L1 data cache as an data scratchpad instead. "
+"However, there are some limitations on this. If you are using a data "
+"scratchpad, you can only use a single core and you cannot give the design"
+" an external DRAM. Note that these configurations fully remove the L2 "
+"cache and mbus."
+msgstr ""
+
+#: ../../Customization/Memory-Hierarchy.rst:38
+msgid ""
+"This configuration fully removes the L2 cache and memory bus by setting "
+"the number of channels and number of banks to 0."
+msgstr ""
+
+#: ../../Customization/Memory-Hierarchy.rst:42
+msgid "The System Bus"
+msgstr ""
+
+#: ../../Customization/Memory-Hierarchy.rst:44
+msgid ""
+"The system bus is the TileLink network that sits between the tiles and "
+"the L2 agents and MMIO peripherals. Ordinarily, it is a fully-connected "
+"crossbar, but TestChipIP provides a version that uses a ring network "
+"instead. This can be useful when taping out larger systems. To use  the "
+"ring network system bus, simply add the ``WithRingSystemBus`` config "
+"fragment to your configuration."
+msgstr ""
+
+#: ../../Customization/Memory-Hierarchy.rst:56
+msgid "The SiFive L2 Cache"
+msgstr ""
+
+#: ../../Customization/Memory-Hierarchy.rst:58
+msgid ""
+"The default ``RocketConfig`` provided in the Chipyard example project "
+"uses SiFive's InclusiveCache generator to produce a shared L2 cache. In "
+"the default configuration, the L2 uses a single cache bank with 512 KiB "
+"capacity and 8-way set-associativity. However, you can change these "
+"parameters to obtain your desired cache configuration. The main "
+"restriction is that the number of ways and the number of banks must be "
+"powers of 2."
+msgstr ""
+
+#: ../../Customization/Memory-Hierarchy.rst:65
+msgid ""
+"Refer to the ``CacheParameters`` object defined in sifive-cache for "
+"customization options."
+msgstr ""
+
+#: ../../Customization/Memory-Hierarchy.rst:69
+msgid "The Broadcast Hub"
+msgstr ""
+
+#: ../../Customization/Memory-Hierarchy.rst:71
+msgid ""
+"If you do not want to use the L2 cache (say, for a resource-limited "
+"embedded design), you can create a configuration without it. Instead of "
+"using the L2 cache, you will instead use RocketChip's TileLink broadcast "
+"hub. To make such a configuration, you can just copy the definition of "
+"``RocketConfig`` but omit the ``WithInclusiveCache`` config fragment from"
+" the list of included mixims."
+msgstr ""
+
+#: ../../Customization/Memory-Hierarchy.rst:78
+msgid ""
+"If you want to reduce the resources used even further, you can configure "
+"the Broadcast Hub to use a bufferless design. This config fragment is "
+"``freechips.rocketchip.subsystem.WithBufferlessBroadcastHub``."
+msgstr ""
+
+#: ../../Customization/Memory-Hierarchy.rst:84
+msgid "The Outer Memory System"
+msgstr ""
+
+#: ../../Customization/Memory-Hierarchy.rst:86
+msgid ""
+"The L2 coherence agent (either L2 cache or Broadcast Hub) makes requests "
+"to an outer memory system consisting of an AXI4-compatible DRAM "
+"controller."
+msgstr ""
+
+#: ../../Customization/Memory-Hierarchy.rst:89
+msgid ""
+"The default configuration uses a single memory channel, but you can "
+"configure the system to use multiple channels. As with the number of L2 "
+"banks, the number of DRAM channels is restricted to powers of two."
+msgstr ""
+
+#: ../../Customization/Memory-Hierarchy.rst:97
+msgid ""
+"In VCS and Verilator simulation, the DRAM is simulated using the "
+"``SimAXIMem`` module, which simply attaches a single-cycle SRAM to each "
+"memory channel."
+msgstr ""
+
+#: ../../Customization/Memory-Hierarchy.rst:101
+msgid ""
+"Instead of connecting to off-chip DRAM, you can instead connect a "
+"scratchpad and remove the off-chip link. This is done by adding a "
+"fragment like ``testchipip.WithBackingScratchpad`` to your configuration "
+"and removing the memory port with "
+"``freechips.rocketchip.subsystem.WithNoMemPort``."
+msgstr ""
+
+#: ../../Customization/Memory-Hierarchy.rst:111
+msgid ""
+"If you want a more realistic memory simulation, you can use FireSim, "
+"which can simulate the timing of DDR3 controllers. More documentation on "
+"FireSim memory models is available in the `FireSim docs "
+"<https://docs.fires.im/en/latest/>`_."
+msgstr ""
+
+#: ../../Customization/RoCC-Accelerators.rst:4
+msgid "Adding a RoCC Accelerator"
+msgstr ""
+
+#: ../../Customization/RoCC-Accelerators.rst:6
+msgid ""
+"RoCC accelerators are lazy modules that extend the ``LazyRoCC`` class. "
+"Their implementation should extends the ``LazyRoCCModule`` class."
+msgstr ""
+
+#: ../../Customization/RoCC-Accelerators.rst:35
+msgid ""
+"The ``opcodes`` parameter for ``LazyRoCC`` is the set of custom opcodes "
+"that will map to this accelerator. More on this in the next subsection."
+msgstr ""
+
+#: ../../Customization/RoCC-Accelerators.rst:38
+msgid ""
+"The ``LazyRoCC`` class contains two TLOutputNode instances, ``atlNode`` "
+"and ``tlNode``. The former connects into a tile-local arbiter along with "
+"the backside of the L1 instruction cache. The latter connects directly to"
+" the L1-L2 crossbar. The corresponding Tilelink ports in the module "
+"implementation's IO bundle are ``atl`` and ``tl``, respectively."
+msgstr ""
+
+#: ../../Customization/RoCC-Accelerators.rst:43
+msgid ""
+"The other interfaces available to the accelerator are ``mem``, which "
+"provides access to the L1 cache; ``ptw`` which provides access to the "
+"page-table walker; the ``busy`` signal, which indicates when the "
+"accelerator is still handling an instruction; and the ``interrupt`` "
+"signal, which can be used to interrupt the CPU."
+msgstr ""
+
+#: ../../Customization/RoCC-Accelerators.rst:48
+msgid ""
+"Look at the examples in ``generators/rocket-"
+"chip/src/main/scala/tile/LazyRoCC.scala`` for detailed information on the"
+" different IOs."
+msgstr ""
+
+#: ../../Customization/RoCC-Accelerators.rst:51
+msgid "Adding RoCC accelerator to Config"
+msgstr ""
+
+#: ../../Customization/RoCC-Accelerators.rst:53
+msgid ""
+"RoCC accelerators can be added to a core by overriding the ``BuildRoCC`` "
+"parameter in the configuration. This takes a sequence of functions "
+"producing ``LazyRoCC`` objects, one for each accelerator you wish to add."
+msgstr ""
+
+#: ../../Customization/RoCC-Accelerators.rst:56
+msgid ""
+"For instance, if we wanted to add the previously defined accelerator and "
+"route custom0 and custom1 instructions to it, we could do the following."
+msgstr ""
+
+#: ../../Customization/RoCC-Accelerators.rst:69
+msgid ""
+"To add RoCC instructions in your program, use the RoCC C macros provided "
+"in ``tests/rocc.h``. You can find examples in the files ``tests/accum.c``"
+" and ``charcount.c``."
+msgstr ""
+
+#: ../../Customization/RoCC-or-MMIO.rst:4
+msgid "RoCC vs MMIO"
+msgstr ""
+
+#: ../../Customization/RoCC-or-MMIO.rst:6
+msgid ""
+"Accelerators or custom IO devices can be added to your SoC in several "
+"ways:"
+msgstr ""
+
+#: ../../Customization/RoCC-or-MMIO.rst:8
+msgid "MMIO Peripheral (a.k.a TileLink-Attached Accelerator)"
+msgstr ""
+
+#: ../../Customization/RoCC-or-MMIO.rst:9
+msgid "Tightly-Coupled RoCC Accelerator"
+msgstr ""
+
+#: ../../Customization/RoCC-or-MMIO.rst:11
+msgid ""
+"These approaches differ in the method of the communication between the "
+"processor and the custom block."
+msgstr ""
+
+#: ../../Customization/RoCC-or-MMIO.rst:13
+msgid ""
+"With the TileLink-Attached approach, the processor communicates with MMIO"
+" peripherals through memory-mapped registers."
+msgstr ""
+
+#: ../../Customization/RoCC-or-MMIO.rst:15
+msgid ""
+"In contrast, the processor communicates with a RoCC accelerators through "
+"a custom protocol and custom non-standard ISA instructions reserved in "
+"the RISC-V ISA encoding space. Each core can have up to four accelerators"
+" that are controlled by custom instructions and share resources with the "
+"CPU. RoCC coprocessor instructions have the following form."
+msgstr ""
+
+#: ../../Customization/RoCC-or-MMIO.rst:23
+msgid ""
+"The X will be a number 0-3, and determines the opcode of the instruction,"
+" which controls which accelerator an instruction will be routed to. The "
+"``rd``, ``rs1``, and ``rs2`` fields are the register numbers of the "
+"destination register and two source registers. The ``funct`` field is a "
+"7-bit integer that the accelerator can use to distinguish different "
+"instructions from each other."
+msgstr ""
+
+#: ../../Customization/RoCC-or-MMIO.rst:27
+msgid ""
+"Note that communication through a RoCC interface requires a custom "
+"software toolchain, whereas MMIO peripherals can use that standard "
+"toolchain with appropriate driver support."
+msgstr ""
+
+#: ../../Customization/index.rst:34
+msgid "Customization:"
+msgstr ""
+
+#: ../../Customization/index.rst:2
+msgid "Customization"
+msgstr ""
+
+#: ../../Customization/index.rst:4
+msgid "These guides will walk you through customization of your system-on-chip:"
+msgstr ""
+
+#: ../../Customization/index.rst:6
+msgid ""
+"Contructing heterogenous systems-on-chip using the existing Chipyard "
+"generators and configuration system."
+msgstr ""
+
+#: ../../Customization/index.rst:8
+msgid "How to include your custom Chisel sources in the Chipyard build system"
+msgstr ""
+
+#: ../../Customization/index.rst:10
+msgid "Adding custom core"
+msgstr ""
+
+#: ../../Customization/index.rst:12
+msgid ""
+"Adding custom RoCC accelerators to an existing Chipyard core (BOOM or "
+"Rocket)"
+msgstr ""
+
+#: ../../Customization/index.rst:14
+msgid ""
+"Adding custom MMIO widgets to the Chipyard memory system by Tilelink or "
+"AXI4, with custom Top-level IOs"
+msgstr ""
+
+#: ../../Customization/index.rst:16
+msgid "Adding custom Dsptools based blocks as MMIO widgets."
+msgstr ""
+
+#: ../../Customization/index.rst:18
+msgid ""
+"Standard practices for using Keys, Traits, and Configs to parameterize "
+"your design"
+msgstr ""
+
+#: ../../Customization/index.rst:20
+msgid "Customizing the memory hierarchy"
+msgstr ""
+
+#: ../../Customization/index.rst:22
+msgid "Connect widgets which act as TileLink masters"
+msgstr ""
+
+#: ../../Customization/index.rst:24
+msgid "Adding custom blackboxed Verilog to a Chipyard design"
+msgstr ""
+
+#: ../../Customization/index.rst:26
+msgid "We also provide information on:"
+msgstr ""
+
+#: ../../Customization/index.rst:28
+msgid "The boot process for Chipyard SoCs"
+msgstr ""
+
+#: ../../Customization/index.rst:30
+msgid ""
+"Examples of FIRRTL transforms used in Chipyard, and where they are "
+"specified"
+msgstr ""
+
+#: ../../Customization/index.rst:32
+msgid "We recommend reading all these pages in order. Hit next to get started!"
+msgstr ""
+

@@ -1,0 +1,892 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2019, Berkeley Architecture Research
+# This file is distributed under the same license as the Chipyard package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Chipyard \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-08-28 13:06+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: ../../Advanced-Concepts/CDEs.rst:4
+msgid "Context-Dependent-Environments"
+msgstr ""
+
+#: ../../Advanced-Concepts/CDEs.rst:6
+msgid ""
+"Readers may notice that the parameterization system frequently uses "
+"``(site, here, up)``. This construct is an artifact of the \"context-"
+"dependent-environment\" system which Chipyard and Rocket Chip both "
+"leverage for powerful composable hardware configuration."
+msgstr ""
+
+#: ../../Advanced-Concepts/CDEs.rst:9
+msgid ""
+"The CDE parameterization system provides different \"Views\" of a single "
+"global parameterization. The syntax for accessing a ``Field`` within a "
+"``View`` is ``my_view(MyKey, site_view)``, where ``site_view`` is a "
+"\"global\" view that will be passed recursively into various functions "
+"and key-lookups in the call-stack of ``my_view(MyKey, site_view)``."
+msgstr ""
+
+#: ../../Advanced-Concepts/CDEs.rst:12
+msgid ""
+"Rocket Chip based designs will frequently use ``val p: Parameters`` and "
+"``p(SomeKey)`` to lookup the value of a key. ``Parameters`` is just a "
+"subclass of the ``View`` abstract class, and ``p(SomeKey)`` really "
+"expands into ``p(SomeKey, p)``. This is because we consider the call "
+"``p(SomeKey)`` to be the \"site\", or \"source\" of the original key "
+"query, so we need to pass in the view of the configuration provided by "
+"``p`` recursively to future calls through the ``site`` argument."
+msgstr ""
+
+#: ../../Advanced-Concepts/CDEs.rst:14
+msgid "Consider the following example using CDEs."
+msgstr ""
+
+#: ../../Advanced-Concepts/CDEs.rst:31
+msgid ""
+"When forming a query based on a ``Parameters`` object, like "
+"``p(SomeKeyX)``, the configuration system traverses the \"chain\" of "
+"config fragments until it finds a partial function which is defined at "
+"the key, and then returns that value."
+msgstr ""
+
+#: ../../Advanced-Concepts/CDEs.rst:40
+msgid ""
+"In this example, the evaluation of ``params(SomeKeyX)`` will terminate in"
+" the partial function defined in ``WithX(true)``, while the evaluation of"
+" ``params(SomeKeyY)`` will terminate in the partial function defined in "
+"``WithY(true)``. Note that when no partial functions match, the "
+"evaluation will return the default value for that parameter."
+msgstr ""
+
+#: ../../Advanced-Concepts/CDEs.rst:42
+msgid ""
+"The real power of CDEs arises from the ``(site, here, up)`` parameters to"
+" the partial functions, which provide useful \"views\" into the global "
+"parameterization that the partial functions may access to determine a "
+"parameterization."
+msgstr ""
+
+#: ../../Advanced-Concepts/CDEs.rst:45
+msgid ""
+"Additional information on the motivations for CDEs can be found in "
+"Chapter 2 of `Henry Cook's Thesis "
+"<https://www2.eecs.berkeley.edu/Pubs/TechRpts/2016/EECS-2016-89.pdf>`_ ."
+msgstr ""
+
+#: ../../Advanced-Concepts/CDEs.rst:49
+msgid "Site"
+msgstr ""
+
+#: ../../Advanced-Concepts/CDEs.rst:51
+msgid ""
+"``site`` provides a ``View`` of the \"source\" of the original parameter "
+"query."
+msgstr ""
+
+#: ../../Advanced-Concepts/CDEs.rst:65
+msgid ""
+"In this example, the partial function in ``WithXEqualsYSite`` will look "
+"up the value of ``SomeKeyY`` in the original ``params_N`` object, which "
+"becomes ``site`` in each call in the recursive traversal."
+msgstr ""
+
+#: ../../Advanced-Concepts/CDEs.rst:69
+msgid "Here"
+msgstr ""
+
+#: ../../Advanced-Concepts/CDEs.rst:71
+msgid ""
+"``here`` provides a ``View`` of the locally defined config, which "
+"typically just contains some partial function."
+msgstr ""
+
+#: ../../Advanced-Concepts/CDEs.rst:86
+msgid ""
+"In this example, note that although our final parameterization in "
+"``params_2`` has ``SomeKeyY`` set to ``true``, the call to "
+"``here(SomeKeyY, site)`` only looks in the local partial function defined"
+" in ``WithXEqualsYHere``. Note that we pass ``site`` to ``here`` since "
+"``site`` may be used in the recursive call."
+msgstr ""
+
+#: ../../Advanced-Concepts/CDEs.rst:90
+msgid "Up"
+msgstr ""
+
+#: ../../Advanced-Concepts/CDEs.rst:92
+msgid ""
+"``up`` provides a ``View`` of the previously defined set of partial "
+"functions in the \"chain\" of partial functions. This is useful when we "
+"want to lookup a previously set value for some key, but not the final "
+"value for that key."
+msgstr ""
+
+#: ../../Advanced-Concepts/CDEs.rst:106
+msgid ""
+"In this example, note how ``up(SomeKeyY, site)`` in ``WithXEqualsYUp`` "
+"will refer to *either* the the partial function defining ``SomeKeyY`` in "
+"``WithY(true)`` *or* the default value for ``SomeKeyY`` provided in the "
+"original ``case object SomeKeyY`` definition, *depending on the order in "
+"which the config fragments were used*. Since the order of config "
+"fragments affects the the order of the ``View`` traversal, ``up`` "
+"provides a different ``View`` of the parameterization in ``params_1`` and"
+" ``params_2``."
+msgstr ""
+
+#: ../../Advanced-Concepts/CDEs.rst:109
+msgid ""
+"Also note that again, ``site`` must be recursively passed through the "
+"call to ``up``."
+msgstr ""
+
+#: ../../Advanced-Concepts/Chip-Communication.rst:4
+msgid "Communicating with the DUT"
+msgstr ""
+
+#: ../../Advanced-Concepts/Chip-Communication.rst:6
+msgid ""
+"There are two types of DUTs that can be made: `tethered` or `standalone` "
+"DUTs. A `tethered` DUT is where a host computer (or just host) must send "
+"transactions to the DUT to bringup a program. This differs from a "
+"`standalone` DUT that can bringup itself (has its own bootrom, loads "
+"programs itself, etc). An example of a tethered DUT is a Chipyard "
+"simulation where the host loads the test program into the DUTs memory and"
+" signals to the DUT that the program is ready to run. An example of a "
+"standalone DUT is a Chipyard simulation where a program can be loaded "
+"from an SDCard out of reset. In this section, we mainly describe how to "
+"communicate to tethered DUTs."
+msgstr ""
+
+#: ../../Advanced-Concepts/Chip-Communication.rst:13
+msgid ""
+"There are two ways the host (otherwise known as the outside world) can "
+"communicate with a tethered Chipyard DUT:"
+msgstr ""
+
+#: ../../Advanced-Concepts/Chip-Communication.rst:15
+msgid ""
+"Using the Tethered Serial Interface (TSI) or the Debug Module Interface "
+"(DMI) with the Front-End Server (FESVR) to communicate with the DUT"
+msgstr ""
+
+#: ../../Advanced-Concepts/Chip-Communication.rst:16
+msgid "Using the JTAG interface with OpenOCD and GDB to communicate with the DUT"
+msgstr ""
+
+#: ../../Advanced-Concepts/Chip-Communication.rst:18
+msgid ""
+"The following picture shows a block diagram view of all the supported "
+"communication mechanisms split between the host and the simulation."
+msgstr ""
+
+#: ../../Advanced-Concepts/Chip-Communication.rst:24
+msgid ""
+"Using the Tethered Serial Interface (TSI) or the Debug Module Interface "
+"(DMI)"
+msgstr ""
+
+#: ../../Advanced-Concepts/Chip-Communication.rst:26
+msgid ""
+"If you are using TSI or DMI to communicate with the DUT, you are using "
+"the Front-End Server (FESVR) to facilitate communication between the host"
+" and the DUT."
+msgstr ""
+
+#: ../../Advanced-Concepts/Chip-Communication.rst:30
+msgid "Primer on the Front-End Server (FESVR)"
+msgstr ""
+
+#: ../../Advanced-Concepts/Chip-Communication.rst:32
+msgid ""
+"FESVR is a C++ library that manages communication between a host machine "
+"and a RISC-V DUT. For debugging, it provides a simple API to reset, send "
+"messages, and load/run programs on a DUT. It also emulates peripheral "
+"devices. It can be incorporated with simulators (VCS, Verilator, "
+"FireSim), or used in a bringup sequence for a taped out chip."
+msgstr ""
+
+#: ../../Advanced-Concepts/Chip-Communication.rst:38
+msgid ""
+"Specifically, FESVR uses the Host Target Interface (HTIF), a "
+"communication protocol, to speak with the DUT. HTIF is a non-standard "
+"Berkeley protocol that uses a FIFO non-blocking interface to communicate "
+"with the DUT. It defines a protocol where you can read/write memory, "
+"load/start/stop the program, and more. Both TSI and DMI implement this "
+"HTIF protocol differently in order to communicate with the DUT."
+msgstr ""
+
+#: ../../Advanced-Concepts/Chip-Communication.rst:45
+msgid "Using the Tethered Serial Interface (TSI)"
+msgstr ""
+
+#: ../../Advanced-Concepts/Chip-Communication.rst:47
+msgid ""
+"By default, Chipyard uses the Tethered Serial Interface (TSI) to "
+"communicate with the DUT. TSI protocol is an implementation of HTIF that "
+"is used to send commands to the RISC-V DUT. These TSI commands are simple"
+" R/W commands that are able to access the DUT's memory space. During "
+"simulation, the host sends TSI commands to a simulation stub in the test "
+"harness called ``SimSerial`` (C++ class) that resides in a ``SimSerial`` "
+"Verilog module (both are located in the ``generators/testchipip`` "
+"project). This ``SimSerial`` Verilog module then sends the TSI command "
+"recieved by the simulation stub to an adapter that converts the TSI "
+"command into a TileLink request. This conversion is done by the "
+"``SerialAdapter`` module (located in the ``generators/testchipip`` "
+"project). After the transaction is converted to TileLink, the "
+"``TLSerdesser`` (located in ``generators/testchipip``) serializes the "
+"transaction and sends it to the chip (this ``TLSerdesser`` is sometimes "
+"also referred to as a digital serial-link or SerDes). Once the serialized"
+" transaction is received on the chip, it is deserialized and masters a "
+"TileLink bus on the chip which handles the request. In simulation, FESVR "
+"resets the DUT, writes into memory the test program, and indicates to the"
+" DUT to start the program through an interrupt (see :ref:`customization"
+"/Boot-Process:Chipyard Boot Process`). Using TSI is currently the fastest"
+" mechanism to communicate with the DUT in simulation (compared to "
+"DMI/JTAG) and is also used by FireSim."
+msgstr ""
+
+#: ../../Advanced-Concepts/Chip-Communication.rst:65
+msgid "Using the Debug Module Interface (DMI)"
+msgstr ""
+
+#: ../../Advanced-Concepts/Chip-Communication.rst:67
+msgid ""
+"Another option to interface with the DUT is to use the Debug Module "
+"Interface (DMI). Similar to TSI, the DMI protocol is an implementation of"
+" HTIF. In order to communicate with the DUT with the DMI protocol, the "
+"DUT needs to contain a Debug Transfer Module (DTM). The DTM is given in "
+"the `RISC-V Debug Specification <https://riscv.org/specifications/debug-"
+"specification/>`__ and is responsible for managing communication between "
+"the DUT and whatever lives on the other side of the DMI (in this case "
+"FESVR). This is implemented in the Rocket Chip ``Subsystem`` by having "
+"the ``HasPeripheryDebug`` and ``HasPeripheryDebugModuleImp`` traits. "
+"During simulation, the host sends DMI commands to a simulation stub "
+"called ``SimDTM`` (C++ class) that resides in a ``SimDTM`` Verilog module"
+" (both are located in the ``generators/rocket-chip`` project). This "
+"``SimDTM`` Verilog module then sends the DMI command recieved by the "
+"simulation stub into the DUT which then converts the DMI command into a "
+"TileLink request. This conversion is done by the DTM named "
+"``DebugModule`` in the ``generators/rocket-chip`` project. When the DTM "
+"receives the program to load, it starts to write the binary byte-wise "
+"into memory. This is considerably slower than the TSI protocol "
+"communication pipeline (i.e. ``SimSerial``/``SerialAdapter``/TileLink) "
+"which directly writes the program binary to memory."
+msgstr ""
+
+#: ../../Advanced-Concepts/Chip-Communication.rst:83
+msgid "Starting the TSI or DMI Simulation"
+msgstr ""
+
+#: ../../Advanced-Concepts/Chip-Communication.rst:85
+msgid ""
+"All default Chipyard configurations use TSI to communicate between the "
+"simulation and the simulated SoC/DUT. Hence, when running a software RTL "
+"simulation, as is indicated in the :ref:`simulation/Software-RTL-"
+"Simulation:Software RTL Simulation` section, you are in-fact using TSI to"
+" communicate with the DUT. As a reminder, to run a software RTL "
+"simulation, run:"
+msgstr ""
+
+#: ../../Advanced-Concepts/Chip-Communication.rst:98
+msgid ""
+"If you would like to build and simulate a Chipyard configuration with a "
+"DTM configured for DMI communication, then you must tie-off the serial-"
+"link interface, and instantiate the `SimDTM`."
+msgstr ""
+
+#: ../../Advanced-Concepts/Chip-Communication.rst:106
+msgid ""
+"Then you can run simulations with the new DMI-enabled top-level and test-"
+"harness."
+msgstr ""
+
+#: ../../Advanced-Concepts/Chip-Communication.rst:117
+msgid "Using the JTAG Interface"
+msgstr ""
+
+#: ../../Advanced-Concepts/Chip-Communication.rst:119
+msgid ""
+"Another way to interface with the DUT is to use JTAG. Similar to the :ref"
+":`Advanced-Concepts/Chip-Communication:Using the Debug Module interface "
+"(DMI)` section, in order to use the JTAG protocol, the DUT needs to "
+"contain a Debug Transfer Module (DTM) configured to use JTAG instead of "
+"DMI. Once the JTAG port is exposed, the host can communicate over JTAG to"
+" the DUT through a simulation stub called ``SimJTAG`` (C++ class) that "
+"resides in a ``SimJTAG`` Verilog module (both reside in the ``generators"
+"/rocket-chip`` project). This simulation stub creates a socket that "
+"OpenOCD and GDB can connect to when the simulation is running. The "
+"default Chipyard designs instantiate the DTM configured to use JTAG (i.e."
+" ``RocketConfig``)."
+msgstr ""
+
+#: ../../Advanced-Concepts/Chip-Communication.rst:128
+msgid ""
+"As mentioned, default Chipyard designs are enabled with JTAG. However, "
+"they also use TSI/Serialized-TL with FESVR in case the JTAG interface "
+"isn't used. This allows users to choose how to communicate with the DUT "
+"(use TSI or JTAG)."
+msgstr ""
+
+#: ../../Advanced-Concepts/Chip-Communication.rst:133
+msgid "Debugging with JTAG"
+msgstr ""
+
+#: ../../Advanced-Concepts/Chip-Communication.rst:135
+msgid "Roughly the steps to debug with JTAG in simulation are as follows:"
+msgstr ""
+
+#: ../../Advanced-Concepts/Chip-Communication.rst:137
+msgid ""
+"Build a Chipyard JTAG-enabled RTL design. Remember default Chipyard "
+"designs are JTAG ready."
+msgstr ""
+
+#: ../../Advanced-Concepts/Chip-Communication.rst:147
+msgid ""
+"Run the simulation with remote bit-bang enabled. Since we hope to "
+"load/run the binary using JTAG, we can pass ``none`` as a binary "
+"(prevents FESVR from loading the program). (Adapted from: "
+"https://github.com/chipsalliance/rocket-chip#3-launch-the-emulator)"
+msgstr ""
+
+#: ../../Advanced-Concepts/Chip-Communication.rst:155
+msgid ""
+"`Follow the instructions here to connect to the simulation using OpenOCD "
+"+ GDB. <https://github.com/chipsalliance/rocket-chip#4-launch-openocd>`__"
+msgstr ""
+
+#: ../../Advanced-Concepts/Chip-Communication.rst:158
+msgid ""
+"This section was adapted from the instruction in Rocket Chip and riscv-"
+"isa-sim. For more information refer to that documentation: `Rocket Chip "
+"GDB Docs <https://github.com/chipsalliance/rocket-chip#-debugging-with-"
+"gdb>`__, `riscv-isa-sim GDB Docs <https://github.com/riscv/riscv-isa-sim"
+"#debugging-with-gdb>`__"
+msgstr ""
+
+#: ../../Advanced-Concepts/Chip-Communication.rst:163
+msgid "Example Test Chip Bringup Communication"
+msgstr ""
+
+#: ../../Advanced-Concepts/Chip-Communication.rst:166
+msgid "Intro to Typical Chipyard Test Chip"
+msgstr ""
+
+#: ../../Advanced-Concepts/Chip-Communication.rst:168
+msgid ""
+"Most, if not all, Chipyard configurations are tethered using TSI (over a "
+"serial-link) and have access to external memory through an AXI port "
+"(backing AXI memory). The following image shows the DUT with these set of"
+" default signals:"
+msgstr ""
+
+#: ../../Advanced-Concepts/Chip-Communication.rst:174
+msgid ""
+"In this setup, the serial-link is connected to the TSI/FESVR peripherals "
+"while the AXI port is connected to a simulated AXI memory. However, AXI "
+"ports tend to have many signals, and thus wires, associated with them so "
+"instead of creating an AXI port off the DUT, one can send the memory "
+"transactions over the bi-directional serial-link (``TLSerdesser``) so "
+"that the main interface to the DUT is the serial-link (which has "
+"comparatively less signals than an AXI port). This new setup (shown "
+"below) is a typical Chipyard test chip setup:"
+msgstr ""
+
+#: ../../Advanced-Concepts/Chip-Communication.rst:184
+msgid "Simulation Setup of the Example Test Chip"
+msgstr ""
+
+#: ../../Advanced-Concepts/Chip-Communication.rst:186
+msgid ""
+"To test this type of configuration (TSI/memory transactions over the "
+"serial-link), most of the same TSI collateral would be used. The main "
+"difference is that the TileLink-to-AXI converters and simulated AXI "
+"memory resides on the other side of the serial-link."
+msgstr ""
+
+#: ../../Advanced-Concepts/Chip-Communication.rst:194
+msgid ""
+"Here the simulated AXI memory and the converters can be in a different "
+"clock domain in the test harness than the reference clock of the DUT. For"
+" example, the DUT can be clocked at 3.2GHz while the simulated AXI memory"
+" can be clocked at 1GHz. This functionality is done in the harness binder"
+" that instantiates the TSI collateral, TL-to-AXI converters, and "
+"simulated AXI memory. See :ref:`Advanced-Concepts/Harness-Clocks:Creating"
+" Clocks in the Test Harness` on how to generate a clock in a harness "
+"binder."
+msgstr ""
+
+#: ../../Advanced-Concepts/Chip-Communication.rst:202
+msgid ""
+"This type of simulation setup is done in the following multi-clock "
+"configuration:"
+msgstr ""
+
+#: ../../Advanced-Concepts/Chip-Communication.rst:210
+msgid "Bringup Setup of the Example Test Chip after Tapeout"
+msgstr ""
+
+#: ../../Advanced-Concepts/Chip-Communication.rst:212
+msgid ""
+"Assuming this example test chip is taped out and now ready to be tested, "
+"we can communicate with the chip using this serial-link. For example, a "
+"common test setup used at Berkeley to evaluate Chipyard-based test-chips "
+"includes an FPGA running a RISC-V soft-core that is able to speak to the "
+"DUT (over an FMC). This RISC-V soft-core would serve as the host of the "
+"test that will run on the DUT. This is done by the RISC-V soft-core "
+"running FESVR, sending TSI commands to a ``SerialAdapter`` / "
+"``TLSerdesser`` programmed on the FPGA. Once the commands are converted "
+"to serialized TileLink, then they can be sent over some medium to the DUT"
+" (like an FMC cable or a set of wires connecting FPGA outputs to the DUT "
+"board). Similar to simulation, if the chip requests offchip memory, it "
+"can then send the transaction back over the serial-link. Then the request"
+" can be serviced by the FPGA DRAM. The following image shows this flow:"
+msgstr ""
+
+#: ../../Advanced-Concepts/Chip-Communication.rst:224
+msgid ""
+"In fact, this exact type of bringup setup is what the following section "
+"discusses: :ref:`Prototyping/VCU118:Introduction to the Bringup Design`."
+msgstr ""
+
+#: ../../Advanced-Concepts/Debugging-BOOM.rst:2
+msgid "Debugging BOOM"
+msgstr ""
+
+#: ../../Advanced-Concepts/Debugging-BOOM.rst:4
+msgid ""
+"In addition to the default debugging techniques specified in :ref"
+":`Advanced-Concepts/Debugging-RTL:Debugging RTL`, single-core BOOM "
+"designs can utilize the Dromajo co-simulator (see "
+":ref:`Tools/Dromajo:Dromajo`) to verify functionality."
+msgstr ""
+
+#: ../../Advanced-Concepts/Debugging-BOOM.rst:8
+msgid ""
+"Dromajo currently only works in single-core BOOM systems without "
+"accelerators."
+msgstr ""
+
+#: ../../Advanced-Concepts/Debugging-BOOM.rst:10
+msgid "Dromajo currently only works in VCS simulation and FireSim."
+msgstr ""
+
+#: ../../Advanced-Concepts/Debugging-BOOM.rst:13
+msgid "Setting up Dromajo Co-simulation"
+msgstr ""
+
+#: ../../Advanced-Concepts/Debugging-BOOM.rst:15
+msgid ""
+"Dromajo co-simulation is setup to work when three config fragments are "
+"added to a BOOM config."
+msgstr ""
+
+#: ../../Advanced-Concepts/Debugging-BOOM.rst:17
+msgid ""
+"A ``chipyard.config.WithTraceIO`` config fragment must be added so that "
+"BOOM's traceport is enabled."
+msgstr ""
+
+#: ../../Advanced-Concepts/Debugging-BOOM.rst:18
+msgid ""
+"A ``chipyard.iobinders.WithTraceIOPunchthrough`` config fragment must be "
+"added to add the ``TraceIO`` to the ``ChipTop``"
+msgstr ""
+
+#: ../../Advanced-Concepts/Debugging-BOOM.rst:19
+msgid ""
+"A ``chipyard.harness.WithSimDromajoBridge`` config fragment must be added"
+" to instantiate a Dromajo cosimulator in the ``TestHarness`` and connect "
+"it to the ``ChipTop``'s ``TraceIO``"
+msgstr ""
+
+#: ../../Advanced-Concepts/Debugging-BOOM.rst:22
+msgid "Once all config fragments are added Dromajo should be enabled."
+msgstr ""
+
+#: ../../Advanced-Concepts/Debugging-BOOM.rst:24
+msgid ""
+"To build/run Dromajo with a BOOM design, run your configuration the "
+"following make commands:"
+msgstr ""
+
+#: ../../Advanced-Concepts/Debugging-RTL.rst:2
+msgid "Debugging RTL"
+msgstr ""
+
+#: ../../Advanced-Concepts/Debugging-RTL.rst:4
+msgid ""
+"While the packaged Chipyard configs and RTL have been tested to work, "
+"users will typically want to build custom chips by adding their own IP, "
+"or by modifying existing Chisel generators. Such changes might introduce "
+"bugs. This section aims to run through a typical debugging flow using "
+"Chipyard. We assume the user has a custom SoC configuration, and is "
+"trying to verify functionality by running some software test. We also "
+"assume the software has already been verified on a functional simulator, "
+"such as Spike or QEMU. This section will focus on debugging hardware."
+msgstr ""
+
+#: ../../Advanced-Concepts/Debugging-RTL.rst:15
+msgid "Waveforms"
+msgstr ""
+
+#: ../../Advanced-Concepts/Debugging-RTL.rst:17
+msgid ""
+"The default software RTL simulators do not dump waveforms during "
+"execution. To build simulators with wave dump capabilities use must use "
+"the ``debug`` make target. For example:"
+msgstr ""
+
+#: ../../Advanced-Concepts/Debugging-RTL.rst:25
+msgid ""
+"The ``run-binary-debug`` rule will also automatically build a simulator, "
+"run it on a custom binary, and generate a waveform. For example, to run a"
+" test on ``helloworld.riscv``, use"
+msgstr ""
+
+#: ../../Advanced-Concepts/Debugging-RTL.rst:33
+msgid ""
+"VCS and Verilator also support many additional flags. For example, "
+"specifying the ``+vpdfilesize`` flag in VCS will treat the output file as"
+" a circular buffer, saving disk space for long-running simulations. Refer"
+" to the VCS and Verilator manuals for more information You may use the "
+"``SIM_FLAGS`` make variable to set additional simulator flags:"
+msgstr ""
+
+#: ../../Advanced-Concepts/Debugging-RTL.rst:44
+msgid ""
+"In some cases where there is multiple simulator flags, you can write the "
+"``SIM_FLAGS`` like the following: ``SIM_FLAGS=\"+vpdfilesize=XYZ "
+"+some_other_flag=ABC\"``."
+msgstr ""
+
+#: ../../Advanced-Concepts/Debugging-RTL.rst:48
+msgid "Print Output"
+msgstr ""
+
+#: ../../Advanced-Concepts/Debugging-RTL.rst:50
+msgid ""
+"Both Rocket and BOOM can be configured with varying levels of print "
+"output. For information see the Rocket core source code, or the BOOM "
+"`documentation <https://docs.boom-core.org/en/latest/>`__ website. In "
+"addition, developers may insert arbitrary printfs at arbitrary conditions"
+" within the Chisel generators. See the Chisel documentation for "
+"information on this."
+msgstr ""
+
+#: ../../Advanced-Concepts/Debugging-RTL.rst:56
+msgid ""
+"Once the cores have been configured with the desired print statements, "
+"the ``+verbose`` flag will cause the simulator to print the statements. "
+"The following commands will all generate desired print statements:"
+msgstr ""
+
+#: ../../Advanced-Concepts/Debugging-RTL.rst:67
+msgid ""
+"Both cores can be configured to print out commit logs, which can then be "
+"compared against a Spike commit log to verify correctness."
+msgstr ""
+
+#: ../../Advanced-Concepts/Debugging-RTL.rst:71
+msgid "Basic tests"
+msgstr ""
+
+#: ../../Advanced-Concepts/Debugging-RTL.rst:72
+msgid ""
+"``riscv-tests`` includes basic ISA-level tests and basic benchmarks. "
+"These are used in Chipyard CI, and should be the first step in verifying "
+"a chip's functionality. The make rule is"
+msgstr ""
+
+#: ../../Advanced-Concepts/Debugging-RTL.rst:82
+msgid "Torture tests"
+msgstr ""
+
+#: ../../Advanced-Concepts/Debugging-RTL.rst:83
+msgid ""
+"The RISC-V torture utility generates random RISC-V assembly streams, "
+"compiles them, runs them on both the Spike functional model and the SW "
+"simulator, and verifies identical program behavior. The torture utility "
+"can also be configured to run continuously for stress-testing. The "
+"torture utility exists within the ``utilities`` directory."
+msgstr ""
+
+#: ../../Advanced-Concepts/Debugging-RTL.rst:90
+msgid "Firesim Debugging"
+msgstr ""
+
+#: ../../Advanced-Concepts/Debugging-RTL.rst:91
+msgid ""
+"Chisel printfs, asserts, Dromajo co-simulation, and waveform generation "
+"are also available in FireSim FPGA-accelerated simulation. See the "
+"FireSim `documentation <https://docs.fires.im/en/latest/>`__ for more "
+"detail."
+msgstr ""
+
+#: ../../Advanced-Concepts/Harness-Clocks.rst:4
+msgid "Creating Clocks in the Test Harness"
+msgstr ""
+
+#: ../../Advanced-Concepts/Harness-Clocks.rst:6
+msgid ""
+"Chipyard currently allows the SoC design (everything under ``ChipTop``) "
+"to have independent clock domains through diplomacy. This implies that "
+"some reference clock enters the ``ChipTop`` and then is divided down into"
+" separate clock domains. From the perspective of the ``TestHarness`` "
+"module, the ``ChipTop`` clock and reset is provided from a clock and "
+"reset called ``buildtopClock`` and ``buildtopReset``. In the default "
+"case, this ``buildtopClock`` and ``buildtopReset`` is directly wired to "
+"the clock and reset IO's of the ``TestHarness`` module. However, the "
+"``TestHarness`` has the ability to generate a standalone clock and reset "
+"signal that is separate from the reference clock/reset of ``ChipTop``. "
+"This allows harness components (including harness binders) the ability to"
+" \"request\" a clock for a new clock domain. This is useful for "
+"simulating systems in which modules in the harness have independent clock"
+" domains from the DUT."
+msgstr ""
+
+#: ../../Advanced-Concepts/Harness-Clocks.rst:21
+msgid ""
+"Requests for a harness clock is done by the ``HarnessClockInstantiator`` "
+"class in ``generators/chipyard/src/main/scala/TestHarness.scala``. This "
+"class is accessed in harness components by referencing the Rocket Chip "
+"parameters key ``p(HarnessClockInstantiatorKey)``. Then you can request a"
+" clock and syncronized reset at a particular frequency by invoking the "
+"``requestClockBundle`` function. Take the following example:"
+msgstr ""
+
+#: ../../Advanced-Concepts/Harness-Clocks.rst:31
+msgid ""
+"Here you can see the ``p(HarnessClockInstantiatorKey)`` is used to "
+"request a clock and reset at ``memFreq`` frequency."
+msgstr ""
+
+#: ../../Advanced-Concepts/Harness-Clocks.rst:34
+msgid ""
+"In the case that the reference clock entering ``ChipTop`` is not the "
+"overall reference clock of the simulation (i.e. the clock/reset coming "
+"into the ``TestHarness`` module), the ``buildtopClock`` and "
+"``buildtopReset`` can differ from the implicit ``TestHarness`` clock and "
+"reset. For example, if the ``ChipTop`` reference is 500MHz but an extra "
+"harness clock is requested at 1GHz, the ``TestHarness`` implicit "
+"clock/reset will be at 1GHz while the ``buildtopClock`` and "
+"``buildtopReset`` will be at 500MHz."
+msgstr ""
+
+#: ../../Advanced-Concepts/Resources.rst:2
+msgid "Accessing Scala Resources"
+msgstr ""
+
+#: ../../Advanced-Concepts/Resources.rst:4
+msgid ""
+"A simple way to copy over a source file to the build directory to be used"
+" for a simulation compile or VLSI flow is to use the ``addResource`` "
+"function given by FIRRTL. An example of its use can be seen in "
+"`generators/testchipip/src/main/scala/SerialAdapter.scala "
+"<https://github.com/ucb-"
+"bar/testchipip/blob/master/src/main/scala/SerialAdapter.scala>`_. Here is"
+" the example inlined:"
+msgstr ""
+
+#: ../../Advanced-Concepts/Resources.rst:22
+msgid ""
+"In this example, the ``SimSerial`` files will be copied from a specific "
+"folder (in this case the "
+"``path/to/testchipip/src/main/resources/testchipip/...``) to the build "
+"folder. The ``addResource`` path retrieves resources from the "
+"``src/main/resources`` directory. So to get an item at "
+"``src/main/resources/fileA.v`` you can use ``addResource(\"/fileA.v\")``."
+" However, one caveat of this approach is that to retrieve the file during"
+" the FIRRTL compile, you must have that project in the FIRRTL compiler's "
+"classpath. Thus, you need to add the SBT project as a dependency to the "
+"FIRRTL compiler in the Chipyard ``build.sbt``, which in Chipyards case is"
+" the ``tapeout`` project. For example, you added a new project called "
+"``myAwesomeAccel`` in the Chipyard ``build.sbt``. Then you can add it as "
+"a ``dependsOn`` dependency to the ``tapeout`` project. For example:"
+msgstr ""
+
+#: ../../Advanced-Concepts/Top-Testharness.rst:2
+msgid "Tops, Test-Harnesses, and the Test-Driver"
+msgstr ""
+
+#: ../../Advanced-Concepts/Top-Testharness.rst:4
+msgid ""
+"The three highest levels of hierarchy in a Chipyard SoC are the "
+"``ChipTop`` (DUT), ``TestHarness``, and the ``TestDriver``. The "
+"``ChipTop`` and ``TestHarness`` are both emitted by Chisel generators. "
+"The ``TestDriver`` serves as our testbench, and is a Verilog file in "
+"Rocket Chip."
+msgstr ""
+
+#: ../../Advanced-Concepts/Top-Testharness.rst:12
+msgid "ChipTop/DUT"
+msgstr ""
+
+#: ../../Advanced-Concepts/Top-Testharness.rst:14
+msgid ""
+"``ChipTop`` is the top-level module that instantiates the ``System`` "
+"submodule, usually an instance of the concrete class ``DigitalTop``. The "
+"vast majority of the design resides in the ``System``. Other components "
+"that exist inside the ``ChipTop`` layer are generally IO cells, clock "
+"receivers and multiplexers, reset synchronizers, and other analog IP that"
+" needs to exist outside of the ``System``. The ``IOBinders`` are "
+"responsible for instantiating the IO cells for ``ChipTop`` IO that "
+"correspond to IO of the ``System``. The ``HarnessBinders`` are "
+"responsible for instantiating test harness collateral that connects to "
+"the ``ChipTop`` ports. Most types of devices and testing collateral can "
+"be instantiated using custom ``IOBinders`` and ``HarnessBinders``."
+msgstr ""
+
+#: ../../Advanced-Concepts/Top-Testharness.rst:23
+msgid "System/DigitalTop"
+msgstr ""
+
+#: ../../Advanced-Concepts/Top-Testharness.rst:25
+msgid ""
+"The system module of a Rocket Chip SoC is composed via cake-pattern. "
+"Specifically, ``DigitalTop`` extends a ``System``, which extends a "
+"``Subsystem``, which extends a ``BaseSubsystem``."
+msgstr ""
+
+#: ../../Advanced-Concepts/Top-Testharness.rst:30
+msgid "BaseSubsystem"
+msgstr ""
+
+#: ../../Advanced-Concepts/Top-Testharness.rst:32
+msgid ""
+"The ``BaseSubsystem`` is defined in "
+"``generators/rocketchip/src/main/scala/subsystem/BaseSubsystem.scala``. "
+"Looking at the ``BaseSubsystem`` abstract class, we see that this class "
+"instantiates the top-level buses (frontbus, systembus, peripherybus, "
+"etc.), but does not specify a topology. We also see this class define "
+"several ``ElaborationArtefacts``, files emitted after Chisel elaboration "
+"(e.g. the device tree string, and the diplomacy graph visualization "
+"GraphML file)."
+msgstr ""
+
+#: ../../Advanced-Concepts/Top-Testharness.rst:39
+msgid "Subsystem"
+msgstr ""
+
+#: ../../Advanced-Concepts/Top-Testharness.rst:41
+msgid ""
+"Looking in `generators/chipyard/src/main/scala/Subsystem.scala "
+"<https://github.com/ucb-"
+"bar/chipyard/blob/master/generators/chipyard/src/main/scala/Subsystem.scala>`__,"
+" we can see how Chipyard's ``Subsystem`` extends the ``BaseSubsystem`` "
+"abstract class. ``Subsystem`` mixes in the ``HasBoomAndRocketTiles`` "
+"trait that defines and instantiates BOOM or Rocket tiles, depending on "
+"the parameters specified. We also connect some basic IOs for each tile "
+"here, specifically the hartids and the reset vector."
+msgstr ""
+
+#: ../../Advanced-Concepts/Top-Testharness.rst:47
+msgid "System"
+msgstr ""
+
+#: ../../Advanced-Concepts/Top-Testharness.rst:49
+msgid ""
+"``generators/chipyard/src/main/scala/System.scala`` completes the "
+"definition of the ``System``."
+msgstr ""
+
+#: ../../Advanced-Concepts/Top-Testharness.rst:51
+msgid ""
+"``HasHierarchicalBusTopology`` is defined in Rocket Chip, and specifies "
+"connections between the top-level buses"
+msgstr ""
+
+#: ../../Advanced-Concepts/Top-Testharness.rst:52
+msgid ""
+"``HasAsyncExtInterrupts`` and ``HasExtInterruptsModuleImp`` adds IOs for "
+"external interrupts and wires them appropriately to tiles"
+msgstr ""
+
+#: ../../Advanced-Concepts/Top-Testharness.rst:53
+msgid ""
+"``CanHave...AXI4Port`` adds various Master and Slave AXI4 ports, adds TL-"
+"to-AXI4 converters, and connects them to the appropriate buses"
+msgstr ""
+
+#: ../../Advanced-Concepts/Top-Testharness.rst:54
+msgid "``HasPeripheryBootROM`` adds a BootROM device"
+msgstr ""
+
+#: ../../Advanced-Concepts/Top-Testharness.rst:57
+msgid "Tops"
+msgstr ""
+
+#: ../../Advanced-Concepts/Top-Testharness.rst:59
+msgid ""
+"A SoC Top then extends the ``System`` class with traits for custom "
+"components. In Chipyard, this includes things like adding a NIC, UART, "
+"and GPIO as well as setting up the hardware for the bringup method. "
+"Please refer to :ref:`Advanced-Concepts/Chip-Communication:Communicating "
+"with the DUT` for more information on these bringup methods."
+msgstr ""
+
+#: ../../Advanced-Concepts/Top-Testharness.rst:64
+msgid "TestHarness"
+msgstr ""
+
+#: ../../Advanced-Concepts/Top-Testharness.rst:66
+msgid ""
+"The wiring between the ``TestHarness`` and the Top are performed in "
+"methods defined in traits added to the Top. When these methods are called"
+" from the ``TestHarness``, they may instantiate modules within the scope "
+"of the harness, and then connect them to the DUT. For example, the "
+"``connectSimAXIMem`` method defined in the "
+"``CanHaveMasterAXI4MemPortModuleImp`` trait, when called from the "
+"``TestHarness``, will instantiate ``SimAXIMems`` and connect them to the "
+"correct IOs of the top."
+msgstr ""
+
+#: ../../Advanced-Concepts/Top-Testharness.rst:72
+msgid ""
+"While this roundabout way of attaching to the IOs of the top may seem to "
+"be unnecessarily complex, it allows the designer to compose custom traits"
+" together without having to worry about the details of the implementation"
+" of any particular trait."
+msgstr ""
+
+#: ../../Advanced-Concepts/Top-Testharness.rst:76
+msgid "TestDriver"
+msgstr ""
+
+#: ../../Advanced-Concepts/Top-Testharness.rst:78
+msgid ""
+"The ``TestDriver`` is defined in "
+"``generators/rocketchip/src/main/resources/vsrc/TestDriver.v``. This "
+"Verilog file executes a simulation by instantiating the ``TestHarness``, "
+"driving the clock and reset signals, and interpreting the success output."
+" This file is compiled with the generated Verilog for the ``TestHarness``"
+" and the ``Top`` to produce a simulator."
+msgstr ""
+
+#: ../../Advanced-Concepts/index.rst:7
+msgid "Advanced Concepts:"
+msgstr ""
+
+#: ../../Advanced-Concepts/index.rst:2
+msgid "Advanced Concepts"
+msgstr ""
+
+#: ../../Advanced-Concepts/index.rst:4
+msgid ""
+"The following sections are advanced topics about how to Chipyard works, "
+"how to use Chipyard, and special features of the framework. They expect "
+"you to know about Chisel, Parameters, configs, etc."
+msgstr ""
+

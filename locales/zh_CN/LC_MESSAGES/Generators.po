@@ -1,0 +1,1151 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2019, Berkeley Architecture Research
+# This file is distributed under the same license as the Chipyard package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Chipyard \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-08-28 13:06+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: ../../Generators/BOOM.rst:2
+msgid "Berkeley Out-of-Order Machine (BOOM)"
+msgstr ""
+
+#: ../../Generators/BOOM.rst:6
+msgid ""
+"The `Berkeley Out-of-Order Machine (BOOM) <https://boom-core.org/>`__ is "
+"a synthesizable and parameterizable open source RV64GC RISC-V core "
+"written in the Chisel hardware construction language. It serves as a "
+"drop-in replacement to the Rocket core given by Rocket Chip (replaces the"
+" RocketTile with a BoomTile). BOOM is heavily inspired by the MIPS R10k "
+"and the Alpha 21264 out-of-order processors. Like the R10k and the 21264,"
+" BOOM is a unified physical register file design (also known as “explicit"
+" register renaming”). Conceptually, BOOM is broken up into 10 stages: "
+"Fetch, Decode, Register Rename, Dispatch, Issue, Register Read, Execute, "
+"Memory, Writeback and Commit. However, many of those stages are combined "
+"in the current implementation, yielding seven stages: Fetch, "
+"Decode/Rename, Rename/Dispatch, Issue/RegisterRead, Execute, Memory and "
+"Writeback (Commit occurs asynchronously, so it is not counted as part of "
+"the “pipeline”)."
+msgstr ""
+
+#: ../../Generators/BOOM.rst:13
+msgid ""
+"Additional information about the BOOM micro-architecture can be found in "
+"the `BOOM documentation pages <https://docs.boom-core.org/>`__."
+msgstr ""
+
+#: ../../Generators/CVA6.rst:2
+msgid "CVA6 Core"
+msgstr ""
+
+#: ../../Generators/CVA6.rst:4
+msgid ""
+"`CVA6 <https://github.com/openhwgroup/cva6>`__ (previously called Ariane)"
+" is a 6-stage in-order scalar processor core, originally developed at "
+"ETH-Zurich by F. Zaruba and L. Benini. The `CVA6 core` is wrapped in an "
+"`CVA6 tile` so it can be used as a component within the `Rocket Chip SoC "
+"generator`. The core by itself exposes an AXI interface, interrupt ports,"
+" and other misc. ports that are connected from within the tile to "
+"TileLink buses and other parameterization signals."
+msgstr ""
+
+#: ../../Generators/CVA6.rst:8
+msgid ""
+"Since the core uses an AXI interface to connect to memory, it is highly "
+"recommended to use the core in a single-core setup (since AXI is a non-"
+"coherent memory interface)."
+msgstr ""
+
+#: ../../Generators/CVA6.rst:10
+msgid ""
+"While the core itself is not a generator, we expose the same "
+"parameterization that the CVA6 core provides (i.e. change branch "
+"prediction parameters)."
+msgstr ""
+
+#: ../../Generators/CVA6.rst:12
+msgid ""
+"This target does not support Verilator simulation at this time. Please "
+"use VCS."
+msgstr ""
+
+#: ../../Generators/CVA6.rst:14
+msgid ""
+"For more information, please refer to the `GitHub repository "
+"<https://github.com/openhwgroup/cva6>`__."
+msgstr ""
+
+#: ../../Generators/Gemmini.rst:2
+msgid "Gemmini"
+msgstr ""
+
+#: ../../Generators/Gemmini.rst:4
+msgid ""
+"The Gemmini project is developing a systolic-array based matrix "
+"multiplication unit generator for the investigation of software/hardware "
+"implications of such integrated SoC accelerators. It is inspired by "
+"recent trends in machine learning accelerators for edge and mobile SoCs."
+msgstr ""
+
+#: ../../Generators/Gemmini.rst:6
+msgid ""
+"Gemmini is implemented as a RoCC accelerator with non-standard RISC-V "
+"custom instructions. The Gemmini unit uses the RoCC port of a Rocket or "
+"BOOM `tile`, and by default connects to the memory system through the "
+"System Bus (i.e., directly to the L2 cache)."
+msgstr ""
+
+#: ../../Generators/Gemmini.rst:8
+msgid ""
+"To add a Gemmini unit to an SoC, you should add the "
+"``gemmini.DefaultGemminiConfig`` config fragment to the SoC "
+"configurations. To change the configuration of the Gemmini accelerator "
+"unit, you can write a custom configuration to replace the "
+"``DefaultGemminiConfig``, which you can view under "
+"`generators/gemmini/src/main/scala/configs.scala <https://github.com/ucb-"
+"bar/gemmini/blob/master/src/main/scala/gemmini/Configs.scala>`__ to see "
+"the possible configuration parameters."
+msgstr ""
+
+#: ../../Generators/Gemmini.rst:10
+msgid ""
+"The example Chipyard config includes the following example SoC "
+"configuration which includes Gemmini:"
+msgstr ""
+
+#: ../../Generators/Gemmini.rst:17
+msgid ""
+"To build a simulation of this example Chipyard config, run the following "
+"commands:"
+msgstr ""
+
+#: ../../Generators/Gemmini.rst:27
+msgid "Generator Parameters"
+msgstr ""
+
+#: ../../Generators/Gemmini.rst:29
+msgid "Major parameters of interest include:"
+msgstr ""
+
+#: ../../Generators/Gemmini.rst:31
+msgid ""
+"Systolic array dimensions (``tileRows``, ``tileColumns``, ``meshRows``, "
+"``meshColumns``): The systolic array is composed of a 2-level hierarchy, "
+"in which each tile is fully combinational, while a mesh of tiles has "
+"pipeline registers between each tile."
+msgstr ""
+
+#: ../../Generators/Gemmini.rst:35
+msgid ""
+"Dataflow parameters (``dataflow``): Determine whether the systolic array "
+"in Gemmini is output-stationary or weight-stationary, or whether it "
+"supports both dataflows so that programmers may choose between them at "
+"runtime."
+msgstr ""
+
+#: ../../Generators/Gemmini.rst:37
+msgid ""
+"Scratchpad and accumulator memory parameters (``sp_banks``, "
+"``sp_capacity``, ``acc_capacity``): Determine the properties of the "
+"Gemmini scratchpad memory: overall capacity of the scratchpad or "
+"accumulators (in KiB), and the number of banks the scratchpad is divided "
+"into."
+msgstr ""
+
+#: ../../Generators/Gemmini.rst:39
+msgid ""
+"Type parameters (``inputType``, ``outputType``, ``accType``): Determine "
+"the data-types flowing through different parts of a Gemmini accelerator. "
+"For example, ``inputType`` may be an 8-bit fixed-point number, while "
+"``accType``, which determines the type of partial accumulations in a "
+"matrix multiplication, may be a 32-bit integer. ``outputType`` only "
+"determines the type of the data passed between two processing elements "
+"(PEs); for example, an 8-bit multiplication may produce a 16-bit result "
+"which must be shared between PEs in a systolic array. If your datatype is"
+" a floating-point number, then you might also want to change the "
+"``pe_latency`` parameter, which specifies how many shift registers to add"
+" inside the PEs. This might be necessary if your datatype cannot complete"
+" a multiply-accumulate operation within a single cycle."
+msgstr ""
+
+#: ../../Generators/Gemmini.rst:41
+msgid ""
+"Access-execute queue parameters (``ld_queue_length``, "
+"``st_queue_length``, ``ex_queue_length``, ``rob_entries``): To implement "
+"access-execute decoupling, a Gemmini accelerator has a load instruction "
+"queue, a store instruction queue, and an execute instruction queue. The "
+"relative sizes of these queue determine the level of access-execute "
+"decoupling. Gemmini also implements a reorder buffer (ROB) - the number "
+"of entries in the ROB determines possible dependency management "
+"limitations."
+msgstr ""
+
+#: ../../Generators/Gemmini.rst:43
+msgid ""
+"DMA parameters (``dma_maxbytes``, ``dma_buswidth``, ``mem_pipeline``): "
+"Gemmini implements a DMA to move data from main memory to the Gemmini "
+"scratchpad, and from the Gemmini accumulators to main memory. The size of"
+" these DMA transactions is determined by the DMA parameters. These DMA "
+"parameters are tightly coupled with Rocket Chip SoC system parameters: in"
+" particular ``dma_buswidth`` is associated with the ``SystemBusKey`` "
+"``beatBytes`` parameter, and ``dma_maxbytes`` is associated with "
+"``cacheblockbytes`` Rocket Chip parameters."
+msgstr ""
+
+#: ../../Generators/Gemmini.rst:45
+msgid ""
+"There are also optional features, which can be either enabled or left out"
+" of Gemmini at elaboration-time. For example:"
+msgstr ""
+
+#: ../../Generators/Gemmini.rst:47
+msgid ""
+"Scaling during \"move-in\" operations (``mvin_scale_args``, "
+"``mvin_scale_acc_args``): When data is being moved in from DRAM or main "
+"memory into Gemmini's local scratchpad memory, it can optionally be "
+"multiplied by a scaling factor. These parameters specify what the "
+"datatype of the scaling factor is, and how the scaling is actually done. "
+"If these are set to ``None``, then this optional feature will be disabled"
+" at elaboration time. If both the scratchpad inputs are accumulator "
+"inputs are to be scaled in the same say, then the ``mvin_scale_shared`` "
+"parameter can be set to ``true`` so that the multipliers and functional "
+"units are shared."
+msgstr ""
+
+#: ../../Generators/Gemmini.rst:52
+msgid "Gemmini Software"
+msgstr ""
+
+#: ../../Generators/Gemmini.rst:54
+msgid ""
+"The Gemmini non-standard ISA extension is specified in the `Gemmini "
+"repository <https://github.com/ucb-bar/gemmini/blob/master/README.md>`__."
+" The ISA includes configuration instructions, data movement instructions "
+"(from main memory to the Gemmini scratchpad, and from the Gemmini "
+"accumulators to main memory), and matrix multiplication execution "
+"instructions."
+msgstr ""
+
+#: ../../Generators/Gemmini.rst:57
+msgid ""
+"Since Gemmini instructions are not exposed through the GNU binutils "
+"assembler, several C macros are provided in order to construct the "
+"instruction encodings to call these instructions."
+msgstr ""
+
+#: ../../Generators/Gemmini.rst:59
+msgid ""
+"The Gemmini generator includes a C matrix multiplication library which "
+"wraps the calls to the custom Gemmini instructions. The ``software`` "
+"directory of the generator (within the generator repository in "
+"``generators/gemmini/software``) includes the aforementioned library and "
+"macros, as well as bare-metal tests, and some FireMarshal workloads to "
+"run the tests in a Linux environment. In particular, the matrix "
+"multiplication C library can be found in the "
+"``generators/gemmini/software/gemmini-rocc-tests/include/gemmini.h`` "
+"file."
+msgstr ""
+
+#: ../../Generators/Gemmini.rst:62
+msgid ""
+"The Gemmini generator generates a C header file based on the generator "
+"parameters. This header files gets compiled together with the matrix "
+"multiplication library to tune library performance. The generated header "
+"file can be found under ``generators/gemmini/software/gemmini-rocc-"
+"tests/include/gemmini_params.h``"
+msgstr ""
+
+#: ../../Generators/Gemmini.rst:64
+msgid ""
+"Gemmini can also be used to run ONNX-specified neural-networks through a "
+"port of Microsoft's ONNX-Runtime framework. The port is included as the "
+"`onnxruntime-riscv <https://github.com/pranav-prakash/onnxruntime-"
+"riscv>`__ repository submoduled in the `software` directory. The port is "
+"under development, and usage documentation can be found `within its "
+"repository <https://github.com/pranav-prakash/onnxruntime-"
+"riscv/blob/systolic/systolic_runner/docs>`__."
+msgstr ""
+
+#: ../../Generators/Gemmini.rst:67
+msgid "Build and Run Gemmini Tests"
+msgstr ""
+
+#: ../../Generators/Gemmini.rst:69
+msgid "To build Gemmini tests:"
+msgstr ""
+
+#: ../../Generators/Gemmini.rst:76
+msgid ""
+"Afterwards, the test binaries will be found in "
+"``generators/gemmini/software/gemmini-rocc-tests/build``. Binaries whose "
+"names end in ``-baremetal`` are meant to be run in a bare-metal "
+"environment, while binaries whose names end in ``-linux`` are meant to "
+"run in a Linux environment. You can run the tests either on a cycle-"
+"accurate RTL simulator, or on a (much faster) functional ISA simulator "
+"called Spike."
+msgstr ""
+
+#: ../../Generators/Gemmini.rst:78
+msgid ""
+"The Gemmini generator implements a custom non-standard version of Spike. "
+"This implementation is found within the ``esp-tools`` Spike "
+"implementation, together with the Hwacha vector accelerator non-standard "
+"ISA-extension. In order to use this version of Spike, please make sure to"
+" build the ``esp-tools`` software toolchain, as described in :ref:`build-"
+"toolchains`."
+msgstr ""
+
+#: ../../Generators/Gemmini.rst:80
+msgid ""
+"In order to run Spike with the gemmini functional model, you will need to"
+" use the ``--extension=gemmini`` flag. For example:"
+msgstr ""
+
+#: ../../Generators/Gemmini.rst:86
+msgid ""
+"Spike is built by default without a commit log. However, if you would "
+"like to add detailed functional log of gemmini operation to the spike "
+"model, you can rebuild spike manually (based on the instructions in the "
+"``esp-tools/riscv-isa-sim/README`` file), with the ``--enable-"
+"gemminicommitlog`` option added to the ``configure`` step."
+msgstr ""
+
+#: ../../Generators/Gemmini.rst:89
+msgid "Alternative SoC Configs"
+msgstr ""
+
+#: ../../Generators/Gemmini.rst:91
+msgid ""
+"The Gemmini generator includes additional alternative SoC configs "
+"(configs that are not in the Chipyard example project). If you would like"
+" to build one of these alternative SoC configurations which are defined "
+"in within the Gemmini project repository, you can run the following "
+"commands. These commands are similar to the one required when building a "
+"simulation from the example project, but they specify that the location "
+"of the configs are in the Gemmini subproject, as opposed to the Chipyard "
+"example project:"
+msgstr ""
+
+#: ../../Generators/Hwacha.rst:2
+msgid "Hwacha"
+msgstr ""
+
+#: ../../Generators/Hwacha.rst:4
+msgid ""
+"The Hwacha project is developing a new vector architecture for future "
+"computer systems that are constrained in their power and energy "
+"consumption. The Hwacha project is inspired by traditional vector "
+"machines from the 70s and 80s, and lessons learned from our previous "
+"vector-thread architectures such as Scale and Maven The Hwacha project "
+"includes the Hwacha microarchitecture generator, as well as the "
+"``XHwacha`` non-standard RISC-V extension. Hwacha does not implement the "
+"RISC-V standard vector extension proposal."
+msgstr ""
+
+#: ../../Generators/Hwacha.rst:8
+msgid ""
+"For more information on the Hwacha project, please visit the `Hwacha "
+"website <http://hwacha.org/>`__."
+msgstr ""
+
+#: ../../Generators/Hwacha.rst:10
+msgid ""
+"To add the Hwacha vector unit to an SoC, you should add the "
+"``hwacha.DefaultHwachaConfig`` config fragment to the SoC configurations."
+" The Hwacha vector unit uses the RoCC port of a Rocket or BOOM `tile`, "
+"and by default connects to the memory system through the `System Bus` "
+"(i.e., directly to the L2 cache)."
+msgstr ""
+
+#: ../../Generators/Hwacha.rst:12
+msgid ""
+"To change the configuration of the Hwacha vector unit, you can write a "
+"custom configuration to replace the ``DefaultHwachaConfig``. You can view"
+" the ``DefaultHwachaConfig`` under "
+"`generators/hwacha/src/main/scala/configs.scala <https://github.com/ucb-"
+"bar/hwacha/blob/master/src/main/scala/configs.scala>`__ to see the "
+"possible configuration parameters."
+msgstr ""
+
+#: ../../Generators/Hwacha.rst:14
+msgid ""
+"Since Hwacha implements a non-standard RISC-V extension, it requires a "
+"unique software toolchain to be able to compile and assemble its vector "
+"instructions. To install the Hwacha toolchain, run the ``./scripts/build-"
+"toolchains.sh esp-tools`` command within the root Chipyard directory. "
+"This may take a while, and it will install the ``esp-tools-install`` "
+"directory within your Chipyard root directory. ``esp-tools`` is a fork of"
+" ``riscv-tools`` (formerly a collection of relevant software RISC-V "
+"tools) that was enhanced with additional non-standard vector "
+"instructions. However, due to the upstreaming of the equivalent RISC-V "
+"toolchains, ``esp-tools`` may not be up-to-date with the latest mainline "
+"version of the tools included in it."
+msgstr ""
+
+#: ../../Generators/IceNet.rst:2
+msgid "IceNet"
+msgstr ""
+
+#: ../../Generators/IceNet.rst:4
+msgid ""
+"IceNet is a library of Chisel designs related to networking. The main "
+"component of IceNet is IceNIC, a network interface controller that is "
+"used primarily in `FireSim <https://fires.im/>`_ for multi-node networked"
+" simulation. A diagram of IceNet's microarchitecture is shown below."
+msgstr ""
+
+#: ../../Generators/IceNet.rst:11
+msgid ""
+"There are four basic parts of the NIC: the "
+":ref:`Generators/IceNet:Controller`, which takes requests from and sends "
+"responses to the CPU; the :ref:`Generators/IceNet:Send Path`, which reads"
+" data from memory and sends it out to the network; the "
+":ref:`Generators/IceNet:Receive Path`, which receives data from the "
+"network and writes it to memory; and, optionally, the "
+":ref:`Generators/IceNet:Pause Handler`, which generates Ethernet pause "
+"frames for the purpose of flow control."
+msgstr ""
+
+#: ../../Generators/IceNet.rst:19
+msgid "Controller"
+msgstr ""
+
+#: ../../Generators/IceNet.rst:21
+msgid ""
+"The controller exposes a set of MMIO registers to the CPU. The device "
+"driver writes to registers to request that packets be sent or to provide "
+"memory locations to write received data to. Upon the completion of a send"
+" request or packet receive, the controller sends an interrupt to the CPU,"
+" which clears the completion by reading from another register."
+msgstr ""
+
+#: ../../Generators/IceNet.rst:28
+msgid "Send Path"
+msgstr ""
+
+#: ../../Generators/IceNet.rst:30
+msgid ""
+"The send path begins at the reader, which takes requests from the "
+"controller and reads the data from memory."
+msgstr ""
+
+#: ../../Generators/IceNet.rst:33
+msgid ""
+"Since TileLink responses can come back out-of-order, we use a reservation"
+" queue to reorder responses so that the packet data can be sent out in "
+"the proper order."
+msgstr ""
+
+#: ../../Generators/IceNet.rst:37
+msgid ""
+"The packet data then goes to an arbiter, which can arbitrate access to "
+"the outbound network interface between the NIC and one or more \"tap in\""
+" interfaces, which come from other hardware modules that may want to send"
+" Ethernet packets. By default, there are no tap in interfaces, so the "
+"arbiter simply passes the output of the reservation buffer through."
+msgstr ""
+
+#: ../../Generators/IceNet.rst:44
+msgid "Receive Path"
+msgstr ""
+
+#: ../../Generators/IceNet.rst:46
+msgid ""
+"The receive path begins with the packet buffer, which buffers data coming"
+" in from the network. If there is insufficient space in the buffer, it "
+"will drop data at packet granularity to ensure that the NIC does not "
+"deliver incomplete packets."
+msgstr ""
+
+#: ../../Generators/IceNet.rst:51
+msgid ""
+"From the packet buffer, the data can optionally go to a network tap, "
+"which examines the Ethernet header and select packets to be redirected "
+"from the NIC to external modules through one or more \"tap out\" "
+"interfaces. By default, there are no tap out interfaces, so the data will"
+" instead go directly to the writer, which writes the data to memory and "
+"then sends a completion to the controller."
+msgstr ""
+
+#: ../../Generators/IceNet.rst:58
+msgid "Pause Handler"
+msgstr ""
+
+#: ../../Generators/IceNet.rst:60
+msgid ""
+"IceNIC can be configured to have pause handler, which sits between the "
+"send and receive paths and the Ethernet interface. This module tracks the"
+" occupancy of the receive packet buffer. If it sees the buffer filling "
+"up, it will send an `Ethernet pause frame "
+"<https://en.wikipedia.org/wiki/Ethernet_flow_control#Pause_frame>`_ out "
+"to the network to block further packets from being sent. If the NIC "
+"receives an Ethernet pause frame, the pause handler will block sending "
+"from the NIC."
+msgstr ""
+
+#: ../../Generators/IceNet.rst:68
+msgid "Linux Driver"
+msgstr ""
+
+#: ../../Generators/IceNet.rst:70
+msgid ""
+"The default Linux configuration provided by `firesim-software "
+"<https://github.com/firesim/firesim-software>`_ contains an IceNet "
+"driver. If you launch a FireSim image that has IceNIC on it, the driver "
+"will automatically detect the device, and you will be able to use the "
+"full Linux networking stack in userspace."
+msgstr ""
+
+#: ../../Generators/IceNet.rst:76
+msgid "Configuration"
+msgstr ""
+
+#: ../../Generators/IceNet.rst:78
+msgid ""
+"To add IceNIC to your design, add ``HasPeripheryIceNIC`` to your lazy "
+"module and ``HasPeripheryIceNICModuleImp`` to the module implementation. "
+"If you are confused about the distinction between lazy module and module "
+"implementation, refer to :ref:`Chipyard-Basics/Configs-Parameters-"
+"Mixins:Cake Pattern / Mixin`."
+msgstr ""
+
+#: ../../Generators/IceNet.rst:83
+msgid ""
+"Then add the ``WithIceNIC`` config fragment to your configuration. This "
+"will define ``NICKey``, which IceNIC uses to determine its parameters. "
+"The config fragment takes two arguments. The ``inBufFlits`` argument is "
+"the number of 64-bit flits that the input packet buffer can hold and the "
+"``usePauser`` argument determines whether or not the NIC will have a "
+"pause handler."
+msgstr ""
+
+#: ../../Generators/NVDLA.rst:2
+msgid "NVDLA"
+msgstr ""
+
+#: ../../Generators/NVDLA.rst:4
+msgid ""
+"`NVDLA <http://nvdla.org/>`_ is an open-source deep learning accelerator "
+"developed by NVIDIA. The `NVDLA` is attached as a TileLink peripheral so "
+"it can be used as a component within the `Rocket Chip SoC generator`. The"
+" accelerator by itself exposes an AXI memory interface (or two if you use"
+" the \"Large\" configuration), a control interface, and an interrupt "
+"line. The main way to use the accelerator in Chipyard is to use the "
+"`NVDLA SW repository <https://github.com/ucb-bar/nvdla-sw>`_ that was "
+"ported to work on FireSim Linux. However, you can also use the "
+"accelerator in baremetal simulations (refer to ``tests/nvdla.c``)."
+msgstr ""
+
+#: ../../Generators/NVDLA.rst:10
+msgid ""
+"For more information on both the HW architecture and the SW, please visit"
+" their `website <http://nvdla.org/>`_."
+msgstr ""
+
+#: ../../Generators/NVDLA.rst:13
+msgid "NVDLA Software with FireMarshal"
+msgstr ""
+
+#: ../../Generators/NVDLA.rst:15
+msgid ""
+"Located at ``software/nvdla-workload`` is a FireMarshal-based workload to"
+" boot Linux with the proper NVDLA drivers. Refer to that ``README.md`` "
+"for more information on how to run a simulation."
+msgstr ""
+
+#: ../../Generators/Rocket.rst:2
+msgid "Rocket Core"
+msgstr ""
+
+#: ../../Generators/Rocket.rst:4
+msgid ""
+"`Rocket <https://github.com/freechipsproject/rocket-chip>`__ is a 5-stage"
+" in-order scalar processor core generator, originally developed at UC "
+"Berkeley and currently supported by `SiFive <https://www.sifive.com/>`__."
+" The `Rocket core` is used as a component within the `Rocket Chip SoC "
+"generator`. A Rocket core combined with L1 caches (data and instruction "
+"caches) form a `Rocket tile`. The `Rocket tile` is the replicable "
+"component of the `Rocket Chip SoC generator`."
+msgstr ""
+
+#: ../../Generators/Rocket.rst:6
+msgid ""
+"The Rocket core supports the open-source RV64GC RISC-V instruction set "
+"and is written in the Chisel hardware construction language. It has an "
+"MMU that supports page-based virtual memory, a non-blocking data cache, "
+"and a front-end with branch prediction. Branch prediction is configurable"
+" and provided by a branch target buffer (BTB), branch history table "
+"(BHT), and a return address stack (RAS). For floating-point,  Rocket  "
+"makes  use  of  Berkeley’s  Chisel  implementations  of  floating-point  "
+"units. Rocket also supports the RISC-V machine, supervisor, and user "
+"privilege levels. A number of parameters are exposed, including the "
+"optional support of some ISA extensions (M, A, F, D), the number of "
+"floating-point pipeline stages, and the cache and TLB sizes."
+msgstr ""
+
+#: ../../Generators/Rocket.rst:13
+msgid ""
+"For more information, please refer to the `GitHub repository "
+"<https://github.com/freechipsproject/rocket-chip>`__, `technical report "
+"<https://www2.eecs.berkeley.edu/Pubs/TechRpts/2016/EECS-2016-17.html>`__ "
+"or to `this Chisel Community Conference video "
+"<https://youtu.be/Eko86PGEoDY>`__."
+msgstr ""
+
+#: ../../Generators/Rocket-Chip.rst:2
+msgid "Rocket Chip"
+msgstr ""
+
+#: ../../Generators/Rocket-Chip.rst:4
+msgid ""
+"Rocket Chip generator is an SoC generator developed at Berkeley and now "
+"supported by `SiFive <https://www.sifive.com>`__. Chipyard uses the "
+"Rocket Chip generator as the basis for producing a RISC-V SoC."
+msgstr ""
+
+#: ../../Generators/Rocket-Chip.rst:7
+msgid ""
+"`Rocket Chip` is distinct from `Rocket core`, the in-order RISC-V CPU "
+"generator. Rocket Chip includes many parts of the SoC besides the CPU. "
+"Though Rocket Chip uses Rocket core CPUs by default, it can also be "
+"configured to use the BOOM out-of-order core generator or some other "
+"custom CPU generator instead."
+msgstr ""
+
+#: ../../Generators/Rocket-Chip.rst:12
+msgid "A detailed diagram of a typical Rocket Chip system is shown below."
+msgstr ""
+
+#: ../../Generators/Rocket-Chip.rst:17
+msgid "Tiles"
+msgstr ""
+
+#: ../../Generators/Rocket-Chip.rst:19
+msgid ""
+"The diagram shows a dual-core ``Rocket`` system. Each ``Rocket`` core is "
+"grouped with a page-table walker, L1 instruction cache, and L1 data cache"
+" into a ``RocketTile``."
+msgstr ""
+
+#: ../../Generators/Rocket-Chip.rst:23
+msgid ""
+"The ``Rocket`` core can also be swapped for a ``BOOM`` core. Each tile "
+"can also be configured with a RoCC accelerator that connects to the core "
+"as a coprocessor."
+msgstr ""
+
+#: ../../Generators/Rocket-Chip.rst:28
+msgid "Memory System"
+msgstr ""
+
+#: ../../Generators/Rocket-Chip.rst:29
+msgid ""
+"The tiles connect to the ``SystemBus``, which connect it to the L2 cache "
+"banks. The L2 cache banks then connect to the ``MemoryBus``, which "
+"connects to the DRAM controller through a TileLink to AXI converter."
+msgstr ""
+
+#: ../../Generators/Rocket-Chip.rst:33
+msgid ""
+"To learn more about the memory hierarchy, see :ref:`Customization/Memory-"
+"Hierarchy:Memory Hierarchy`."
+msgstr ""
+
+#: ../../Generators/Rocket-Chip.rst:36
+msgid "MMIO"
+msgstr ""
+
+#: ../../Generators/Rocket-Chip.rst:38
+msgid ""
+"For MMIO peripherals, the ``SystemBus`` connects to the ``ControlBus`` "
+"and ``PeripheryBus``."
+msgstr ""
+
+#: ../../Generators/Rocket-Chip.rst:40
+msgid ""
+"The ``ControlBus`` attaches standard peripherals like the BootROM, the "
+"Platform-Level Interrupt Controller (PLIC), the core-local interrupts "
+"(CLINT), and the Debug Unit."
+msgstr ""
+
+#: ../../Generators/Rocket-Chip.rst:44
+msgid ""
+"The BootROM contains the first stage bootloader, the first instructions "
+"to run when the system comes out of reset. It also contains the Device "
+"Tree, which is used by Linux to determine what other peripherals are "
+"attached."
+msgstr ""
+
+#: ../../Generators/Rocket-Chip.rst:48
+msgid "The PLIC aggregates and masks device interrupts and external interrupts."
+msgstr ""
+
+#: ../../Generators/Rocket-Chip.rst:50
+msgid ""
+"The core-local interrupts include software interrupts and timer "
+"interrupts for each CPU."
+msgstr ""
+
+#: ../../Generators/Rocket-Chip.rst:53
+msgid ""
+"The Debug Unit is used to control the chip externally. It can be used to "
+"load data and instructions to memory or pull data from memory. It can be "
+"controlled through a custom DMI or standard JTAG protocol."
+msgstr ""
+
+#: ../../Generators/Rocket-Chip.rst:57
+msgid ""
+"The ``PeripheryBus`` attaches additional peripherals like the NIC and "
+"Block Device. It can also optionally expose an external AXI4 port, which "
+"can be attached to vendor-supplied AXI4 IP."
+msgstr ""
+
+#: ../../Generators/Rocket-Chip.rst:61
+msgid ""
+"To learn more about adding MMIO peripherals, check out the :ref:`mmio-"
+"accelerators` section."
+msgstr ""
+
+#: ../../Generators/Rocket-Chip.rst:65
+msgid "DMA"
+msgstr ""
+
+#: ../../Generators/Rocket-Chip.rst:67
+msgid ""
+"You can also add DMA devices that read and write directly from the memory"
+" system. These are attached to the ``FrontendBus``. The ``FrontendBus`` "
+"can also connect vendor-supplied AXI4 DMA devices through an AXI4 to "
+"TileLink converter."
+msgstr ""
+
+#: ../../Generators/Rocket-Chip.rst:71
+msgid ""
+"To learn more about adding DMA devices, see the :ref:`dma-devices` "
+"section."
+msgstr ""
+
+#: ../../Generators/SHA3.rst:2
+msgid "SHA3 RoCC Accelerator"
+msgstr ""
+
+#: ../../Generators/SHA3.rst:3
+msgid ""
+"The SHA3 accelerator is a basic RoCC accelerator for the SHA3 hashing "
+"algorithm. We like using SHA3 in Chipyard tutorial content because it is "
+"a self-contained, simple example of integrating a custom accelerator into"
+" Chipyard."
+msgstr ""
+
+#: ../../Generators/SHA3.rst:9
+msgid "Introduction"
+msgstr ""
+
+#: ../../Generators/SHA3.rst:10
+msgid ""
+"Secure hashing algorithms represent a class of hashing functions that "
+"provide four attributes: ease of hash computation, inability to generate "
+"the message from the hash (one-way property), inability to change the "
+"message and not the hash (weakly collision free property), and inability "
+"to find two messages with the same hash (strongly collision free "
+"property). The National Institute of Standards and Technology (NIST) "
+"recently held a competition for a new algorithm to be added to its set of"
+" Secure Hashing Algorithms (SHA). In 2012 the winner was determined to be"
+" the Keccak hashing function and a rough specification for SHA3 was "
+"established. The algorithm operates on variable length messages with a "
+"sponge function, and thus alternates between absorbing chunks of the "
+"message into a set of state bits and permuting the state. The absorbing "
+"is a simple bitwise XOR while the permutation is a more complex function "
+"composed of several operations, χ, θ, ρ, π, ι, that all perform various "
+"bitwise operations, including rotations, parity calculations, XORs, etc. "
+"The Keccak hashing function is parameterized for different sizes of state"
+" and message chunks but for this accelerator we will only support the "
+"Keccak-256 variant with 1600 bits of state and 1088 bit message chunks. A"
+" diagram of the SHA3 accelerator is shown below."
+msgstr ""
+
+#: ../../Generators/SHA3.rst:28
+msgid "Technical Details"
+msgstr ""
+
+#: ../../Generators/SHA3.rst:29
+msgid ""
+"The accelerator is designed around three sub-systems, an interface with "
+"the processor, an interface with memory, and the actual hashing "
+"computation system. The interface with the processor is designed using "
+"the ROCC interface for coprocessors integrating with the RISC-V "
+"Rocket/BOOM processor. It includes the ability to transfer two 64 bit "
+"words to the co-processor, the request for a return value, and a small "
+"field for the function requested. The accelerator receives these requests"
+" using a ready/valid interface. The ROCC instruction is parsed and the "
+"needed information is stored into a execution context. The execution "
+"context contains the memory address of the message being hashed, the "
+"memory address to store the resulting hash in, the length of the message,"
+" and several other control fields."
+msgstr ""
+
+#: ../../Generators/SHA3.rst:44
+msgid ""
+"Once the execution context is valid the memory subsystem then begins to "
+"fetch chunks of the message. The memory subsystem is fully decoupled from"
+" the other subsystems and maintains a single full round memory buffers. "
+"The accelerators memory interface can provide a maximum of one 64 bit "
+"word per cycle which corresponds to 17 requests needed to fill a buffer "
+"(the size is dictated by the SHA3 algorithm). Memory requests to fill "
+"these buffers are sent out as rapidly as the memory interface can handle,"
+" with a tag field set to allow the different memory buffers requests to "
+"be distinguished, as they may be returned out of order. Once the memory "
+"subsystem has filled a buffer the control unit absorbs the buffer into "
+"the execution context, at which point the execution context is free to "
+"begin permutation, and the memory buffer is free to send more memory "
+"requests."
+msgstr ""
+
+#: ../../Generators/SHA3.rst:61
+msgid ""
+"After the buffer is absorbed, the hashing computation subsystem begins "
+"the permutation operations. Once the message is fully hashed, the hash is"
+" written to memory with a simple state machine."
+msgstr ""
+
+#: ../../Generators/SHA3.rst:68
+msgid "Using a SHA3 Accelerator"
+msgstr ""
+
+#: ../../Generators/SHA3.rst:69
+msgid ""
+"Since the SHA3 accelerator is designed as a RoCC accelerator, it can be "
+"mixed into a Rocket or BOOM core by overriding the ``BuildRoCC`` key. The"
+" config fragment is defined in the SHA3 generator. An example "
+"configuration highlighting the use of this config fragment is shown here:"
+msgstr ""
+
+#: ../../Generators/SHA3.rst:80
+msgid ""
+"The SHA3 example baremetal and Linux tests are located in the SHA3 "
+"repository. Please refer to its `README.md <https://github.com/ucb-"
+"bar/sha3/blob/master/README.md>`_ for more information on how to "
+"run/build the tests."
+msgstr ""
+
+#: ../../Generators/SiFive-Generators.rst:2
+msgid "SiFive Generators"
+msgstr ""
+
+#: ../../Generators/SiFive-Generators.rst:4
+msgid ""
+"Chipyard includes several open-source generators developed and maintained"
+" by `SiFive <https://www.sifive.com/>`__. These are currently organized "
+"within two submodules named ``sifive-blocks`` and ``sifive-cache``."
+msgstr ""
+
+#: ../../Generators/SiFive-Generators.rst:8
+msgid "Last-Level Cache Generator"
+msgstr ""
+
+#: ../../Generators/SiFive-Generators.rst:10
+msgid ""
+"``sifive-cache`` includes last-level cache geneator. The Chipyard "
+"framework uses this last-level cache as an L2 cache. To use this L2 "
+"cache, you should add the "
+"``freechips.rocketchip.subsystem.WithInclusiveCache`` config fragment to "
+"your SoC configuration. To learn more about configuring this L2 cache, "
+"please refer to the :ref:`memory-hierarchy` section."
+msgstr ""
+
+#: ../../Generators/SiFive-Generators.rst:15
+msgid "Peripheral Devices"
+msgstr ""
+
+#: ../../Generators/SiFive-Generators.rst:16
+msgid ""
+"``sifive-blocks`` includes multiple peripheral device generators, such as"
+" UART, SPI, PWM, JTAG, GPIO and more."
+msgstr ""
+
+#: ../../Generators/SiFive-Generators.rst:18
+msgid ""
+"These peripheral devices usually affect the memory map of the SoC, and "
+"its top-level IO as well. To integrate one of these devices in your SoC, "
+"you will need to define a custom config fragment with the approriate "
+"address for the device using the Rocket Chip parameter system. As an "
+"example, for a GPIO device you could add the following config fragment to"
+" set the GPIO address to ``0x10012000``. This address is the start "
+"address for the GPIO configuration registers."
+msgstr ""
+
+#: ../../Generators/SiFive-Generators.rst:26
+msgid ""
+"Additionally, if the device requires top-level IOs, you will need to "
+"define a config fragment to change the top-level configuration of your "
+"SoC. When adding a top-level IO, you should also be aware of whether it "
+"interacts with the test-harness."
+msgstr ""
+
+#: ../../Generators/SiFive-Generators.rst:29
+msgid ""
+"This example instantiates a top-level module with include GPIO ports, and"
+" then ties-off the GPIO port inputs to 0 (``false.B``)."
+msgstr ""
+
+#: ../../Generators/SiFive-Generators.rst:32
+msgid ""
+"Finally, you add the relevant config fragment to the SoC config. For "
+"example:"
+msgstr ""
+
+#: ../../Generators/SiFive-Generators.rst:39
+msgid ""
+"Some of the devices in ``sifive-blocks`` (such as GPIO) may already have "
+"pre-defined config fragments within the Chipyard example project. You may"
+" be able to use these config fragments directly, but you should be aware "
+"of their addresses within the SoC address map."
+msgstr ""
+
+#: ../../Generators/Sodor.rst:2
+msgid "Sodor Core"
+msgstr ""
+
+#: ../../Generators/Sodor.rst:4
+msgid ""
+"`Sodor <https://github.com/ucb-bar/riscv-sodor>`__ is a collection of 5 "
+"simple RV32MI cores designed for educational purpose. The `Sodor core` is"
+" wrapped in an tile during generation so it can be used as a component "
+"within the `Rocket Chip SoC generator`. The cores contain a small "
+"scratchpad memory to which the program are loaded through a TileLink "
+"slave port, and the cores **DO NOT** support external memory."
+msgstr ""
+
+#: ../../Generators/Sodor.rst:9
+msgid ""
+"The five available cores and their corresponding generator configuration "
+"are:"
+msgstr ""
+
+#: ../../Generators/Sodor.rst:11
+msgid "1-stage (essentially an ISA simulator) - ``Sodor1StageConfig``"
+msgstr ""
+
+#: ../../Generators/Sodor.rst:12
+msgid "2-stage (demonstrates pipelining in Chisel) - ``Sodor2StageConfig``"
+msgstr ""
+
+#: ../../Generators/Sodor.rst:13
+msgid ""
+"3-stage (uses sequential memory; supports both Harvard "
+"(``Sodor3StageConfig``) and Princeton (``Sodor3StageSinglePortConfig``) "
+"versions)"
+msgstr ""
+
+#: ../../Generators/Sodor.rst:14
+msgid ""
+"5-stage (can toggle between fully bypassed or fully interlocked) - "
+"``Sodor5StageConfig``"
+msgstr ""
+
+#: ../../Generators/Sodor.rst:15
+msgid "\"bus\"-based micro-coded implementation - ``SodorUCodeConfig``"
+msgstr ""
+
+#: ../../Generators/Sodor.rst:17
+msgid ""
+"For more information, please refer to the `GitHub repository "
+"<https://github.com/ucb-bar/riscv-sodor>`__."
+msgstr ""
+
+#: ../../Generators/TestChipIP.rst:2
+msgid "Test Chip IP"
+msgstr ""
+
+#: ../../Generators/TestChipIP.rst:4
+msgid ""
+"Chipyard includes a Test Chip IP library which provides various hardware "
+"widgets that may be useful when designing SoCs. This includes a "
+":ref:`Generators/TestChipIP:Serial Adapter`, "
+":ref:`Generators/TestChipIP:Block Device Controller`, "
+":ref:`Generators/TestChipIP:TileLink SERDES`, "
+":ref:`Generators/TestChipIP:TileLink Switcher`, "
+":ref:`Generators/TestChipIP:TileLink Ring Network`, and "
+":ref:`Generators/TestChipIP:UART Adapter`."
+msgstr ""
+
+#: ../../Generators/TestChipIP.rst:10
+msgid "Serial Adapter"
+msgstr ""
+
+#: ../../Generators/TestChipIP.rst:12
+msgid ""
+"The serial adapter is used by tethered test chips to communicate with the"
+" host processor. An instance of RISC-V frontend server running on the "
+"host CPU can send commands to the serial adapter to read and write data "
+"from the memory system. The frontend server uses this functionality to "
+"load the test program into memory and to poll for completion of the "
+"program. More information on this can be found in :ref:`Customization"
+"/Boot-Process:Chipyard Boot Process`."
+msgstr ""
+
+#: ../../Generators/TestChipIP.rst:20
+msgid "Block Device Controller"
+msgstr ""
+
+#: ../../Generators/TestChipIP.rst:22
+msgid ""
+"The block device controller provides a generic interface for secondary "
+"storage. This device is primarily used in FireSim to interface with a "
+"block device software simulation model. The default Linux configuration "
+"in `firesim-software <https://github.com/firesim/firesim-software>`_"
+msgstr ""
+
+#: ../../Generators/TestChipIP.rst:26
+msgid ""
+"To add a block device to your design, add the ``WithBlockDevice`` config "
+"fragment to your configuration."
+msgstr ""
+
+#: ../../Generators/TestChipIP.rst:30
+msgid "TileLink SERDES"
+msgstr ""
+
+#: ../../Generators/TestChipIP.rst:32
+msgid ""
+"The TileLink SERDES in the Test Chip IP library allow TileLink memory "
+"requests to be serialized so that they can be carried off chip through a "
+"serial link. The five TileLink channels are multiplexed over two SERDES "
+"channels, one in each direction."
+msgstr ""
+
+#: ../../Generators/TestChipIP.rst:37
+msgid ""
+"There are three different variants provided by the library, ``TLSerdes`` "
+"exposes a manager interface to the chip, tunnels A, C, and E channels on "
+"its outbound link, and tunnels B and D channels on its inbound link. "
+"``TLDesser`` exposes a client interface to the chip, tunnels A, C, and E "
+"on its inbound link, and tunnels B and D on its outbound link. Finally, "
+"``TLSerdesser`` exposes both client and manager interface to the chip and"
+" can tunnel all channels in both directions."
+msgstr ""
+
+#: ../../Generators/TestChipIP.rst:45
+msgid ""
+"For an example of how to use the SERDES classes, take a look at the "
+"``SerdesTest`` unit test in `the Test Chip IP unit test suite "
+"<https://github.com/ucb-"
+"bar/testchipip/blob/master/src/main/scala/Unittests.scala>`_."
+msgstr ""
+
+#: ../../Generators/TestChipIP.rst:50
+msgid "TileLink Switcher"
+msgstr ""
+
+#: ../../Generators/TestChipIP.rst:52
+msgid ""
+"The TileLink switcher is used when the chip has multiple possible memory "
+"interfaces and you would like to select which channels to map your memory"
+" requests to at boot time. It exposes a client node, multiple manager "
+"nodes, and a select signal. Depending on the setting of the select "
+"signal, requests from the client node will be directed to one of the "
+"manager nodes. The select signal must be set before any TileLink messages"
+" are sent and be kept stable throughout the remainder of operation. It is"
+" not safe to change the select signal once TileLink messages have begun "
+"sending."
+msgstr ""
+
+#: ../../Generators/TestChipIP.rst:61
+msgid ""
+"For an example of how to use the switcher, take a look at the "
+"``SwitcherTest`` unit test in the `Test Chip IP unit tests "
+"<https://github.com/ucb-"
+"bar/testchipip/blob/master/src/main/scala/Unittests.scala>`_."
+msgstr ""
+
+#: ../../Generators/TestChipIP.rst:65
+msgid "TileLink Ring Network"
+msgstr ""
+
+#: ../../Generators/TestChipIP.rst:67
+msgid ""
+"TestChipIP provides a TLRingNetwork generator that has a similar "
+"interface to the TLXbar provided by RocketChip, but uses ring networks "
+"internally rather than crossbars. This can be useful for chips with very "
+"wide TileLink networks (many cores and L2 banks) that can sacrifice "
+"cross-section bandwidth to relieve wire routing congestion. Documentation"
+" on how to use the ring network can be found in :ref:`Customization"
+"/Memory-Hierarchy:The System Bus`. The implementation itself can be found"
+" `here <https://github.com/ucb-"
+"bar/testchipip/blob/master/src/main/scala/Ring.scala>`_, and may serve as"
+" an example of how to implement your own TileLink network with a "
+"different topology."
+msgstr ""
+
+#: ../../Generators/TestChipIP.rst:78
+msgid "UART Adapter"
+msgstr ""
+
+#: ../../Generators/TestChipIP.rst:80
+msgid ""
+"The UART Adapter is a device that lives in the TestHarness and connects "
+"to the UART port of the DUT to simulate communication over UART (ex. "
+"printing out to UART during Linux boot). In addition to working with "
+"``stdin/stdout`` of the host, it is able to output a UART log to a "
+"particular file using ``+uartlog=<NAME_OF_FILE>`` during simulation."
+msgstr ""
+
+#: ../../Generators/TestChipIP.rst:85
+msgid ""
+"By default, this UART Adapter is added to all systems within Chipyard by "
+"adding the ``WithUART`` and ``WithUARTAdapter`` configs."
+msgstr ""
+
+#: ../../Generators/TestChipIP.rst:89
+msgid "SPI Flash Model"
+msgstr ""
+
+#: ../../Generators/TestChipIP.rst:91
+msgid ""
+"The SPI flash model is a device that models a simple SPI flash device. It"
+" currently only supports single read, quad read, single write, and quad "
+"write instructions. The memory is backed by a file which is provided "
+"using ``+spiflash#=<NAME_OF_FILE>``, where ``#`` is the SPI flash ID "
+"(usually ``0``)."
+msgstr ""
+
+#: ../../Generators/index.rst:17
+msgid "Generators:"
+msgstr ""
+
+#: ../../Generators/index.rst:4
+msgid "Included RTL Generators"
+msgstr ""
+
+#: ../../Generators/index.rst:6
+msgid ""
+"A Generator can be thought of as a generalized RTL design, written using "
+"a mix of meta-programming and standard RTL. This type of meta-programming"
+" is enabled by the Chisel hardware description language (see "
+":ref:`Tools/Chisel:Chisel`). A standard RTL design is essentially just a "
+"single instance of a design coming from a generator. However, by using "
+"meta-programming and parameter systems, generators can allow for "
+"integration of complex hardware designs in automated ways. The following "
+"pages introduce the generators integrated with the Chipyard framework."
+msgstr ""
+
+#: ../../Generators/index.rst:12
+msgid ""
+"Chipyard bundles the source code for the generators, under the "
+"``generators/`` directory. It builds them from source each time (although"
+" the build system will cache results if they have not changed), so "
+"changes to the generators themselves will automatically be used when "
+"building with Chipyard and propagate to software simulation, FPGA-"
+"accelerated simulation, and VLSI flows."
+msgstr ""
+
